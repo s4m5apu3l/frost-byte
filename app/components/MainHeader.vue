@@ -1,19 +1,26 @@
 <script setup lang="ts">
 const { locales, setLocale } = useI18n();
+
+const localesCustom = computed(() => {
+    return locales.value.map((locale) => {
+        return {
+            label: locale.name,
+            onSelect: () => setLocale(locale.code),
+        };
+    });
+});
 </script>
 
 <template>
-    <header>
-        <nav class="flex gap-2">
-            <nuxt-link to="/">home</nuxt-link>
-            <nuxt-link to="/about">about</nuxt-link>
-            <nuxt-link :to="$localePath('/about')">about with local</nuxt-link>
-        </nav>
+    <UHeader :toggle="false">
+        <template #title>
+            <span>{{ $t("name") }}</span>
+        </template>
 
-        <div>
-            <button v-for="locale in locales" @click="setLocale(locale.code)">
-                {{ locale.name }}
-            </button>
-        </div>
-    </header>
+        <template #right>
+            <UDropdownMenu :items="localesCustom">
+                <UIcon name="i-material-symbols-light:language" class="size-5" />
+            </UDropdownMenu>
+        </template>
+    </UHeader>
 </template>

@@ -4,7 +4,7 @@
     <section class="main-layout">
         <main-header />
         <slot />
-        <main-footer />
+        <!-- <main-footer /> -->
     </section>
 </template>
 
