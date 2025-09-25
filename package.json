@@ -10,6 +10,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/ui": "^4.0.0",
+    "@nuxtjs/i18n": "^10.1.0",
     "nuxt": "^4.1.2",
     "v-gsap-nuxt": "^1.4.4",
     "vue": "^3.5.21",
