@@ -1,3 +1,8 @@
 {
-	"name": "frostbyte"
+    "name": "frost:byte",
+    "toggle": {
+        "fast": "быстрота",
+        "good": "качество",
+        "cheap": "цена"
+    }
 }

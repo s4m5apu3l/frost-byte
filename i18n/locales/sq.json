@@ -1,3 +1,8 @@
 {
-	"name": "fɾɔstbajt"
+	"name": "fɾɔst:bajt",
+	"toggle": {
+		"fast": "tuɾgɛn:ik",
+		"good": "ycygɛj",
+		"cheap": "cɛpcɛki"
+	}
 }

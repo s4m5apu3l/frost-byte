@@ -1,2 +1,8 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+.l-wrapper {
+    max-width: 1440px;
+    padding: 16px;
+    margin: 0 auto;
+}
