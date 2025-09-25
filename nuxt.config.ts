@@ -8,7 +8,7 @@ export default defineNuxtConfig({
         defaultLocale: "sq",
         locales: [
             { code: "sq", name: "Saqa", file: "sq.json" },
-            { code: "ru", name: "Russia", file: "ru.json" },
+            { code: "ru", name: "Russian", file: "ru.json" },
             { code: "en", name: "English", file: "en.json" },
         ],
     },

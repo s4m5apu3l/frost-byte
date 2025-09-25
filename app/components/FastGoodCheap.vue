@@ -24,22 +24,20 @@ watch(cheap, (newVal) => {
 </script>
 
 <template>
-    <div class="fast-good-cheap">
-        <div class="toggles space-y-3">
-            <label class="flex items-center space-x-3 cursor-pointer">
-                <input type="checkbox" v-model="fast" class="w-5 h-5" />
-                <span>{{ $t("toggle.fast") }}</span>
-            </label>
+    <div class="toggles space-y-3">
+        <label class="flex items-center gap-3 cursor-pointer">
+            <USwitch v-model="fast" color="neutral" />
+            <span>{{ $t("toggle.fast") }}</span>
+        </label>
 
-            <label class="flex items-center space-x-3 cursor-pointer">
-                <input type="checkbox" v-model="good" class="w-5 h-5" />
-                <span>{{ $t("toggle.good") }}</span>
-            </label>
+        <label class="flex items-center gap-3 cursor-pointer">
+            <USwitch v-model="good" color="neutral" />
+            <span>{{ $t("toggle.good") }}</span>
+        </label>
 
-            <label class="flex items-center space-x-3 cursor-pointer">
-                <input type="checkbox" v-model="cheap" class="w-5 h-5" />
-				<span>{{ $t("toggle.cheap") }}</span>
-            </label>
-        </div>
+        <label class="flex items-center gap-3 cursor-pointer">
+            <USwitch v-model="cheap" color="neutral" />
+            <span>{{ $t("toggle.cheap") }}</span>
+        </label>
     </div>
 </template>
