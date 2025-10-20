@@ -24,20 +24,38 @@ watch(cheap, (newVal) => {
 </script>
 
 <template>
-    <div class="toggles space-y-3">
-        <label class="flex items-center gap-3 cursor-pointer">
-            <USwitch v-model="fast" color="neutral" />
-            <span>{{ $t("toggle.fast") }}</span>
+    <div class="toggles space-y-8">
+        <label class="toggle-item flex items-center justify-between cursor-pointer group w-80">
+            <span class="text-2xl font-light tracking-wide group-hover:tracking-wider transition-all duration-300 text-white">
+                {{ $t("toggle.fast") }}
+            </span>
+            <USwitch 
+                v-model="fast" 
+                color="neutral"
+                class="scale-125"
+            />
         </label>
 
-        <label class="flex items-center gap-3 cursor-pointer">
-            <USwitch v-model="good" color="neutral" />
-            <span>{{ $t("toggle.good") }}</span>
+        <label class="toggle-item flex items-center justify-between cursor-pointer group w-80">
+            <span class="text-2xl font-light tracking-wide group-hover:tracking-wider transition-all duration-300 text-white">
+                {{ $t("toggle.good") }}
+            </span>
+            <USwitch 
+                v-model="good" 
+                color="neutral"
+                class="scale-125"
+            />
         </label>
 
-        <label class="flex items-center gap-3 cursor-pointer">
-            <USwitch v-model="cheap" color="neutral" />
-            <span>{{ $t("toggle.cheap") }}</span>
+        <label class="toggle-item flex items-center justify-between cursor-pointer group w-80">
+            <span class="text-2xl font-light tracking-wide group-hover:tracking-wider transition-all duration-300 text-white">
+                {{ $t("toggle.cheap") }}
+            </span>
+            <USwitch 
+                v-model="cheap" 
+                color="neutral"
+                class="scale-125"
+            />
         </label>
     </div>
 </template>
