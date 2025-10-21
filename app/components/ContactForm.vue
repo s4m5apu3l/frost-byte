@@ -25,34 +25,22 @@ const submitForm = async () => {
 </script>
 
 <template>
-    <form @submit.prevent="submitForm" class="space-y-8">
-        <div class="form-field">
-            <UInput 
-                v-model="form.name"
-                :placeholder="$t('form.name')"
-                variant="none"
-                class="w-full border-b border-white bg-transparent text-white placeholder-gray-400 pb-2 text-lg font-light"
-                required
-            />
-        </div>
-        
+    <form @submit.prevent="submitForm" class="space-y-8 max-w-[520px] w-full">
         <div class="form-field">
             <UInput 
                 v-model="form.email"
-                type="email"
-                :placeholder="$t('form.email')"
-                variant="none"
-                class="w-full border-b border-white bg-transparent text-white placeholder-gray-400 pb-2 text-lg font-light"
+                :placeholder="$t('form.mail')"
                 required
+                class="w-full"
             />
         </div>
+    
         
         <div class="form-field">
             <UTextarea 
                 v-model="form.message"
                 :placeholder="$t('form.message')"
-                variant="none"
-                class="w-full border-b border-white bg-transparent text-white placeholder-gray-400 pb-2 resize-none text-lg font-light"
+                class="w-full"
                 :rows="4"
                 required
             />
@@ -63,8 +51,7 @@ const submitForm = async () => {
                 type="submit"
                 :loading="isSubmitting"
                 variant="outline"
-                color="neutral"
-                class="w-full py-4 text-lg font-light border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-500 tracking-widest"
+                class="justify-center cursor-pointer w-full py-4 text-lg font-light border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-500 "
             >
                 {{ $t('form.submit') }}
             </UButton>

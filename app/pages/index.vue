@@ -5,7 +5,7 @@
         <section class="h-screen">
             <div
                 class="absolute bottom-0 flex justify-center w-full left-0"
-                v-gsap.draggable
+                v-gsap.magnetic.strong
                 v-gsap.entrance.slide-bottom
             >
                 <h1 class="text-[20vw] leading-[110%] font-bold">{{ $t("name") }}</h1>
@@ -22,5 +22,12 @@
         >
             <FastGoodCheap />
         </section>
+        <section class="h-screen flex items-center justify-center">
+            <ContactForm />
+        </section>
     </div>
 </template>
+
+<style scoped>
+
+</style>
