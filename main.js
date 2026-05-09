@@ -18,53 +18,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalCloseButton = document.getElementById('modalCloseButton');
 
     const capabilityInfo = {
-        automation: {
-            name: 'automation',
-            label: 'AI automation',
-            title: 'AI automation & agents',
-            description: 'Строим AI-first процессы, в которых команда тратит меньше времени на рутину, а бизнес получает понятный рабочий контур.',
+        websites: {
+            name: 'websites',
+            label: 'Сайты',
+            title: 'Веб-разработка',
+            description: 'Собираем сайты под ключ: от дизайна до запуска и поддержки.',
             bullets: [
-                'Аудит ручных процессов, проектирование сценариев, ассистенты, агенты и AI-воркфлоу.',
-                'Интеграции с CRM, Telegram, документами, базой знаний, API и внутренними системами.',
-                'Фокус не на "эффекте вау", а на скорости цикла, чистых данных и реальной пользе.'
+                'WordPress — блоги, корпоративные сайты, магазины на WooCommerce.',
+                'Bitrix — корпоративные порталы, интернет-магазины, интеграции с 1C.',
+                '1C-Битрикс — каталоги, CRM-формы, сложная бизнес-логика.',
+                'Tilda — быстрые лендинги и сайты с нуля, без программирования.'
             ],
-            terminal: 'AI automation / agents / CRM flows'
+            terminal: 'WordPress / Bitrix / 1C / Tilda'
         },
         telegram: {
             name: 'telegram',
             label: 'Telegram',
-            title: 'Telegram bots & Mini Apps',
-            description: 'Делаем Telegram как полноценную продуктовую поверхность: от быстрых ботов до Mini Apps с логикой, кабинетами и оплатами.',
+            title: 'Telegram-боты',
+            description: 'Автоматизируем коммуникацию и продажи через Telegram.',
             bullets: [
-                'Боты продаж, поддержки, внутренних процессов, заявок и онбординга.',
-                'Mini Apps с нормальным UX, а не просто обёрткой вокруг страницы.',
-                'Подключение к оплатам, CRM, каталогам, аналитике, складу и кастомным API.'
+                'Боты для продаж, записи, доставки, опросов и поддержки.',
+                'Интеграция с CRM, платёжными системами, Google-таблицами.',
+                'Рассылки, сегментация аудитории, аналитика открытий и кликов.'
             ],
-            terminal: 'bots / mini apps / support / commerce'
+            terminal: 'bots / sales / support / delivery'
         },
-        bitrix: {
-            name: 'bitrix',
-            label: 'Bitrix',
-            title: 'Bitrix & corporate sites',
-            description: 'Собираем сайты и Bitrix-проекты, где бизнесу нужна управляемая CMS, быстрые обновления, адекватная структура и интеграции.',
+        miniapps: {
+            name: 'miniapps',
+            label: 'Mini Apps',
+            title: 'Telegram Mini Apps',
+            description: 'Веб-приложения внутри Telegram — без установки и регистрации.',
             bullets: [
-                'Лендинги, корпсайты, каталоги, промостраницы и контентные разделы.',
-                'Интеграция с формами, CRM, аналитикой, заявками, email и внешними сервисами.',
-                'Редизайн без шаблонного мусора: сильная подача, понятная структура и нормальный продакшен.'
+                'Каталоги товаров и услуг с корзиной и оплатой.',
+                'Личные кабинеты, бронирование, доставка.',
+                'Нативный UX: push-уведомления, геолокация, платёжки в один тап.'
             ],
-            terminal: 'landing pages / corporate web / CMS / admin'
+            terminal: 'TMA / catalogs / booking / delivery'
         },
-        platforms: {
-            name: 'platforms',
-            label: 'Platforms',
-            title: 'Web platforms & internal tools',
-            description: 'Делаем веб-сервисы, кабинеты, CRM-связки и внутренние панели, которые живут дольше одного красивого релиза.',
+        automation: {
+            name: 'automation',
+            label: 'Автоматизация',
+            title: 'Автоматизация и интеграции',
+            description: 'Связываем сайт, CRM, Telegram и таблицы в единый контур.',
             bullets: [
-                'Личные кабинеты, дашборды, B2B/B2C платформы, порталы и внутренние интерфейсы.',
-                'Интеграции между сайтом, Bitrix, Telegram, AI-инструментами и существующей инфраструктурой.',
-                'Запуск, развитие и поддержка с прицелом на масштабирование, а не на одноразовый MVP.'
+                'Интеграция Bitrix, 1C, Google Sheets, AmoCRM, Telegram.',
+                'Автоматические уведомления, напоминания, отчёты.',
+                'Убираем дублирование данных и ручной перенос между системами.'
             ],
-            terminal: 'dashboards / portals / custom systems / integrations'
+            terminal: 'integrations / CRM / workflows / sync'
         }
     };
 
@@ -73,14 +74,21 @@ document.addEventListener('DOMContentLoaded', () => {
         agents: 'automation',
         bot: 'telegram',
         bots: 'telegram',
-        tma: 'telegram',
-        miniapp: 'telegram',
-        miniapps: 'telegram',
-        website: 'bitrix',
-        websites: 'bitrix',
-        web: 'platforms',
-        platform: 'platforms',
-        dashboards: 'platforms'
+        tma: 'miniapps',
+        miniapp: 'miniapps',
+        miniapps: 'miniapps',
+        website: 'websites',
+        websites: 'websites',
+        web: 'websites',
+        wordpress: 'websites',
+        wp: 'websites',
+        bitrix: 'websites',
+        tilda: 'websites',
+        platform: 'automation',
+        platforms: 'automation',
+        crm: 'automation',
+        integration: 'automation',
+        integrations: 'automation'
     };
 
     let commandHistory = [];
@@ -222,6 +230,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    /* --- Contact Form --- */
+    const contactForm = document.getElementById('contactForm');
+    const projectTypeTags = document.getElementById('projectTypeTags');
+    const projectTypeInput = document.getElementById('projectType');
+
+    if (projectTypeTags) {
+        projectTypeTags.querySelectorAll('.form-tag').forEach((tag) => {
+            tag.addEventListener('click', () => {
+                projectTypeTags.querySelectorAll('.form-tag').forEach((t) => t.classList.remove('active'));
+                tag.classList.add('active');
+                projectTypeInput.value = tag.dataset.value;
+            });
+        });
+    }
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const name = document.getElementById('contactName').value.trim();
+            const phone = document.getElementById('contactPhone').value.trim();
+            const type = projectTypeInput.value || 'не выбрано';
+            const message = document.getElementById('contactMessage').value.trim();
+
+            let text = `Заявка с сайта iindev\\n\\n`;
+            text += `Имя: ${name}\\n`;
+            text += `Контакт: ${phone}\\n`;
+            text += `Тип проекта: ${type}\\n`;
+            if (message) {
+                text += `\\nО задаче:\\n${message}`;
+            }
+
+            const tgUrl = `https://t.me/iindev?text=${encodeURIComponent(text)}`;
+            window.open(tgUrl, '_blank');
+            showToast('Откройте Telegram и отправьте сообщение');
+        });
+    }
+
     function resetTerminal() {
         terminalOutput.innerHTML = '';
         terminalInput.value = '';
@@ -307,27 +352,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 duration: 1.1,
                 ease: 'power3.out'
             }, '-=0.45')
+            .from('.hero-desc', {
+                y: 24,
+                opacity: 0,
+                filter: 'blur(4px)',
+                duration: 0.7,
+                ease: 'power3.out'
+            }, '-=0.6')
             .from('.hero-actions', {
                 y: 26,
                 opacity: 0,
                 filter: 'blur(4px)',
                 duration: 0.7,
                 ease: 'power3.out'
-            }, '-=0.55')
+            }, '-=0.5')
             .from('.hero-tags li', {
                 y: 20,
                 opacity: 0,
                 duration: 0.5,
                 stagger: 0.08,
                 ease: 'power3.out'
-            }, '-=0.35')
-            .from('.hero-panel', {
-                y: 44,
-                opacity: 0,
-                filter: 'blur(8px)',
-                duration: 0.95,
-                ease: 'power3.out'
-            }, '-=0.6');
+            }, '-=0.35');
 
         if (!window.ScrollTrigger) return;
 
@@ -400,14 +445,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        gsap.from('.cta-panel', {
-            y: 28,
+        gsap.from('.contact-form', {
+            y: 30,
             opacity: 0,
             filter: 'blur(6px)',
             duration: 0.85,
             ease: 'power3.out',
             scrollTrigger: {
-                trigger: '.cta-panel',
+                trigger: '.contact-layout',
                 start: 'top 84%',
                 once: true
             }
@@ -495,10 +540,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderWhenOutput() {
         addLine('<span class="output-muted">Common entry points</span>');
         addLine('');
-        addLine('<span class="output">01 → manual work eats team time</span>');
-        addLine('<span class="output">02 → Bitrix, website, and Telegram are disconnected</span>');
-        addLine('<span class="output">03 → redesign needed, but not empty visuals</span>');
-        addLine('<span class="output">04 → AI should automate work, not just decorate pitch decks</span>');
+        addLine('<span class="output">01 → site is outdated or missing</span>');
+        addLine('<span class="output">02 → leads get lost in chats</span>');
+        addLine('<span class="output">03 → manual work eats team time</span>');
+        addLine('<span class="output">04 → systems do not talk to each other</span>');
+        addLine('<span class="output">05 → want a bot or Mini App but do not know where to start</span>');
     }
 
     const commands = {
@@ -519,11 +565,12 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         about: () => {
             addLine('<span class="brand-inline"><span style="color: #5eead4;">iind</span>ev.</span>');
-            addLine('<span class="output-muted">AI automation studio</span>');
+            addLine('<span class="output-muted">Web development & automation studio</span>');
             addLine('');
-            addLine('<span class="output">Делаем AI-автоматизацию, Telegram боты, TMA, сайты на Bitrix и веб-платформы.</span>');
-            addLine('<span class="output">Заходим в задачу как продуктовая команда: диагностика, UX, код, интеграции, запуск.</span>');
-            addLine('<span class="output">Нам приносят хаос — мы возвращаем понятную систему.</span>');
+            addLine('<span class="output">Веб-разработка: WordPress, Bitrix, 1C, Tilda.</span>');
+            addLine('<span class="output">Telegram-боты, Mini Apps, CRM-интеграции.</span>');
+            addLine('<span class="output">Автоматизация процессов и связка систем.</span>');
+            addLine('<span class="output">Берём задачу целиком: от аудита до запуска.</span>');
         },
         capabilities: () => {
             renderCapabilitiesOutput();
@@ -549,18 +596,19 @@ document.addEventListener('DOMContentLoaded', () => {
         stack: () => {
             addLine('<span class="output-muted">iindev:~/stack$ cat profile.txt</span>');
             addLine('');
-            addLine('<span class="output">frontend   :: HTML / CSS / JS / React / Next / Nuxt</span>');
-            addLine('<span class="output">backend    :: Node / Laravel / Bitrix / custom API</span>');
-            addLine('<span class="output">surfaces   :: web / corporate sites / Telegram / Mini Apps</span>');
-            addLine('<span class="output">automation :: AI providers / CRM / docs / bots / internal flows</span>');
+            addLine('<span class="output">web        :: WordPress / Bitrix / 1C / Tilda</span>');
+            addLine('<span class="output">bots       :: Python / Node.js / Aiogram / Telegraf</span>');
+            addLine('<span class="output">mini apps  :: React / Vue / Vanilla JS + TMA SDK</span>');
+            addLine('<span class="output">automation :: Zapier / Make / custom API / webhooks</span>');
+            addLine('<span class="output">crm        :: Bitrix24 / AmoCRM / Google Sheets</span>');
         },
         process: () => {
             addLine('<span class="output-muted">iindev:~/process$ ./delivery-model</span>');
             addLine('');
-            addLine('<span class="output">01 → diagnose business flow and bottlenecks</span>');
-            addLine('<span class="output">02 → design architecture, interface, and integrations</span>');
-            addLine('<span class="output">03 → build product, automation, and admin tools</span>');
-            addLine('<span class="output">04 → launch, support, and scale without chaos</span>');
+            addLine('<span class="output">01 → audit current processes and bottlenecks</span>');
+            addLine('<span class="output">02 → design architecture and pick the stack</span>');
+            addLine('<span class="output">03 → develop, integrate, test</span>');
+            addLine('<span class="output">04 → launch, train, maintain</span>');
         },
         when: () => {
             renderWhenOutput();
@@ -574,7 +622,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const telegramLine = addLine('<span class="contact-item" data-copy="@iindev"><span class="contact-label-terminal">telegram:</span> <span class="contact-value-terminal">@iindev</span></span>');
             const emailLine = addLine('<span class="contact-item" data-copy="iindev@tuta.io"><span class="contact-label-terminal">email:</span> <span class="contact-value-terminal">iindev@tuta.io</span></span>');
             addLine('');
-            addLine('<span class="output-muted">Telegram отвечает быстрее.</span>');
+            addLine('<span class="output-muted">Telegram responds fastest.</span>');
 
             [telegramLine, emailLine].forEach((line) => {
                 const item = line.querySelector('.contact-item');
@@ -594,10 +642,10 @@ document.addEventListener('DOMContentLoaded', () => {
         metrics: () => {
             addLine('<span class="output-muted">Studio profile</span>');
             addLine('');
-            addLine('<span class="metric-line"><span class="metric-label">mode</span><span class="metric-bar-text">build → automate → ship</span></span>');
-            addLine('<span class="metric-line"><span class="metric-label">focus</span><span class="metric-bar-text">AI / Bitrix / Telegram / web systems</span></span>');
-            addLine('<span class="metric-line"><span class="metric-label">style</span><span class="metric-bar-text">high taste / clean code / no template noise</span></span>');
-            addLine('<span class="metric-line"><span class="metric-label">result</span><span class="metric-bar-text">working product instead of slideware</span></span>');
+            addLine('<span class="metric-line"><span class="metric-label">mode</span><span class="metric-bar-text">audit → design → build → launch</span></span>');
+            addLine('<span class="metric-line"><span class="metric-label">focus</span><span class="metric-bar-text">websites / bots / mini apps / automation</span></span>');
+            addLine('<span class="metric-line"><span class="metric-label">stack</span><span class="metric-bar-text">WordPress / Bitrix / Telegram / TMA</span></span>');
+            addLine('<span class="metric-line"><span class="metric-label">style</span><span class="metric-bar-text">clean code / working systems / no fluff</span></span>');
         },
         weather: async () => {
             addLine('<span class="output-muted">Fetching Yakutsk weather...</span>');
