@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         element.addEventListener('click', async () => {
             const copied = await copyText(element.dataset.copy);
             if (copied) {
-                showToast(`copied: ${element.dataset.copy}`);
+                showToast(`скопировано: ${element.dataset.copy}`);
             }
         });
     });
@@ -294,34 +294,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const heroTimeline = gsap.timeline();
         heroTimeline
             .from('.eyebrow', {
-                y: 18,
+                y: 20,
                 opacity: 0,
-                duration: 0.65,
+                filter: 'blur(6px)',
+                duration: 0.7,
                 ease: 'power3.out'
             })
             .from('.hero-title', {
-                y: 48,
+                y: 50,
                 opacity: 0,
-                duration: 1,
+                filter: 'blur(10px)',
+                duration: 1.1,
                 ease: 'power3.out'
             }, '-=0.45')
             .from('.hero-actions', {
-                y: 24,
+                y: 26,
                 opacity: 0,
-                duration: 0.65,
+                filter: 'blur(4px)',
+                duration: 0.7,
                 ease: 'power3.out'
             }, '-=0.55')
             .from('.hero-tags li', {
                 y: 20,
                 opacity: 0,
                 duration: 0.5,
-                stagger: 0.05,
+                stagger: 0.08,
                 ease: 'power3.out'
             }, '-=0.35')
             .from('.hero-panel', {
-                y: 42,
+                y: 44,
                 opacity: 0,
-                duration: 0.9,
+                filter: 'blur(8px)',
+                duration: 0.95,
                 ease: 'power3.out'
             }, '-=0.6');
 
@@ -329,9 +333,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         gsap.utils.toArray('.section-heading').forEach((section) => {
             gsap.from(section, {
-                y: 26,
+                y: 30,
                 opacity: 0,
-                duration: 0.8,
+                filter: 'blur(6px)',
+                duration: 0.9,
                 ease: 'power3.out',
                 scrollTrigger: {
                     trigger: section,
@@ -342,9 +347,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         gsap.from('.capability-card', {
-            y: 34,
+            y: 36,
             opacity: 0,
-            duration: 0.8,
+            filter: 'blur(4px)',
+            duration: 0.85,
             stagger: 0.12,
             ease: 'power3.out',
             scrollTrigger: {
@@ -355,9 +361,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         gsap.from('.pressure-item', {
-            y: 28,
+            y: 30,
             opacity: 0,
-            duration: 0.72,
+            filter: 'blur(4px)',
+            duration: 0.75,
             stagger: 0.1,
             ease: 'power3.out',
             scrollTrigger: {
@@ -368,9 +375,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         gsap.from('.workflow-manifesto', {
-            y: 28,
+            y: 30,
             opacity: 0,
-            duration: 0.8,
+            filter: 'blur(6px)',
+            duration: 0.85,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: '.workflow-layout',
@@ -380,9 +388,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         gsap.from('.workflow-step', {
-            y: 24,
+            y: 26,
             opacity: 0,
-            duration: 0.65,
+            duration: 0.7,
             stagger: 0.12,
             ease: 'power3.out',
             scrollTrigger: {
@@ -393,9 +401,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         gsap.from('.cta-panel', {
-            y: 26,
+            y: 28,
             opacity: 0,
-            duration: 0.8,
+            filter: 'blur(6px)',
+            duration: 0.85,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: '.cta-panel',
@@ -509,7 +518,7 @@ document.addEventListener('DOMContentLoaded', () => {
             addLine('<span class="help-line"><span class="help-cmd">clear</span><span class="help-desc">clear terminal</span></span>');
         },
         about: () => {
-            addLine('<span class="brand-inline"><span style="color: #8fdccf;">iind</span>ev.</span>');
+            addLine('<span class="brand-inline"><span style="color: #5eead4;">iind</span>ev.</span>');
             addLine('<span class="output-muted">AI automation studio</span>');
             addLine('');
             addLine('<span class="output">Делаем AI-автоматизацию, Telegram боты, TMA, сайты на Bitrix и веб-платформы.</span>');
@@ -565,7 +574,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const telegramLine = addLine('<span class="contact-item" data-copy="@iindev"><span class="contact-label-terminal">telegram:</span> <span class="contact-value-terminal">@iindev</span></span>');
             const emailLine = addLine('<span class="contact-item" data-copy="iindev@tuta.io"><span class="contact-label-terminal">email:</span> <span class="contact-value-terminal">iindev@tuta.io</span></span>');
             addLine('');
-            addLine('<span class="output-muted">Telegram responds fastest.</span>');
+            addLine('<span class="output-muted">Telegram отвечает быстрее.</span>');
 
             [telegramLine, emailLine].forEach((line) => {
                 const item = line.querySelector('.contact-item');
