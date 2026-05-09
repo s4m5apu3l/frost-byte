@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             bullets: [
                 'Аудит ручных процессов, проектирование сценариев, ассистенты, агенты и AI-воркфлоу.',
                 'Интеграции с CRM, Telegram, документами, базой знаний, API и внутренними системами.',
-                'Фокус не на “эффекте вау”, а на скорости цикла, чистых данных и реальной пользе.'
+                'Фокус не на "эффекте вау", а на скорости цикла, чистых данных и реальной пользе.'
             ],
             terminal: 'AI automation / agents / CRM flows'
         },
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    bindSpotlightEffect('.capability-card, .hero-strip-card, .pressure-item');
+    bindSpotlightEffect('.capability-card, .pressure-item');
 
     function bindSpotlightEffect(selector) {
         document.querySelectorAll(selector).forEach((element) => {
@@ -305,18 +305,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 duration: 1,
                 ease: 'power3.out'
             }, '-=0.45')
-            .from('.hero-lead', {
-                y: 28,
-                opacity: 0,
-                duration: 0.75,
-                ease: 'power3.out'
-            }, '-=0.55')
             .from('.hero-actions', {
                 y: 24,
                 opacity: 0,
                 duration: 0.65,
                 ease: 'power3.out'
-            }, '-=0.45')
+            }, '-=0.55')
             .from('.hero-tags li', {
                 y: 20,
                 opacity: 0,
@@ -324,19 +318,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 stagger: 0.05,
                 ease: 'power3.out'
             }, '-=0.35')
-            .from('.hero-strip-card', {
-                y: 24,
-                opacity: 0,
-                duration: 0.55,
-                stagger: 0.08,
-                ease: 'power3.out'
-            }, '-=0.25')
             .from('.hero-panel', {
                 y: 42,
                 opacity: 0,
                 duration: 0.9,
                 ease: 'power3.out'
-            }, '-=0.8');
+            }, '-=0.6');
 
         if (!window.ScrollTrigger) return;
 
@@ -493,7 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         addLine('');
-        addLine('<span class="output-muted">Type \"open &lt;name&gt;\" for details</span>');
+        addLine('<span class="output-muted">Type "open &lt;name&gt;" for details</span>');
     }
 
     function renderWhenOutput() {
@@ -632,7 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
             await handler(args);
         } else {
             addLine(`<span class="output-error">command not found: ${escapeHtml(cmd)}</span>`);
-            addLine('<span class="output-muted">Type \"help\" for available commands</span>');
+            addLine('<span class="output-muted">Type "help" for available commands</span>');
         }
 
         scrollToBottom();
@@ -725,7 +712,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         await sleep(220);
         addLine('');
-        addLine('<span class="output-muted">Type \"help\" for available commands</span>');
+        addLine('<span class="output-muted">Type "help" for available commands</span>');
         addLine('');
 
         bootScrollLock = false;
