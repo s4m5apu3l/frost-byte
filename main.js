@@ -372,7 +372,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 duration: 0.5,
                 stagger: 0.08,
                 ease: 'power3.out'
-            }, '-=0.35');
+            }, '-=0.35')
+            .from('.hero-panel', {
+                y: 44,
+                opacity: 0,
+                filter: 'blur(8px)',
+                duration: 0.95,
+                ease: 'power3.out'
+            }, '-=0.6');
 
         if (!window.ScrollTrigger) return;
 
