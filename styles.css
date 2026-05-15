@@ -263,7 +263,6 @@ ul {
 .nav-brand,
 .eyebrow,
 .meta-pill,
-.nav-link,
 .delivery-label,
 .io-key,
 .section-kicker,
@@ -318,21 +317,6 @@ ul {
 .nav-weather {
 	min-width: 126px;
 	justify-content: center;
-}
-
-.status-dot {
-	width: 7px;
-	height: 7px;
-	border-radius: 999px;
-	background: var(--accent);
-	box-shadow: 0 0 0 3px rgba(94, 234, 212, 0.15);
-	flex-shrink: 0;
-	animation: statusPulse 2.5s ease-in-out infinite;
-}
-
-@keyframes statusPulse {
-	0%, 100% { box-shadow: 0 0 0 3px rgba(94, 234, 212, 0.15); }
-	50% { box-shadow: 0 0 0 6px rgba(94, 234, 212, 0.08); }
 }
 
 .nav-toggle {
@@ -436,8 +420,7 @@ ul {
 	flex-wrap: wrap;
 }
 
-.primary-cta,
-.secondary-cta {
+.primary-cta {
 	transition:
 		transform 0.4s var(--ease-card),
 		color 0.2s ease,
@@ -485,19 +468,6 @@ ul {
 .primary-cta:hover .cta-icon {
 	transform: translate(4px, -1px) scale(1.05);
 	background: rgba(10, 12, 14, 0.8);
-}
-
-.secondary-cta {
-	color: var(--text-muted);
-	font-weight: 500;
-	transition:
-		color 0.2s ease,
-		transform 0.3s var(--ease-out);
-}
-
-.secondary-cta:hover {
-	color: var(--accent-strong);
-	transform: translateX(3px);
 }
 
 .hero-desc {
@@ -626,8 +596,7 @@ ul {
 	max-width: 780px;
 }
 
-.section-title,
-.cta-title {
+.section-title {
 	margin-top: 14px;
 	font-size: clamp(2rem, 4.5vw, 3.2rem);
 	font-weight: 700;
@@ -927,13 +896,6 @@ ul {
 }
 
 /* --- Connect section --- */
-
-.cta-panel-inner {
-	display: grid;
-	grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
-	gap: 22px;
-	align-items: end;
-}
 
 .contacts-terminal {
 	margin-bottom: auto;
@@ -1469,6 +1431,37 @@ ul {
 	color: var(--text-dim);
 }
 
+/* --- Reduced motion --- */
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+
+	.animate-element {
+		will-change: auto;
+	}
+
+	.cursor-blink {
+		animation: none;
+		opacity: 1;
+	}
+
+	.loader-dot {
+		animation: none;
+		opacity: 1;
+	}
+}
+
 /* --- Responsive: tablet --- */
 
 @media (max-width: 1120px) {
@@ -1477,7 +1470,6 @@ ul {
 	}
 
 	.hero,
-	.cta-panel-inner,
 	.workflow-layout,
 	.pressure-layout {
 		grid-template-columns: 1fr;

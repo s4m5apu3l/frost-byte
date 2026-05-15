@@ -91,16 +91,20 @@ document.addEventListener('DOMContentLoaded', () => {
         integrations: 'automation'
     };
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let commandHistory = [];
     let historyIndex = -1;
     let isAnimating = false;
     let bootScrollLock = true;
     let scrollRaf = false;
     let cachedWeather = null;
+    let weatherTimestamp = 0;
+    const WEATHER_TTL = 30 * 60 * 1000;
     let normalAnimationsInitialized = false;
     let bootSequenceId = 0;
     let lastFocusedElement = null;
     let currentMode = localStorage.getItem('iindev-mode') || 'normal';
+    let toastTimeoutId = null;
 
     function escapeHtml(value) {
         return String(value).replace(/[<>&"']/g, (char) => ({
@@ -131,8 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function showToast(text) {
         copyToast.textContent = text;
         copyToast.classList.add('show');
-        window.clearTimeout(showToast.timeoutId);
-        showToast.timeoutId = window.setTimeout(() => {
+        window.clearTimeout(toastTimeoutId);
+        toastTimeoutId = window.setTimeout(() => {
             copyToast.classList.remove('show');
         }, 2000);
     }
@@ -148,14 +152,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function fetchWeather() {
-        if (cachedWeather) return cachedWeather;
+        if (cachedWeather && (Date.now() - weatherTimestamp) < WEATHER_TTL) return cachedWeather;
         try {
             const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=62.0355&longitude=129.6755&current_weather=true');
             const data = await response.json();
             cachedWeather = `${Math.round(data.current_weather.temperature)}°C`;
+            weatherTimestamp = Date.now();
             return cachedWeather;
         } catch {
             cachedWeather = '—°C';
+            weatherTimestamp = Date.now();
             return cachedWeather;
         }
     }
@@ -218,6 +224,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     modalCloseButton.addEventListener('click', closeCapabilityModal);
 
+    detailModal.addEventListener('keydown', (event) => {
+        if (event.key !== 'Tab' || !detailModal.classList.contains('visible')) return;
+
+        const focusable = detailModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (focusable.length === 0) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey) {
+            if (document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            }
+        } else {
+            if (document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        }
+    });
+
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
             closeCapabilityModal();
@@ -253,12 +281,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const type = projectTypeInput.value || 'не выбрано';
             const message = document.getElementById('contactMessage').value.trim();
 
-            let text = `Заявка с сайта iindev\\n\\n`;
-            text += `Имя: ${name}\\n`;
-            text += `Контакт: ${phone}\\n`;
-            text += `Тип проекта: ${type}\\n`;
+            let text = `Заявка с сайта iindev\n\n`;
+            text += `Имя: ${name}\n`;
+            text += `Контакт: ${phone}\n`;
+            text += `Тип проекта: ${type}\n`;
             if (message) {
-                text += `\\nО задаче:\\n${message}`;
+                text += `\nО задаче:\n${message}`;
             }
 
             const tgUrl = `https://t.me/iindev?text=${encodeURIComponent(text)}`;
@@ -291,10 +319,12 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('iindev-mode', mode);
             window.scrollTo(0, 0);
 
-            if (window.gsap) {
+            outgoing.style.opacity = '';
+            incoming.style.opacity = '';
+
+            if (window.gsap && !prefersReducedMotion) {
+                incoming.style.opacity = '0';
                 gsap.fromTo(incoming, { opacity: 0 }, { opacity: 1, duration: 0.45, ease: 'power3.out' });
-            } else {
-                incoming.style.opacity = '1';
             }
 
             if (mode === 'normal') {
@@ -308,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        if (window.gsap) {
+        if (window.gsap && !prefersReducedMotion) {
             gsap.to(outgoing, {
                 opacity: 0,
                 duration: 0.25,
@@ -316,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 onComplete: completeSwitch
             });
         } else {
-            outgoing.style.opacity = '0';
+            outgoing.style.opacity = '';
             completeSwitch();
         }
     }
@@ -325,7 +355,10 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleTerminal.addEventListener('click', () => switchMode('terminal'));
 
     function initNormalAnimations() {
-        if (!window.gsap) return;
+        if (!window.gsap || prefersReducedMotion) {
+            normalAnimationsInitialized = true;
+            return;
+        }
         if (window.ScrollTrigger) {
             gsap.registerPlugin(ScrollTrigger);
         }
@@ -485,8 +518,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         scrollRaf = true;
         requestAnimationFrame(() => {
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-            scrollRaf = false;
+            try {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            } finally {
+                scrollRaf = false;
+            }
         });
     }
 
@@ -739,11 +775,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const sequenceId = ++bootSequenceId;
         bootScrollLock = true;
         window.scrollTo(0, 0);
-        await sleep(220);
+
+        const typeSpeed = prefersReducedMotion ? 0 : 28;
+        const shortDelay = prefersReducedMotion ? 0 : 220;
+        const medDelay = prefersReducedMotion ? 0 : 280;
+        const longDelay = prefersReducedMotion ? 0 : 620;
+        const cmdDelay = prefersReducedMotion ? 0 : 360;
+        const cmdSpeed = prefersReducedMotion ? 0 : 24;
+
+        await sleep(shortDelay);
         if (!isActiveBoot(sequenceId)) return;
 
         addLine('<span class="output-muted">iindev:~$ ./boot --studio</span>');
-        await sleep(280);
+        await sleep(medDelay);
         if (!isActiveBoot(sequenceId)) return;
 
         const weatherLine = addLine('<span class="output">→ YAKUTSK <span class="temp-loader"><span class="loader-dot"></span><span class="loader-dot"></span><span class="loader-dot"></span></span></span>');
@@ -753,28 +797,28 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        await sleep(620);
+        await sleep(longDelay);
         if (!isActiveBoot(sequenceId)) return;
 
         addLine('<span class="output-success">→ system ready</span>');
         addLine('');
-        await sleep(240);
+        await sleep(prefersReducedMotion ? 0 : 240);
         if (!isActiveBoot(sequenceId)) return;
 
-        await typeCommand('about', 28, sequenceId);
+        await typeCommand('about', typeSpeed, sequenceId);
         if (!isActiveBoot(sequenceId)) return;
 
-        await sleep(360);
+        await sleep(cmdDelay);
         addLine('');
-        await typeCommand('capabilities', 24, sequenceId);
+        await typeCommand('capabilities', cmdSpeed, sequenceId);
         if (!isActiveBoot(sequenceId)) return;
 
-        await sleep(360);
+        await sleep(cmdDelay);
         addLine('');
-        await typeCommand('contact', 24, sequenceId);
+        await typeCommand('contact', cmdSpeed, sequenceId);
         if (!isActiveBoot(sequenceId)) return;
 
-        await sleep(220);
+        await sleep(shortDelay);
         addLine('');
         addLine('<span class="output-muted">Type "help" for available commands</span>');
         addLine('');

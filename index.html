@@ -54,6 +54,14 @@
 		<link rel="stylesheet" href="styles.css" />
 	</head>
 	<body class="mode-normal">
+		<noscript>
+			<style>
+				.normal-container { display: block !important; opacity: 1 !important; }
+				.terminal-container { display: none !important; }
+				.animate-element { opacity: 1 !important; filter: none !important; transform: none !important; }
+				.weather-loader { display: none; }
+			</style>
+		</noscript>
 		<a class="skip-link" href="#normalContainer">Перейти к контенту</a>
 		<div class="background-pattern" aria-hidden="true"></div>
 		<div class="noise-overlay" aria-hidden="true"></div>
@@ -574,8 +582,8 @@
 			скопировано
 		</div>
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-		<script src="main.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer integrity="sha384-d+vyQ0dYcymoP8ndq2hW7FGC50nqGdXUEgoOUGxbbkAJwZqL7h+jKN0GGgn9hFDS" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer integrity="sha384-poC0r6usQOX2Ayt/VGA+t81H6V3iN9L+Irz9iO8o+s0X20tLpzc9DOOtnKxhaQSE" crossorigin="anonymous"></script>
+		<script src="main.js" defer></script>
 	</body>
 </html>
