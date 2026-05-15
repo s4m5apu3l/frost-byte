@@ -21,51 +21,55 @@ document.addEventListener('DOMContentLoaded', () => {
         websites: {
             name: 'websites',
             label: 'Сайты',
-            title: 'Веб-разработка',
-            description: 'Собираем сайты под ключ: от дизайна до запуска и поддержки.',
+            title: 'Сайт, который приносит заявки',
+            description: 'Не просто визитка — точка входа для клиентов. Формы, мессенджеры, CRM-интеграция. Каждая заявка доходит.',
             bullets: [
                 'WordPress — блоги, корпоративные сайты, магазины на WooCommerce.',
                 'Bitrix — корпоративные порталы, интернет-магазины, интеграции с 1C.',
                 '1C-Битрикс — каталоги, CRM-формы, сложная бизнес-логика.',
-                'Tilda — быстрые лендинги и сайты с нуля, без программирования.'
+                'Tilda — быстрые лендинги и сайты с нуля, без программирования.',
+                'Все сайты — с формами, мессенджерами и автосбором заявок в CRM.'
             ],
-            terminal: 'WordPress / Bitrix / 1C / Tilda'
+            terminal: 'сайты / заявки / CRM'
         },
         telegram: {
             name: 'telegram',
             label: 'Telegram',
-            title: 'Telegram-боты',
-            description: 'Автоматизируем коммуникацию и продажи через Telegram.',
+            title: 'Бот, который продаёт 24/7',
+            description: 'Принимает заказы, записывает на услуги, отвечает на вопросы — без менеджера.',
             bullets: [
-                'Боты для продаж, записи, доставки, опросов и поддержки.',
+                'Боты для продаж, записи, доставки, опросов и поддержки — 24/7.',
                 'Интеграция с CRM, платёжными системами, Google-таблицами.',
-                'Рассылки, сегментация аудитории, аналитика открытий и кликов.'
+                'Рассылки, сегментация аудитории, аналитика открытий и кликов.',
+                'Автоответы на частые вопросы — менеджеры занимаются сложным.'
             ],
-            terminal: 'bots / sales / support / delivery'
+            terminal: 'боты / продажи / поддержка'
         },
         miniapps: {
             name: 'miniapps',
             label: 'Mini Apps',
-            title: 'Telegram Mini Apps',
-            description: 'Веб-приложения внутри Telegram — без установки и регистрации.',
+            title: 'Mini App — магазин в Telegram',
+            description: 'Каталог, корзина, оплата — прямо в мессенджере. Клиенту не нужно ничего скачивать.',
             bullets: [
-                'Каталоги товаров и услуг с корзиной и оплатой.',
-                'Личные кабинеты, бронирование, доставка.',
-                'Нативный UX: push-уведомления, геолокация, платёжки в один тап.'
+                'Каталоги товаров и услуг с корзиной и оплатой в один тап.',
+                'Личные кабинеты, бронирование, доставка — внутри Telegram.',
+                'Нативный UX: push-уведомления, геолокация, платёжки.',
+                'Не нужно скачивать приложение — открывается из чата.'
             ],
-            terminal: 'TMA / catalogs / booking / delivery'
+            terminal: 'TMA / каталоги / оплата'
         },
         automation: {
             name: 'automation',
             label: 'Автоматизация',
-            title: 'Автоматизация и интеграции',
-            description: 'Связываем сайт, CRM, Telegram и таблицы в единый контур.',
+            title: 'Системы работают без вас',
+            description: 'Сайт → CRM → Telegram → таблицы. Заявки летят сами, уведомления приходят автоматом.',
             bullets: [
                 'Интеграция Bitrix, 1C, Google Sheets, AmoCRM, Telegram.',
-                'Автоматические уведомления, напоминания, отчёты.',
-                'Убираем дублирование данных и ручной перенос между системами.'
+                'Автоматические уведомления, напоминания, отчёты — без ручной работы.',
+                'Убираем дублирование данных и ручной перенос между системами.',
+                'Всё связанное: одна заявка — путь от сайта до CRM и ответа клиенту.'
             ],
-            terminal: 'integrations / CRM / workflows / sync'
+            terminal: 'интеграции / CRM / автоматизация'
         }
     };
 
@@ -566,7 +570,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderCapabilitiesOutput() {
-        addLine('<span class="output-muted">iindev:~/capabilities$ ls -la</span>');
+        addLine('<span class="output-muted">iindev:~/направления$ ls -la</span>');
         addLine('');
 
         Object.entries(capabilityInfo).forEach(([key, info]) => {
@@ -577,43 +581,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         addLine('');
-        addLine('<span class="output-muted">Type "open &lt;name&gt;" for details</span>');
+        addLine('<span class="output-muted">Введите "open &lt;имя&gt;" для подробностей</span>');
     }
 
     function renderWhenOutput() {
-        addLine('<span class="output-muted">Common entry points</span>');
+        addLine('<span class="output-muted">Когда к нам приходят</span>');
         addLine('');
-        addLine('<span class="output">01 → site is outdated or missing</span>');
-        addLine('<span class="output">02 → leads get lost in chats</span>');
-        addLine('<span class="output">03 → manual work eats team time</span>');
-        addLine('<span class="output">04 → systems do not talk to each other</span>');
-        addLine('<span class="output">05 → want a bot or Mini App but do not know where to start</span>');
+        addLine('<span class="output">01 → сайт устарел — заявки не идут</span>');
+        addLine('<span class="output">02 → заявки теряются в чатах</span>');
+        addLine('<span class="output">03 → менеджеры копируют данные вручную</span>');
+        addLine('<span class="output">04 → сайт, CRM и Telegram живут отдельно</span>');
+        addLine('<span class="output">05 → нужен бот или Mini App — не знают с чего</span>');
     }
 
     const commands = {
         help: () => {
-            addLine('<span class="output">Available commands:</span>');
+            addLine('<span class="output">Доступные команды:</span>');
             addLine('');
-            addLine('<span class="help-line"><span class="help-cmd">help</span><span class="help-desc">show this help</span></span>');
-            addLine('<span class="help-line"><span class="help-cmd">about</span><span class="help-desc">about iindev</span></span>');
-            addLine('<span class="help-line"><span class="help-cmd">capabilities</span><span class="help-desc">list expertise areas</span></span>');
-            addLine('<span class="help-line"><span class="help-cmd">open &lt;name&gt;</span><span class="help-desc">open capability details</span></span>');
-            addLine('<span class="help-line"><span class="help-cmd">stack</span><span class="help-desc">show build stack</span></span>');
-            addLine('<span class="help-line"><span class="help-cmd">process</span><span class="help-desc">show delivery model</span></span>');
-            addLine('<span class="help-line"><span class="help-cmd">when</span><span class="help-desc">show common entry points</span></span>');
-            addLine('<span class="help-line"><span class="help-cmd">contact</span><span class="help-desc">show contact info</span></span>');
-            addLine('<span class="help-line"><span class="help-cmd">metrics</span><span class="help-desc">show studio profile</span></span>');
-            addLine('<span class="help-line"><span class="help-cmd">weather</span><span class="help-desc">current Yakutsk weather</span></span>');
-            addLine('<span class="help-line"><span class="help-cmd">clear</span><span class="help-desc">clear terminal</span></span>');
+            addLine('<span class="help-line"><span class="help-cmd">help</span><span class="help-desc">показать справку</span></span>');
+            addLine('<span class="help-line"><span class="help-cmd">about</span><span class="help-desc">о студии</span></span>');
+            addLine('<span class="help-line"><span class="help-cmd">capabilities</span><span class="help-desc">направления работы</span></span>');
+            addLine('<span class="help-line"><span class="help-cmd">open &lt;имя&gt;</span><span class="help-desc">подробнее о направлении</span></span>');
+            addLine('<span class="help-line"><span class="help-cmd">stack</span><span class="help-desc">технологический стек</span></span>');
+            addLine('<span class="help-line"><span class="help-cmd">process</span><span class="help-desc">процесс работы</span></span>');
+            addLine('<span class="help-line"><span class="help-cmd">when</span><span class="help-desc">когда к нам приходят</span></span>');
+            addLine('<span class="help-line"><span class="help-cmd">contact</span><span class="help-desc">контакты</span></span>');
+            addLine('<span class="help-line"><span class="help-cmd">metrics</span><span class="help-desc">профиль студии</span></span>');
+            addLine('<span class="help-line"><span class="help-cmd">weather</span><span class="help-desc">погода в Якутске</span></span>');
+            addLine('<span class="help-line"><span class="help-cmd">clear</span><span class="help-desc">очистить терминал</span></span>');
         },
         about: () => {
             addLine('<span class="brand-inline"><span style="color: #5eead4;">iind</span>ev.</span>');
-            addLine('<span class="output-muted">Web development & automation studio</span>');
+            addLine('<span class="output-muted">Студия разработки и автоматизации</span>');
             addLine('');
-            addLine('<span class="output">Веб-разработка: WordPress, Bitrix, 1C, Tilda.</span>');
-            addLine('<span class="output">Telegram-боты, Mini Apps, CRM-интеграции.</span>');
-            addLine('<span class="output">Автоматизация процессов и связка систем.</span>');
-            addLine('<span class="output">Берём задачу целиком: от аудита до запуска.</span>');
+            addLine('<span class="output">Связываем сайт, бота и CRM в единый контур.</span>');
+            addLine('<span class="output">Не шаблон — система под ваш процесс.</span>');
+            addLine('<span class="output">От хаоса и ручной работы — к автоматизации.</span>');
         },
         capabilities: () => {
             renderCapabilitiesOutput();
@@ -629,29 +632,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const capabilityKey = resolveCapabilityKey(args[0]);
             if (capabilityKey) {
                 openCapabilityModal(capabilityKey);
-                addLine(`<span class="output-success">→ opened: ${escapeHtml(capabilityKey)}</span>`);
+                addLine(`<span class="output-success">→ открыто: ${escapeHtml(capabilityKey)}</span>`);
                 return;
             }
 
-            addLine(`<span class="output-error">capability not found: ${escapeHtml(args[0] || '(none)')}</span>`);
-            addLine(`<span class="output-muted">Available: ${Object.keys(capabilityInfo).join(', ')}</span>`);
+            addLine(`<span class="output-error">направление не найдено: ${escapeHtml(args[0] || '(пусто)')}</span>`);
+            addLine(`<span class="output-muted">Доступные: ${Object.keys(capabilityInfo).join(', ')}</span>`);
         },
         stack: () => {
-            addLine('<span class="output-muted">iindev:~/stack$ cat profile.txt</span>');
+            addLine('<span class="output-muted">iindev:~/стек$ cat profile.txt</span>');
             addLine('');
-            addLine('<span class="output">web        :: WordPress / Bitrix / 1C / Tilda</span>');
-            addLine('<span class="output">bots       :: Python / Node.js / Aiogram / Telegraf</span>');
+            addLine('<span class="output">сайты      :: WordPress / Bitrix / 1C / Tilda</span>');
+            addLine('<span class="output">боты       :: Python / Node.js / Aiogram / Telegraf</span>');
             addLine('<span class="output">mini apps  :: React / Vue / Vanilla JS + TMA SDK</span>');
-            addLine('<span class="output">automation :: Zapier / Make / custom API / webhooks</span>');
+            addLine('<span class="output">автоматиз. :: Zapier / Make / custom API / webhooks</span>');
             addLine('<span class="output">crm        :: Bitrix24 / AmoCRM / Google Sheets</span>');
         },
         process: () => {
-            addLine('<span class="output-muted">iindev:~/process$ ./delivery-model</span>');
+            addLine('<span class="output-muted">iindev:~/процесс$ ./модель-работы</span>');
             addLine('');
-            addLine('<span class="output">01 → audit current processes and bottlenecks</span>');
-            addLine('<span class="output">02 → design architecture and pick the stack</span>');
-            addLine('<span class="output">03 → develop, integrate, test</span>');
-            addLine('<span class="output">04 → launch, train, maintain</span>');
+            addLine('<span class="output">01 → аудит процессов, 3–5 дней</span>');
+            addLine('<span class="output">02 → проектирование, архитектура и UX</span>');
+            addLine('<span class="output">03 → разработка, интеграция, тесты</span>');
+            addLine('<span class="output">04 → запуск, обучение, поддержка</span>');
         },
         when: () => {
             renderWhenOutput();
@@ -660,12 +663,12 @@ document.addEventListener('DOMContentLoaded', () => {
             renderWhenOutput();
         },
         contact: () => {
-            addLine('<span class="output-muted">iindev:~/contact$ cat info.txt</span>');
+            addLine('<span class="output-muted">iindev:~/контакты$ cat info.txt</span>');
             addLine('');
             const telegramLine = addLine('<span class="contact-item" data-copy="@iindev"><span class="contact-label-terminal">telegram:</span> <span class="contact-value-terminal">@iindev</span></span>');
             const emailLine = addLine('<span class="contact-item" data-copy="iindev@tuta.io"><span class="contact-label-terminal">email:</span> <span class="contact-value-terminal">iindev@tuta.io</span></span>');
             addLine('');
-            addLine('<span class="output-muted">Telegram responds fastest.</span>');
+            addLine('<span class="output-muted">Telegram — быстрее всего.</span>');
 
             [telegramLine, emailLine].forEach((line) => {
                 const item = line.querySelector('.contact-item');
@@ -683,12 +686,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         },
         metrics: () => {
-            addLine('<span class="output-muted">Studio profile</span>');
+            addLine('<span class="output-muted">Профиль студии</span>');
             addLine('');
-            addLine('<span class="metric-line"><span class="metric-label">mode</span><span class="metric-bar-text">audit → design → build → launch</span></span>');
-            addLine('<span class="metric-line"><span class="metric-label">focus</span><span class="metric-bar-text">websites / bots / mini apps / automation</span></span>');
-            addLine('<span class="metric-line"><span class="metric-label">stack</span><span class="metric-bar-text">WordPress / Bitrix / Telegram / TMA</span></span>');
-            addLine('<span class="metric-line"><span class="metric-label">style</span><span class="metric-bar-text">clean code / working systems / no fluff</span></span>');
+            addLine('<span class="metric-line"><span class="metric-label">подход</span><span class="metric-bar-text">аудит → проектирование → разработка → запуск</span></span>');
+            addLine('<span class="metric-line"><span class="metric-label">фокус</span><span class="metric-bar-text">сайты / боты / mini apps / автоматизация</span></span>');
+            addLine('<span class="metric-line"><span class="metric-label">стек</span><span class="metric-bar-text">WordPress / Bitrix / Telegram / TMA</span></span>');
+            addLine('<span class="metric-line"><span class="metric-label">стиль</span><span class="metric-bar-text">работающие системы / без шаблонов / под процесс</span></span>');
         },
         weather: async () => {
             addLine('<span class="output-muted">Fetching Yakutsk weather...</span>');
@@ -718,8 +721,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (handler) {
             await handler(args);
         } else {
-            addLine(`<span class="output-error">command not found: ${escapeHtml(cmd)}</span>`);
-            addLine('<span class="output-muted">Type "help" for available commands</span>');
+            addLine(`<span class="output-error">команда не найдена: ${escapeHtml(cmd)}</span>`);
+            addLine('<span class="output-muted">Введите "help" для списка команд</span>');
         }
 
         scrollToBottom();
@@ -800,7 +803,7 @@ document.addEventListener('DOMContentLoaded', () => {
         await sleep(longDelay);
         if (!isActiveBoot(sequenceId)) return;
 
-        addLine('<span class="output-success">→ system ready</span>');
+        addLine('<span class="output-success">→ система готова</span>');
         addLine('');
         await sleep(prefersReducedMotion ? 0 : 240);
         if (!isActiveBoot(sequenceId)) return;
@@ -820,7 +823,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         await sleep(shortDelay);
         addLine('');
-        addLine('<span class="output-muted">Type "help" for available commands</span>');
+        addLine('<span class="output-muted">Введите "help" для списка команд</span>');
         addLine('');
 
         bootScrollLock = false;
