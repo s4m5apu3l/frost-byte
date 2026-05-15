@@ -21,24 +21,23 @@ document.addEventListener('DOMContentLoaded', () => {
         websites: {
             name: 'websites',
             label: 'Сайты',
-            title: 'Сайт, который приносит заявки',
-            description: 'Не просто визитка — точка входа для клиентов. Формы, мессенджеры, CRM-интеграция. Каждая заявка доходит.',
+            title: 'Сайты любой сложности',
+            description: 'Лендинги, корпоративные сайты, интернет-магазины, порталы. Под ключ — от дизайна до запуска и поддержки.',
             bullets: [
+                '1C-Битрикс — корпоративные порталы, магазины, CRM-формы, интеграции с 1C.',
                 'WordPress — блоги, корпоративные сайты, магазины на WooCommerce.',
-                'Bitrix — корпоративные порталы, интернет-магазины, интеграции с 1C.',
-                '1C-Битрикс — каталоги, CRM-формы, сложная бизнес-логика.',
-                'Tilda — быстрые лендинги и сайты с нуля, без программирования.',
-                'Все сайты — с формами, мессенджерами и автосбором заявок в CRM.'
+                'Tilda — быстрые лендинги с нуля, без программирования.',
+                'Любой масштаб: от одностраничника до многофункционального портала.'
             ],
-            terminal: 'сайты / заявки / CRM'
+            terminal: '1C-Битрикс / WordPress / Tilda / магазины'
         },
         telegram: {
             name: 'telegram',
             label: 'Telegram',
-            title: 'Бот, который продаёт 24/7',
-            description: 'Принимает заказы, записывает на услуги, отвечает на вопросы — без менеджера.',
+            title: 'Telegram-боты',
+            description: 'Продажи, запись, поддержка — 24/7. Бот как дополнение к сайту: заявки из чата летят в CRM.',
             bullets: [
-                'Боты для продаж, записи, доставки, опросов и поддержки — 24/7.',
+                'Боты для продаж, записи, доставки, опросов и поддержки.',
                 'Интеграция с CRM, платёжными системами, Google-таблицами.',
                 'Рассылки, сегментация аудитории, аналитика открытий и кликов.',
                 'Автоответы на частые вопросы — менеджеры занимаются сложным.'
@@ -48,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         miniapps: {
             name: 'miniapps',
             label: 'Mini Apps',
-            title: 'Mini App — магазин в Telegram',
-            description: 'Каталог, корзина, оплата — прямо в мессенджере. Клиенту не нужно ничего скачивать.',
+            title: 'Mini Apps',
+            description: 'Магазин, каталог или кабинет — прямо в Telegram. Клиенту не нужно ничего скачивать.',
             bullets: [
                 'Каталоги товаров и услуг с корзиной и оплатой в один тап.',
                 'Личные кабинеты, бронирование, доставка — внутри Telegram.',
@@ -60,14 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         automation: {
             name: 'automation',
-            label: 'Автоматизация',
-            title: 'Системы работают без вас',
-            description: 'Сайт → CRM → Telegram → таблицы. Заявки летят сами, уведомления приходят автоматом.',
+            label: 'Интеграции',
+            title: 'Сайт + CRM + Telegram — связаны',
+            description: 'Заявки с сайта летят в CRM, уведомления в Telegram, данные не дублируются. Всё на автопилоте.',
             bullets: [
                 'Интеграция Bitrix, 1C, Google Sheets, AmoCRM, Telegram.',
                 'Автоматические уведомления, напоминания, отчёты — без ручной работы.',
                 'Убираем дублирование данных и ручной перенос между системами.',
-                'Всё связанное: одна заявка — путь от сайта до CRM и ответа клиенту.'
+                'Сайт, CRM и Telegram работают как единая система.'
             ],
             terminal: 'интеграции / CRM / автоматизация'
         }
@@ -612,11 +611,12 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         about: () => {
             addLine('<span class="brand-inline"><span style="color: #5eead4;">iind</span>ev.</span>');
-            addLine('<span class="output-muted">Студия разработки и автоматизации</span>');
+            addLine('<span class="output-muted">Веб-студия полного цикла</span>');
             addLine('');
-            addLine('<span class="output">Связываем сайт, бота и CRM в единый контур.</span>');
-            addLine('<span class="output">Не шаблон — система под ваш процесс.</span>');
-            addLine('<span class="output">От хаоса и ручной работы — к автоматизации.</span>');
+            addLine('<span class="output">Сайты любой сложности: 1C-Битрикс, WordPress, Tilda.</span>');
+            addLine('<span class="output">От лендинга до корпоративного портала — под ключ.</span>');
+            addLine('<span class="output">Telegram-боты, Mini Apps, CRM-интеграции.</span>');
+            addLine('<span class="output">Сайт + бот + CRM — работаем как единая система.</span>');
         },
         capabilities: () => {
             renderCapabilitiesOutput();
@@ -689,9 +689,9 @@ document.addEventListener('DOMContentLoaded', () => {
             addLine('<span class="output-muted">Профиль студии</span>');
             addLine('');
             addLine('<span class="metric-line"><span class="metric-label">подход</span><span class="metric-bar-text">аудит → проектирование → разработка → запуск</span></span>');
-            addLine('<span class="metric-line"><span class="metric-label">фокус</span><span class="metric-bar-text">сайты / боты / mini apps / автоматизация</span></span>');
-            addLine('<span class="metric-line"><span class="metric-label">стек</span><span class="metric-bar-text">WordPress / Bitrix / Telegram / TMA</span></span>');
-            addLine('<span class="metric-line"><span class="metric-label">стиль</span><span class="metric-bar-text">работающие системы / без шаблонов / под процесс</span></span>');
+            addLine('<span class="metric-line"><span class="metric-label">основное</span><span class="metric-bar-text">сайты любой сложности / 1C-Битрикс / WordPress</span></span>');
+            addLine('<span class="metric-line"><span class="metric-label">доп.</span><span class="metric-bar-text">Telegram-боты / Mini Apps / CRM-интеграции</span></span>');
+            addLine('<span class="metric-line"><span class="metric-label">стиль</span><span class="metric-bar-text">под ключ / под процесс / без шаблонов</span></span>');
         },
         weather: async () => {
             addLine('<span class="output-muted">Fetching Yakutsk weather...</span>');
