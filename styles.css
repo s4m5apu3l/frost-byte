@@ -1161,6 +1161,25 @@ ul {
 	color: var(--success-green);
 }
 
+.easter-ascii {
+	display: block;
+	max-width: 100%;
+	margin: 8px 0 0;
+	overflow-x: auto;
+	padding-bottom: 8px;
+	color: var(--accent-strong);
+	font-family: var(--font-mono);
+	font-size: clamp(0.38rem, 1.15vw, 0.64rem);
+	font-kerning: none;
+	font-variant-ligatures: none;
+	font-feature-settings: "liga" 0, "calt" 0;
+	line-height: 1;
+	letter-spacing: 0;
+	tab-size: 4;
+	text-rendering: geometricPrecision;
+	white-space: pre;
+}
+
 .brand-inline {
 	display: block;
 	margin: 12px 0 10px;
