@@ -31,6 +31,17 @@
 		/>
 		<meta property="og:locale" content="ru_RU" />
 		<meta property="og:site_name" content="iindev" />
+		<meta
+			property="og:image"
+			content="https://iindev-solutions.github.io/iindev-landing/og-image.svg"
+		/>
+		<meta property="og:image:type" content="image/svg+xml" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta
+			property="og:image:alt"
+			content="iindev. — сайты, CRM и Telegram-системы"
+		/>
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta
 			name="twitter:title"
@@ -39,6 +50,14 @@
 		<meta
 			name="twitter:description"
 			content="1C-Битрикс, WordPress, Tilda. От лендинга до портала. Боты и CRM-интеграции."
+		/>
+		<meta
+			name="twitter:image"
+			content="https://iindev-solutions.github.io/iindev-landing/og-image.svg"
+		/>
+		<meta
+			name="twitter:image:alt"
+			content="iindev. — сайты, CRM и Telegram-системы"
 		/>
 		<link
 			rel="icon"
@@ -491,7 +510,7 @@
 								type="submit"
 								class="form-submit primary-cta"
 							>
-								<span>Написать в Telegram</span>
+								<span>Отправить заявку</span>
 								<span class="cta-icon">↗</span>
 							</button>
 						</div>
@@ -568,7 +587,10 @@
 			id="detailModal"
 			role="dialog"
 			aria-modal="true"
+			aria-hidden="true"
 			aria-labelledby="modalTitle"
+			hidden
+			inert
 		>
 			<div class="modal-content">
 				<div class="modal-header">
@@ -607,6 +629,6 @@
 			integrity="sha384-poC0r6usQOX2Ayt/VGA+t81H6V3iN9L+Irz9iO8o+s0X20tLpzc9DOOtnKxhaQSE"
 			crossorigin="anonymous"
 		></script>
-		<script src="main.js" defer></script>
+		<script src="main.js" type="module"></script>
 	</body>
 </html>
