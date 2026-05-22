@@ -1358,6 +1358,10 @@ ul {
 	z-index: 30;
 }
 
+.detail-modal[hidden] {
+	display: none;
+}
+
 .detail-modal.visible {
 	opacity: 1;
 	pointer-events: auto;
