@@ -1,4 +1,94 @@
-import { capabilityAliases, capabilityInfo } from './content.js';
+const capabilityInfo = {
+    websites: {
+        name: 'websites',
+        label: 'Сайты',
+        title: 'Сайты любой сложности',
+        description: 'Лендинги, корпоративные сайты, интернет-магазины, порталы. Под ключ — от дизайна до запуска и поддержки.',
+        bullets: [
+            '1C-Битрикс — корпоративные порталы, магазины, CRM-формы, интеграции с 1C.',
+            'WordPress — блоги, корпоративные сайты, магазины на WooCommerce.',
+            'Tilda — быстрые лендинги с нуля, без программирования.',
+            'Любой масштаб: от одностраничника до многофункционального портала.'
+        ],
+        terminal: '1C-Битрикс / WordPress / Tilda / магазины'
+    },
+    telegram: {
+        name: 'telegram',
+        label: 'Telegram',
+        title: 'Telegram-боты',
+        description: 'Продажи, запись, поддержка — 24/7. Бот как дополнение к сайту: заявки из чата летят в CRM.',
+        bullets: [
+            'Боты для продаж, записи, доставки, опросов и поддержки.',
+            'Интеграция с CRM, платёжными системами, Google-таблицами.',
+            'Рассылки, сегментация аудитории, аналитика открытий и кликов.',
+            'Автоответы на частые вопросы — менеджеры занимаются сложным.'
+        ],
+        terminal: 'боты / продажи / поддержка'
+    },
+    miniapps: {
+        name: 'miniapps',
+        label: 'Mini Apps',
+        title: 'Mini Apps',
+        description: 'Магазин, каталог или кабинет — прямо в Telegram. Клиенту не нужно ничего скачивать.',
+        bullets: [
+            'Каталоги товаров и услуг с корзиной и оплатой в один тап.',
+            'Личные кабинеты, бронирование, доставка — внутри Telegram.',
+            'Нативный UX: push-уведомления, геолокация, платёжки.',
+            'Не нужно скачивать приложение — открывается из чата.'
+        ],
+        terminal: 'TMA / каталоги / оплата'
+    },
+    automation: {
+        name: 'automation',
+        label: 'Интеграции',
+        title: 'Сайт + CRM + Telegram — связаны',
+        description: 'Заявки с сайта летят в CRM, уведомления в Telegram, данные не дублируются. Всё на автопилоте.',
+        bullets: [
+            'Интеграция Bitrix, 1C, Google Sheets, AmoCRM, Telegram.',
+            'Автоматические уведомления, напоминания, отчёты — без ручной работы.',
+            'Убираем дублирование данных и ручной перенос между системами.',
+            'Сайт, CRM и Telegram работают как единая система.'
+        ],
+        terminal: 'интеграции / CRM / автоматизация'
+    }
+};
+
+const capabilityAliases = {
+    ai: 'automation',
+    agents: 'automation',
+    bot: 'telegram',
+    bots: 'telegram',
+    tma: 'miniapps',
+    'mini app': 'miniapps',
+    'mini apps': 'miniapps',
+    'telegram bot': 'telegram',
+    'telegram bots': 'telegram',
+    'telegram-bot': 'telegram',
+    'telegram-bots': 'telegram',
+    bitrix: 'websites',
+    wordpress: 'websites',
+    tilda: 'websites',
+    shop: 'websites',
+    store: 'websites',
+    landing: 'websites',
+    landings: 'websites',
+    site: 'websites',
+    sites: 'websites',
+    сайт: 'websites',
+    сайты: 'websites',
+    crm: 'automation',
+    интеграции: 'automation',
+    автоматизация: 'automation',
+    бот: 'telegram',
+    боты: 'telegram',
+    'телеграм бот': 'telegram',
+    'телеграм боты': 'telegram',
+    'mini app': 'miniapps',
+    'mini apps': 'miniapps',
+    миниапп: 'miniapps',
+    'мини апп': 'miniapps',
+    'мини аппы': 'miniapps'
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
@@ -241,6 +331,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     method: 'POST',
                     body: JSON.stringify({ name, phone, type, message })
                 });
+
+                if (!response.ok) {
+                    console.error('GAS HTTP error', response.status, await response.text());
+                    showToast('Ошибка отправки. Попробуйте позже.');
+                    return;
+                }
+
                 const result = await response.json();
 
                 if (result && result.success) {
@@ -249,9 +346,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     projectTypeTags.querySelectorAll('.form-tag').forEach((t) => t.classList.remove('active'));
                     projectTypeInput.value = '';
                 } else {
+                    console.error('GAS logic error', result);
                     showToast('Ошибка отправки. Попробуйте позже.');
                 }
             } catch (err) {
+                console.error('Form submission network/parsing error', err);
                 showToast('Ошибка сети. Попробуйте позже.');
             } finally {
                 submitBtn.disabled = false;
