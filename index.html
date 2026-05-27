@@ -33,8 +33,8 @@
   <noscript>
     <style>
       .preloader { display: none !important; }
-      body { overflow: auto !important; }
-      .hero-badge, .hero-title, .hero-desc, .hero-actions,
+      body { overflow-x: hidden !important; }
+      .hero-title, .hero-desc, .hero-actions,
       .manifesto, .template-card,
       .contact-info, .contact-form-wrap, .terminal-trigger, .footer {
         opacity: 1 !important;
@@ -83,10 +83,7 @@
   </header>
   <main class="main l-main" id="main-content">
     <section class="hero" id="hero">
-      <div class="hero-badge">
-        <span class="hero-ping"></span>
-        <span class="hero-badge-text">МЫ ОБНУЛИЛИ ЦЕНЫ НА ВЕБ-РАЗРАБОТКУ</span>
-      </div>
+      <div class="hero-bg" aria-hidden="true"></div>
       <h1 class="hero-title">Сайт - как бейдж. Каждому бизнесу нужен.</h1>
       <p class="hero-desc">
         iindev - просто и современно, без предоплаты. Лендинг у контор от 50к, магазин от 150к - перебор. Сначала покажем, потом разговор о цене.
@@ -100,10 +97,7 @@
       </div>
     </section>
     <section class="manifesto" id="manifesto">
-      <div class="section-label">
-        <span class="label-tag">01 // ФИЛОСОФИЯ</span>
-        <h2 class="label-title">Что такое iindiinda?</h2>
-      </div>
+      <h2 class="manifesto-title">Что такое iindiinda?</h2>
       <div class="manifesto-body">
         <p>В якутском языке есть слово <em>«ииньдиньда»</em> - добрая ирония над тем, кто слишком серьёзно относится к вещам, которые того не стоят.</p>
         <p>Рынок веб-разработки в регионах именно такой. Агентства берут 50-90 тысяч рублей за шаблоны на конструкторах, которые грузятся по 5 секунд. Малый бизнес не может себе этого позволить - и остаётся только в Instagram и WhatsApp.</p>
@@ -113,7 +107,6 @@
     </section>
     <section class="comparison" id="comparison">
       <div class="section-header">
-        <span class="label-tag">02 // СРАВНЕНИЕ</span>
         <h2 class="section-title">Зачем переплачивать?</h2>
       </div>
       <div class="comparison-grid">
@@ -176,14 +169,12 @@
     </section>
     <section class="templates" id="templates">
       <div class="section-header">
-        <span class="label-tag">03 // РЕШЕНИЯ</span>
         <h2 class="section-title">Что мы делаем</h2>
       </div>
       <div class="templates-grid" id="templates-grid"></div>
     </section>
     <section class="contact" id="contact">
       <div class="section-header">
-        <span class="label-tag">04 // СВЯЗАТЬСЯ</span>
         <h2 class="section-title">Напишите нам</h2>
       </div>
       <div class="contact-grid">

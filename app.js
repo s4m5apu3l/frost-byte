@@ -143,8 +143,7 @@ function initPreloader() {
 
 // ===== ENTRANCE ANIMATIONS =====
 function initEntranceAnimations() {
-	gsap.to(".hero-badge", { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.1 });
-	gsap.to(".hero-title", { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.3 });
+	gsap.to(".hero-title", { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.2 });
 	gsap.to(".hero-desc", { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.5 });
 	gsap.to(".hero-actions", { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.7 });
 
