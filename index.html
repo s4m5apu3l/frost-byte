@@ -1,634 +1,323 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>iindev. — Сайты любой сложности. 1C-Битрикс, WordPress, Telegram</title>
-		<meta
-			name="description"
-			content="Веб-студия полного цикла: 1C-Битрикс, WordPress, Tilda. Сайты любой сложности — от лендинга до портала. Telegram-боты, Mini Apps, CRM-интеграции."
-		/>
-		<meta name="author" content="iindev" />
-		<meta name="robots" content="index, follow" />
-		<meta name="color-scheme" content="dark" />
-		<meta name="theme-color" content="#0a0c0e" />
-		<link
-			rel="canonical"
-			href="https://iindev-solutions.github.io/iindev-landing/"
-		/>
-		<meta
-			property="og:title"
-			content="iindev. — Сайты любой сложности. 1C-Битрикс, WordPress, Telegram"
-		/>
-		<meta
-			property="og:description"
-			content="Веб-студия полного цикла. 1C-Битрикс, WordPress, Tilda. Сайты от лендинга до портала. Боты, Mini Apps, CRM-интеграции."
-		/>
-		<meta property="og:type" content="website" />
-		<meta
-			property="og:url"
-			content="https://iindev-solutions.github.io/iindev-landing/"
-		/>
-		<meta property="og:locale" content="ru_RU" />
-		<meta property="og:site_name" content="iindev" />
-		<meta
-			property="og:image"
-			content="https://iindev-solutions.github.io/iindev-landing/og-image.svg"
-		/>
-		<meta property="og:image:type" content="image/svg+xml" />
-		<meta property="og:image:width" content="1200" />
-		<meta property="og:image:height" content="630" />
-		<meta
-			property="og:image:alt"
-			content="iindev. — сайты, CRM и Telegram-системы"
-		/>
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta
-			name="twitter:title"
-			content="iindev. — Сайты любой сложности"
-		/>
-		<meta
-			name="twitter:description"
-			content="1C-Битрикс, WordPress, Tilda. От лендинга до портала. Боты и CRM-интеграции."
-		/>
-		<meta
-			name="twitter:image"
-			content="https://iindev-solutions.github.io/iindev-landing/og-image.svg"
-		/>
-		<meta
-			name="twitter:image:alt"
-			content="iindev. — сайты, CRM и Telegram-системы"
-		/>
-		<link
-			rel="icon"
-			type="image/svg+xml"
-			href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0c0e'/%3E%3Crect x='2' y='2' width='60' height='60' rx='12' fill='none' stroke='%231c222c' stroke-width='1'/%3E%3Ctext x='32' y='38' fill='%233d6b63' font-size='18' font-family='monospace' font-weight='400' text-anchor='middle' letter-spacing='1'%3Eiind%3C/text%3E%3C/svg%3E"
-		/>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-			rel="stylesheet"
-		/>
-		<link rel="stylesheet" href="styles.css" />
-	</head>
-	<body class="mode-normal">
-		<noscript>
-			<style>
-				.normal-container {
-					display: block !important;
-					opacity: 1 !important;
-				}
-				.terminal-container {
-					display: none !important;
-				}
-				.animate-element {
-					opacity: 1 !important;
-					filter: none !important;
-					transform: none !important;
-				}
-				.weather-loader {
-					display: none;
-				}
-			</style>
-		</noscript>
-		<a class="skip-link" href="#normalContainer">Перейти к контенту</a>
-		<div class="background-pattern" aria-hidden="true"></div>
-		<div class="noise-overlay" aria-hidden="true"></div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iindev. — Сайты любой сложности. 1C-Битрикс, WordPress, Telegram</title>
+  <meta name="description" content="Веб-студия iindev: разработка сайтов, Telegram-ботов, Mini Apps и интеграция с CRM под ключ в стиле современного минимализма.">
+  <meta name="author" content="iindev">
+  <meta name="robots" content="index, follow">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0a0c0e">
+  <link rel="canonical" href="https://iindev-solutions.github.io/iindev-landing/">
+  <meta property="og:title" content="iindev. — Сайты любой сложности. 1C-Битрикс, WordPress, Telegram">
+  <meta property="og:description" content="Веб-студия полного цикла. 1C-Битрикс, WordPress, Tilda. Сайты от лендинга до портала. Боты, Mini Apps, CRM-интеграции.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://iindev-solutions.github.io/iindev-landing/">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="iindev">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="iindev. — Сайты любой сложности">
+  <meta name="twitter:description" content="1C-Битрикс, WordPress, Tilda. От лендинга до портала. Боты и CRM-интеграции.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0c0e'/%3E%3Crect x='2' y='2' width='60' height='60' rx='12' fill='none' stroke='%231c222c' stroke-width='1'/%3E%3Ctext x='32' y='38' fill='%233d6b63' font-size='18' font-family='monospace' font-weight='400' text-anchor='middle' letter-spacing='1'%3Eiind%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+</head>
+<body>
+  <noscript>
+    <style>
+      .preloader { display: none !important; }
+      body { overflow: auto !important; }
+      .hero-badge, .hero-title, .hero-desc, .hero-actions,
+      .manifesto, .template-card, .calculator,
+      .contact-info, .contact-form-wrap, .terminal-trigger, .footer {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    </style>
+  </noscript>
+  <!-- ===== PRELOADER ===== -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-grid"></div>
+    <div class="preloader-content">
+      <span class="preloader-word">
+        <span class="preloader-root">iind</span><span class="preloader-suffix" id="preloader-suffix">iinda</span>
+      </span>
+    </div>
+  </div>
 
-		<header class="navbar" id="navbar" role="banner">
-			<div class="navbar-inner">
-				<a
-					class="nav-brand"
-					href="#hero"
-					aria-label="iindev — к началу страницы"
-				>
-					<span class="nav-brand-accent">iind</span>ev.
-				</a>
+  <!-- ===== AMBIENT BG ===== -->
+  <div class="ambient">
+    <div class="ambient-blob ambient-blob-1"></div>
+    <div class="ambient-blob ambient-blob-2"></div>
+  </div>
 
-				<div class="nav-meta">
-					<span class="meta-pill nav-weather" id="weatherBadge">
-						<span class="weather-loader"
-							><span class="loader-dot"></span
-							><span class="loader-dot"></span
-							><span class="loader-dot"></span
-						></span>
-					</span>
-				</div>
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <a href="#" class="logo" id="logo">
+          <span class="logo-brand">iind</span>ev<span class="logo-dim">.</span>
+        </a>
+        <span class="header-tag">[ iindiinda protest project ]</span>
+      </div>
+      <div class="header-meta">
+        <span class="header-time" id="header-time">YAKUTSK GMT+9 // --:--:--</span>
+        <span class="header-weather" id="header-weather">—°C</span>
+        <button class="sound-toggle" id="sound-toggle" title="Включить аудио-отклик интерфейса">
+          <svg class="sound-icon" id="sound-on" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          <svg class="sound-icon" id="sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+        </button>
+        <a href="#manifesto" class="header-link">МАНИФЕСТ</a>
+      </div>
+    </div>
+  </header>
 
-				<div class="nav-actions">
-					<div
-						class="nav-toggle"
-						id="modeToggle"
-						role="group"
-						aria-label="Режим отображения"
-					>
-						<button
-							class="toggle-option"
-							type="button"
-							data-mode="normal"
-							id="toggleNormal"
-							aria-label="Обычный режим"
-						>
-							<svg
-								width="16"
-								height="16"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="1.75"
-								aria-hidden="true"
-							>
-								<circle cx="12" cy="12" r="10" />
-								<circle cx="12" cy="12" r="3" />
-							</svg>
-						</button>
-						<span class="toggle-slider" id="toggleSlider"></span>
-						<button
-							class="toggle-option"
-							type="button"
-							data-mode="terminal"
-							id="toggleTerminal"
-							aria-label="Терминал"
-						>
-							<svg
-								width="16"
-								height="16"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="1.75"
-								aria-hidden="true"
-							>
-								<polyline points="4 17 10 11 4 5" />
-								<line x1="12" y1="19" x2="20" y2="19" />
-							</svg>
-						</button>
-					</div>
-				</div>
-			</div>
-		</header>
+  <!-- ===== MAIN ===== -->
+  <main class="main">
 
-		<main class="normal-container" id="normalContainer">
-			<section class="hero" id="hero">
-				<div class="hero-copy">
-					<p class="eyebrow animate-element">
-						Веб-студия полного цикла
-					</p>
-					<h1 class="hero-title animate-element">
-						<span class="hero-line">Сайты любой</span>
-						<span class="hero-line hero-line-accent">сложности —</span>
-						<span class="hero-line">от лендинга до портала.</span>
-					</h1>
-					<p class="hero-desc animate-element">
-						Корпоративные сайты, 1C-Битрикс, магазины, порталы.
-						А ещё — Telegram-боты, Mini Apps и связка всего с CRM.
-					</p>
-					<div class="hero-actions animate-element">
-						<a
-							class="primary-cta"
-							href="#contactSection"
-						>
-							<span>Написать в Telegram</span>
-							<span class="cta-icon">↓</span>
-						</a>
-					</div>
-					<ul
-						class="hero-tags animate-element"
-						aria-label="Ключевые направления"
-					>
-						<li>1C-Битрикс</li>
-						<li>WordPress</li>
-						<li>Корп. порталы</li>
-						<li>WooCommerce</li>
-						<li>Telegram боты</li>
-						<li>Mini Apps</li>
-						<li>CRM интеграции</li>
-					</ul>
-				</div>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-badge">
+        <span class="hero-ping"></span>
+        <span class="hero-badge-text">МЫ ОБНУЛИЛИ ЦЕНЫ НА ВЕБ-РАЗРАБОТКУ</span>
+      </div>
+      <h1 class="hero-title">Получите свой готовый сайт почти бесплатно.</h1>
+      <p class="hero-desc">
+        Проект <span class="text-brand">iindev</span> зародился как ирония над IT-агентствами, берущими 30–50 тысяч рублей за сухие копипастные лендинги. Мы отдаем готовый чистый софт под ключ за любой донат. Вы платите только за свой хостинг и домен.
+      </p>
+      <div class="hero-actions">
+        <a href="#calculator" class="btn btn-primary">
+          <span>ВЫБРАТЬ ШАБЛОН & ДОНАТ</span>
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
+        </a>
+        <a href="#manifesto" class="btn btn-ghost">Прочесть философию</a>
+      </div>
+    </section>
 
-				<aside
-					class="hero-panel shell-card animate-element"
-					aria-label="Результаты работы"
-				>
-					<div class="shell-card-inner hero-panel-inner">
-						<div class="delivery-rows">
-							<div class="delivery-row">
-								<span class="delivery-label">сайты</span>
-								<span class="delivery-value">лендинги, корпсайты, порталы, магазины</span>
-							</div>
-							<div class="delivery-row">
-								<span class="delivery-label">платформы</span>
-								<span class="delivery-value">1C-Битрикс / WordPress / Tilda</span>
-							</div>
-							<div class="delivery-row">
-								<span class="delivery-label">доп.</span>
-								<span class="delivery-value">боты, Mini Apps, CRM-интеграции</span>
-							</div>
-						</div>
-						<div class="delivery-io">
-							<div class="io-line">
-								<span class="io-key">in</span>
-								<span class="io-val">нужен сайт или всё не связано</span>
-							</div>
-							<div class="io-line">
-								<span class="io-key">out</span>
-								<span class="io-val">работающий сайт + всё связано</span>
-							</div>
-						</div>
-					</div>
-				</aside>
-			</section>
+    <!-- MANIFESTO -->
+    <section class="manifesto" id="manifesto">
+      <div class="section-label">
+        <span class="label-tag">01 // PHILOSOPHY</span>
+        <h2 class="label-title">Что такое iindiinda?</h2>
+      </div>
+      <div class="manifesto-body">
+        <p>В якутском языке есть крылатое слово <em>«ииньдиньда»</em>. Это особое народное выражение, которое емко описывает шутку, безобидное подтрунивание или глубокую житейскую иронию над слишком серьезным лицом обстоятельств.</p>
+        <p class="text-dim">Сегодня рынок веб-разработки превратился в сплошную шутку. Продажники без кода обещают «магический маркетинг», выбивают из малого бизнеса последние 30 000 – 50 000 рублей за примитивные шаблоны на конструкторах, которые грузятся по 5 секунд и ломаются при малейшей нагрузке.</p>
+        <blockquote>«Мы решили разрушить эту систему смехом. У нас накоплена библиотека безупречного продакшн-кода: легкие сайты на Next.js 15, умные Telegram Mini Apps, оптимизированные CRM-мосты. Мы отдаем эту интеллектуальную собственность за свободный донат.»</blockquote>
+        <p class="text-dim">Вам не нужно тратить бюджеты. Вы берете готовое решение, деплоите на собственный хостинг/домен по нашей инструкции (или с нашей авто-помощью), а размер доната разработчику определяете сами по кнопке совести. Справедливо? Абсолютно.</p>
+      </div>
+    </section>
 
-			<section
-				class="capabilities-section section-block"
-				id="capabilitiesSection"
-			>
-				<div class="section-heading animate-element">
-					<p class="section-kicker">направления</p>
-					<h2 class="section-title">Что делаем</h2>
-				</div>
+    <!-- TEMPLATES -->
+    <section class="templates" id="templates">
+      <div class="section-header">
+        <span class="label-tag">02 // DIRECTORY</span>
+        <h2 class="section-title">Доступные архитектуры готовых систем</h2>
+      </div>
+      <div class="templates-grid" id="templates-grid"></div>
+    </section>
 
-				<div class="capability-grid">
-					<button
-						class="capability-card capability-card--wide animate-element"
-						type="button"
-						data-capability="websites"
-					>
-						<span class="capability-eyebrow">сайты</span>
-						<h3 class="capability-title">Сайты любой сложности</h3>
-						<p class="capability-text">
-							Лендинги, корпоративные сайты, интернет-магазины,
-							порталы. 1C-Битрикс, WordPress, Tilda — под задачу.
-						</p>
-						<span class="capability-link">подробнее</span>
-					</button>
+    <!-- CALCULATOR -->
+    <section class="calculator" id="calculator">
+      <div class="calculator-header">
+        <span class="label-tag">03 // SATIRICAL ROTOR SLIDER</span>
+        <h2 class="section-title">Интерактивный Ротор-Калькулятор</h2>
+        <p class="section-subtitle">Вы играете в открытую. Выберите архитектуру и укажите размер взятки (доната), который вы готовы задонатить на серверы. Система выдаст язвительный вердикт.</p>
+      </div>
+      <div class="calculator-body">
+        <div class="calc-step">
+          <span class="calc-step-label">А) Выберите кодовый пресет под деплой</span>
+          <div class="calc-presets" id="calc-presets"></div>
+        </div>
+        <div class="calc-step">
+          <span class="calc-step-label">Б) Добавить опциональные инженерные пакеты</span>
+          <div class="calc-features" id="calc-features"></div>
+        </div>
+        <div class="calc-step">
+          <div class="calc-slider-header">
+            <span class="calc-step-label">В) Размер добровольного доната разработчику:</span>
+            <span class="calc-amount" id="calc-amount">10 000 ₽</span>
+          </div>
+          <input type="range" class="calc-slider" id="calc-slider" min="500" max="50000" step="500" value="10000">
+          <div class="calc-slider-labels">
+            <span>500 ₽ (студент)</span>
+            <span>25 000 ₽ (золотая середина)</span>
+            <span>50 000 ₽ (уважение к коду)</span>
+          </div>
+        </div>
+        <div class="calc-verdict" id="calc-verdict"></div>
+        <button class="btn btn-primary btn-block" id="calc-inject">ЗАФИКСИРОВАТЬ ЭТУ СМЕТУ И ПЕРЕНЕСТИ В БРИФ</button>
+      </div>
+    </section>
 
-					<button
-						class="capability-card capability-card--tall animate-element"
-						type="button"
-						data-capability="telegram"
-					>
-						<span class="capability-eyebrow">telegram</span>
-						<h3 class="capability-title">Telegram-боты</h3>
-						<p class="capability-text">
-							Продажи, запись, поддержка — 24/7. Интеграция с CRM
-							и платёжками. Бот как дополнение к сайту.
-						</p>
-						<span class="capability-link">подробнее</span>
-					</button>
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="section-header">
+        <span class="label-tag">04 // DIRECT CONTACT HANDSHAKE</span>
+        <h2 class="section-title">Отправить бриф основателю</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p class="contact-desc">Мы свяжемся с вами в Telegram или по телефону в течение 3 часов. Согласуем архитектуру, поможем зарегистрировать хостинг/домен на ваше имя и запланируем деплой.</p>
+          <div class="contact-channels">
+            <button class="contact-channel" data-copy="@iindev">
+              <div>
+                <span class="channel-label">Прямой Telegram основателя</span>
+                <span class="channel-value">@iindev</span>
+              </div>
+              <span class="channel-action">copy</span>
+            </button>
+            <button class="contact-channel" data-copy="iindev@tuta.io">
+              <div>
+                <span class="channel-label">Email</span>
+                <span class="channel-value">iindev@tuta.io</span>
+              </div>
+              <span class="channel-action">copy</span>
+            </button>
+          </div>
+        </div>
+        <div class="contact-form-wrap">
+          <form class="contact-form" id="contact-form">
+            <div class="form-row">
+              <div class="form-field">
+                <label class="form-label">01 // ВАШЕ ИМЯ ИЛИ КОМПАНИЯ *</label>
+                <input type="text" class="form-input" name="name" placeholder="Александр" required>
+              </div>
+              <div class="form-field">
+                <label class="form-label">02 // TELEGRAM ACCOUNT / ТЕЛЕФОН *</label>
+                <input type="text" class="form-input" name="contact" placeholder="@alex_dev или +7..." required>
+              </div>
+            </div>
+            <div class="form-field">
+              <label class="form-label">03 // ОПИСАНИЕ ИЛИ ПАРАМЕТРЫ СМЕТЫ</label>
+              <textarea class="form-input form-textarea" name="msg" rows="2" placeholder="Например: хочу запустить нативный Telegram Mini App для ресторана."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="form-submit">ОТПРАВИТЬ СМЕТУ НА ОДОБРЕНИЕ</button>
+            <div class="form-success" id="form-success" style="display:none;">
+              <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Спасибо! Спецификация зафиксирована. Команда свяжется с вами в Telegram в течение 3 часов.</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
 
-					<button
-						class="capability-card capability-card--compact animate-element"
-						type="button"
-						data-capability="miniapps"
-					>
-						<span class="capability-eyebrow">tma</span>
-						<h3 class="capability-title">Mini Apps</h3>
-						<p class="capability-text">
-							Магазин, каталог или кабинет — прямо
-							в Telegram. Без установки.
-						</p>
-						<span class="capability-link">подробнее</span>
-					</button>
+    <!-- TERMINAL TRIGGER -->
+    <section class="terminal-trigger">
+      <div class="terminal-trigger-card">
+        <div class="terminal-trigger-text">
+          <span class="label-tag label-tag-brand">// SYSTEM CONSOLE ACTIVE</span>
+          <p class="terminal-trigger-title">Ищете полный хардкорный режим разработчика?</p>
+          <p class="terminal-trigger-sub">Вы можете переключиться в интерактивную CLI утилиту и управлять сайтом через терминал.</p>
+        </div>
+        <button class="btn btn-terminal" id="btn-terminal">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+          Запустить терминал cli_
+        </button>
+      </div>
+    </section>
 
-					<button
-						class="capability-card capability-card--long animate-element"
-						type="button"
-						data-capability="automation"
-					>
-						<span class="capability-eyebrow">интеграции</span>
-						<h3 class="capability-title">
-							Сайт + CRM + Telegram — связаны
-						</h3>
-						<p class="capability-text">
-							Заявки с сайта летят в CRM, уведомления в Telegram,
-							данные не дублируются. Всё на автопилоте.
-						</p>
-						<span class="capability-link">подробнее</span>
-					</button>
-				</div>
-			</section>
+  </main>
 
-			<section
-				class="pressure-section section-block"
-				id="pressureSection"
-			>
-				<div class="pressure-layout">
-					<div class="section-heading pressure-copy animate-element">
-						<p class="section-kicker">знакомо?</p>
-						<h2 class="section-title">Когда к нам приходят</h2>
-					</div>
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-copy">
+        <p>&copy; 2026 <span class="text-brand">iind</span>ev (народный протест iindiinda). ALL RIGHTS RESERVED.</p>
+        <p class="footer-motto">WE DESIGN FAST DIGITALS FOR REASONABLE REWARDS NONE OF AGENCY CRAP</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://t.me/iindev" target="_blank" rel="noopener noreferrer">TELEGRAM</a>
+        <a href="mailto:iindev@tuta.io">EMAIL</a>
+      </div>
+    </div>
+  </footer>
 
-					<div class="pressure-list">
-						<article class="pressure-item animate-element">
-							<span class="pressure-index">01</span>
-							<h3>Сайт устарел — заявки не идут</h3>
-						</article>
-						<article class="pressure-item animate-element">
-							<span class="pressure-index">02</span>
-							<h3>Заявки теряются в чатах и таблицах</h3>
-						</article>
-						<article class="pressure-item animate-element">
-							<span class="pressure-index">03</span>
-							<h3>Менеджеры копируют данные вручную</h3>
-						</article>
-						<article class="pressure-item animate-element">
-							<span class="pressure-index">04</span>
-							<h3>Сайт, CRM и Telegram — живут отдельно</h3>
-						</article>
-						<article class="pressure-item animate-element">
-							<span class="pressure-index">05</span>
-							<h3>
-								Нужен бот или Mini App — не знают с чего начать
-							</h3>
-						</article>
-					</div>
-				</div>
-			</section>
+  <!-- ===== TEMPLATE DRAWER ===== -->
+  <div class="drawer-overlay" id="drawer-overlay" style="display:none;">
+    <div class="drawer-backdrop" id="drawer-backdrop"></div>
+    <div class="drawer" id="drawer">
+      <div class="drawer-header">
+        <span class="drawer-label">СПЕЦИФИКАЦИЯ // <span id="drawer-num"></span></span>
+        <button class="drawer-close" id="drawer-close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="drawer-body">
+        <span class="drawer-category" id="drawer-category"></span>
+        <h3 class="drawer-title" id="drawer-title"></h3>
+        <div class="drawer-stats">
+          <div class="drawer-stat">
+            <span class="drawer-stat-label">Время холодного старта</span>
+            <span class="drawer-stat-value text-brand" id="drawer-speed"></span>
+          </div>
+          <div class="drawer-stat">
+            <span class="drawer-stat-label">Архитектура рендеринга</span>
+            <span class="drawer-stat-value" id="drawer-arch"></span>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <h4 class="drawer-section-title">// СТЕК КОДОВОЙ БАЗЫ</h4>
+          <p class="drawer-tech" id="drawer-tech"></p>
+          <p class="drawer-note">Продукт комплектуется готовым скриптом развертывания в один клик. Исходный код оптимизирован по стандартам чистого разделения бизнес-логики и UI.</p>
+        </div>
+      </div>
+      <div class="drawer-footer">
+        <button class="btn btn-brand btn-block" id="drawer-goto">ПЕРЕЙТИ К РАСЧЕТУ ДОНАТА</button>
+      </div>
+    </div>
+  </div>
 
-			<section
-				class="workflow-section section-block"
-				id="workflowSection"
-			>
-				<div class="section-heading animate-element">
-					<p class="section-kicker">процесс</p>
-					<h2 class="section-title">От проблемы до результата</h2>
-				</div>
+  <!-- ===== TERMINAL ===== -->
+  <div class="terminal" id="terminal" style="display:none;">
+    <div class="terminal-inner">
+      <div class="terminal-header">
+        <div class="terminal-header-left">
+          <div class="terminal-dots">
+            <span class="dot-red"></span>
+            <span class="dot-yellow"></span>
+            <span class="dot-green"></span>
+          </div>
+          <span class="terminal-title">iindev_console_satire_v2.1.0</span>
+        </div>
+        <div class="terminal-header-right">
+          <span class="terminal-time" id="terminal-time">YAKUTSK TIME: --:--:--</span>
+          <button class="btn btn-terminal-exit" id="terminal-exit">ВЫЙТИ ИЗ CLI [ESC]</button>
+        </div>
+      </div>
+      <div class="terminal-body" id="terminal-body"></div>
+      <form class="terminal-input-wrap" id="terminal-form">
+        <span class="terminal-prompt">operator@iindiinda:~$</span>
+        <input type="text" class="terminal-input" id="terminal-input" placeholder="Введите системную инструкцию (help, estimate, contact, sound)..." autocomplete="off" spellcheck="false">
+        <button type="submit" class="terminal-enter">ENTER</button>
+      </form>
+      <div class="terminal-shortcuts">
+        <div class="terminal-shortcuts-list">
+          <span>Горячие директивы:</span>
+          <button class="terminal-shortcut" data-cmd="help">help</button>
+          <button class="terminal-shortcut" data-cmd="about">about</button>
+          <button class="terminal-shortcut" data-cmd="estimate">estimate</button>
+          <button class="terminal-shortcut" data-cmd="works">works</button>
+          <button class="terminal-shortcut" data-cmd="contact">contact</button>
+          <button class="terminal-shortcut" data-cmd="clear">clear</button>
+        </div>
+        <span>Используйте sound on/off для управления аудио-движком.</span>
+      </div>
+    </div>
+  </div>
 
-				<div class="workflow-layout">
-					<article
-						class="workflow-manifesto shell-card animate-element"
-					>
-						<div class="shell-card-inner manifesto-inner">
-							<p class="manifesto-copy">
-								Не продаём шаблон — собираем систему под ваш
-								процесс.
-							</p>
-							<div class="manifesto-tags">
-								<span>аудит</span>
-								<span>проектирование</span>
-								<span>разработка</span>
-								<span>поддержка</span>
-							</div>
-						</div>
-					</article>
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast">
+    <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span class="toast-text" id="toast-text"></span>
+  </div>
 
-					<div class="workflow-shell shell-card animate-element">
-						<div class="shell-card-inner workflow-steps">
-							<article class="workflow-step">
-								<span class="workflow-number">01</span>
-								<div>
-									<h3>Аудит — 3–5 дней</h3>
-									<p>
-										Находим узкие места. Вы получаете карту
-										процессов и план действий.
-									</p>
-								</div>
-							</article>
-							<article class="workflow-step">
-								<span class="workflow-number">02</span>
-								<div>
-									<h3>Проектирование — 1 неделя</h3>
-									<p>
-										Выбираем стек, рисуем архитектуру и
-										прототип. Вы видите результат до кода.
-									</p>
-								</div>
-							</article>
-							<article class="workflow-step">
-								<span class="workflow-number">03</span>
-								<div>
-									<h3>Разработка — от 2 недель</h3>
-									<p>
-										Пишем код, связываем системы, тестируем.
-										Промежуточные демо каждую неделю.
-									</p>
-								</div>
-							</article>
-							<article class="workflow-step">
-								<span class="workflow-number">04</span>
-								<div>
-									<h3>Запуск и поддержка</h3>
-									<p>
-										Деплоим, обучаем команду, фиксим по
-										обратной связи. Поддержка после запуска.
-									</p>
-								</div>
-							</article>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<section class="connect-section section-block" id="contactSection">
-				<div class="section-heading animate-element">
-					<p class="section-kicker">контакты</p>
-					<h2 class="section-title">Обсудить проект</h2>
-				</div>
-
-				<div class="contact-layout">
-					<form
-						class="contact-form shell-card animate-element"
-						id="contactForm"
-					>
-						<div class="shell-card-inner form-inner">
-							<div class="form-group">
-								<label for="contactName">Имя</label>
-								<input
-									type="text"
-									id="contactName"
-									placeholder="Как к вам обращаться"
-									required
-								/>
-							</div>
-							<div class="form-group">
-								<label for="contactPhone"
-									>Телефон или Telegram</label
-								>
-								<input
-									type="text"
-									id="contactPhone"
-									placeholder="@username или +7..."
-									required
-								/>
-							</div>
-							<div class="form-group">
-								<label>Тип проекта</label>
-								<div class="form-tags" id="projectTypeTags">
-									<button
-										type="button"
-										class="form-tag"
-										data-value="Сайт"
-									>
-										Сайт
-									</button>
-									<button
-										type="button"
-										class="form-tag"
-										data-value="Telegram-бот"
-									>
-										Telegram-бот
-									</button>
-									<button
-										type="button"
-										class="form-tag"
-										data-value="Mini App"
-									>
-										Mini App
-									</button>
-									<button
-										type="button"
-										class="form-tag"
-										data-value="Автоматизация"
-									>
-										Автоматизация
-									</button>
-									<button
-										type="button"
-										class="form-tag"
-										data-value="Другое/не знаю"
-									>
-										Другое / не знаю
-									</button>
-								</div>
-								<input
-									type="hidden"
-									id="projectType"
-									value=""
-								/>
-							</div>
-							<div class="form-group">
-								<label for="contactMessage">О задаче</label>
-								<textarea
-									id="contactMessage"
-									rows="4"
-									placeholder="Что нужно сделать — опишите задачу, а бюджет обсудим вместе"
-								></textarea>
-							</div>
-							<button
-								type="submit"
-								class="form-submit primary-cta"
-							>
-								<span>Отправить заявку</span>
-								<span class="cta-icon">↗</span>
-							</button>
-						</div>
-					</form>
-
-					<div class="contact-info">
-						<div class="contacts-terminal">
-							<div class="contact-line">
-								<span class="contact-label">telegram</span>
-								<a
-									class="contact-value"
-									href="https://t.me/iindev"
-									target="_blank"
-									rel="noreferrer"
-									data-copy="@iindev"
-									>@iindev</a
-								>
-							</div>
-							<div class="contact-line">
-								<span class="contact-label">email</span>
-								<a
-									class="contact-value"
-									href="mailto:iindev@tuta.io"
-									data-copy="iindev@tuta.io"
-									>iindev@tuta.io</a
-								>
-							</div>
-						</div>
-						<p class="contact-note">
-							Напишите — ответим в течение дня. Telegram —
-							быстрее.
-						</p>
-					</div>
-				</div>
-			</section>
-
-			<footer class="site-footer">
-				<span>iindev · yakutsk → worldwide</span>
-				<a href="https://t.me/iindev" target="_blank" rel="noreferrer"
-					>telegram</a
-				>
-				<a href="mailto:iindev@tuta.io">email</a>
-			</footer>
-		</main>
-
-		<div
-			class="terminal-container"
-			id="terminalContainer"
-			aria-live="polite"
-		>
-			<div class="terminal-output" id="terminalOutput"></div>
-			<div class="terminal-input-line" id="inputLine">
-				<span class="prompt" id="promptText">operator@iindev:~$</span>
-				<div class="input-wrapper">
-					<span
-						class="terminal-input-display"
-						id="inputDisplay"
-					></span>
-					<span class="cursor-blink">_</span>
-					<input
-						type="text"
-						class="terminal-input"
-						id="terminalInput"
-						autocomplete="off"
-						spellcheck="false"
-						aria-label="Командная строка iindev"
-					/>
-				</div>
-			</div>
-		</div>
-
-		<div
-			class="detail-modal"
-			id="detailModal"
-			role="dialog"
-			aria-modal="true"
-			aria-hidden="true"
-			aria-labelledby="modalTitle"
-			hidden
-			inert
-		>
-			<div class="modal-content">
-				<div class="modal-header">
-					<div>
-						<span class="modal-kicker" id="modalLabel"></span>
-						<h3 class="modal-title" id="modalTitle"></h3>
-					</div>
-					<button
-						class="modal-close-button"
-						id="modalCloseButton"
-						type="button"
-						aria-label="Закрыть окно"
-					>
-						×
-					</button>
-				</div>
-				<p class="modal-lead" id="modalLead"></p>
-				<ul class="modal-list" id="modalList"></ul>
-				<div class="modal-close-hint">ESC чтобы закрыть</div>
-			</div>
-		</div>
-
-		<div class="copy-toast" id="copyToast" role="status" aria-live="polite">
-			скопировано
-		</div>
-
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
-			defer
-			integrity="sha384-d+vyQ0dYcymoP8ndq2hW7FGC50nqGdXUEgoOUGxbbkAJwZqL7h+jKN0GGgn9hFDS"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
-			defer
-			integrity="sha384-poC0r6usQOX2Ayt/VGA+t81H6V3iN9L+Irz9iO8o+s0X20tLpzc9DOOtnKxhaQSE"
-			crossorigin="anonymous"
-		></script>
-		<script src="main.js" type="module"></script>
-	</body>
+  <script src="app.js"></script>
+</body>
 </html>

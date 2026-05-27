@@ -1,10 +1,1 @@
-promt.md
-
-# local agent skill installs
-.agents/
-.claude/
-.kiro/
-.pi/
-.qoder/
-.windsurf/
-skills-lock.json
+new/\nnew-v2/\nnew-v3/\nnul\nskills-lock.json\nnode_modules/
