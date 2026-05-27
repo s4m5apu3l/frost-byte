@@ -51,34 +51,7 @@ const coreTemplates = [
 	},
 ];
 
-const calcFeatures = [
-	{ id: "1c", title: "1С-Синхронизация ERP", desc: "Автообмен прайсами и базой." },
-	{ id: "pay", title: "Приём оплат", desc: "СБП, эквайринг, чеки." },
-	{ id: "fast", title: "CDN-ускорение", desc: "Кеширование по миру." },
-];
 
-function getSatiricalComment(value) {
-	if (value < 1500) return {
-		title: "Студенческий микро-донат",
-		desc: "Хватит на порцию шаурмы и банку колы для программиста. Код будет собран с любовью, но, возможно, с якутским акцентом и парой смешных комментариев в исходниках.",
-	};
-	if (value < 5000) return {
-		title: "Стейк-брифинг",
-		desc: "Отличный классический донат! Наш архитектор сможет позволить себе стейк из оленины. Команда приступает к деплою с повышенным уровнем серотонина.",
-	};
-	if (value < 15000) return {
-		title: "Настоящий бизнес-донат",
-		desc: "Прагматичный вклад. Мы полностью упакуем систему под ваши требования, настроим интеграции и не будем спрашивать глупых вопросов про 'целевую аудиторию'.",
-	};
-	if (value < 35000) return {
-		title: "Почти как у душного агентства",
-		desc: "Вы платите цену, сопоставимую с рыночным шаблоном, но получаете чистейший код без агентского пафоса, бесконечных созвонов в Зуме и ТЗ на 100 страниц.",
-	};
-	return {
-		title: "VIP меценат сатиры",
-		desc: "Вы официально спонсируете борьбу с оверпрайс-айтишниками! Мы добавим ваше имя в секретный футер манифеста, сделаем вам идеальный продукт и предоставим вечную пожизненную благодарность.",
-	};
-}
 
 const ASCII_ART = `::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::++=*%%%%###**+*###***+--:::::::-+%%%%%%=:::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::---===+=****%##%%%%%%%%%%%%%%%%%%%#**+-:::-::#%%%%%%#-:::::::::::::::::::
@@ -260,11 +233,6 @@ function initEntranceAnimations() {
 		y: 0, opacity: 1, duration: 0.9, stagger: 0.15, ease: "power2.out",
 	});
 
-	gsap.to(".calculator", {
-		scrollTrigger: { trigger: ".calculator", start: "top 80%" },
-		y: 0, opacity: 1, duration: 1, ease: "power2.out",
-	});
-
 	gsap.to(".contact-info", {
 		scrollTrigger: { trigger: ".contact", start: "top 80%" },
 		x: 0, opacity: 1, duration: 0.9, ease: "power2.out",
@@ -358,7 +326,7 @@ function initTemplates() {
 		drawerGoto.onclick = () => {
 			clickSound();
 			closeDrawer();
-			gsap.to(window, { duration: 0.8, scrollTo: { y: "#calculator", offsetY: 80 }, ease: "power2.inOut" });
+			gsap.to(window, { duration: 0.8, scrollTo: { y: "#contact", offsetY: 80 }, ease: "power2.inOut" });
 		};
 
 		drawerOverlay.style.display = "flex";
@@ -372,94 +340,6 @@ function initTemplates() {
 
 	drawerBackdrop.addEventListener("click", closeDrawer);
 	drawerClose.addEventListener("click", () => { clickSound(); closeDrawer(); });
-}
-
-// ===== CALCULATOR =====
-function initCalculator() {
-	const presetsEl = document.getElementById("calc-presets");
-	const featuresEl = document.getElementById("calc-features");
-	const slider = document.getElementById("calc-slider");
-	const amountEl = document.getElementById("calc-amount");
-	const verdictEl = document.getElementById("calc-verdict");
-	const injectBtn = document.getElementById("calc-inject");
-
-	let selectedPreset = "site";
-	let selectedFeatures = ["fast"];
-
-	presetsEl.innerHTML = coreTemplates.map((t) => {
-		const label = t.id === "site" ? "Сайт" : t.id === "tma" ? "Mini App" : t.id === "crm" ? "CRM мост" : "Телега Бот";
-		return `<button class="calc-preset ${t.id === selectedPreset ? "active" : ""}" data-id="${t.id}">
-      <span class="calc-preset-num">PRESET ${t.num}</span>${label}
-    </button>`;
-	}).join("");
-
-	presetsEl.querySelectorAll(".calc-preset").forEach((btn) => {
-		btn.addEventListener("click", () => {
-			clickSound();
-			selectedPreset = btn.dataset.id;
-			presetsEl.querySelectorAll(".calc-preset").forEach((b) => b.classList.toggle("active", b.dataset.id === selectedPreset));
-		});
-	});
-
-	const checkSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
-	featuresEl.innerHTML = calcFeatures.map((f) => `
-    <div class="calc-feature ${selectedFeatures.includes(f.id) ? "active" : ""}" data-id="${f.id}">
-      <div class="calc-check">${checkSvg}</div>
-      <div>
-        <span class="calc-feature-title">${f.title}</span>
-        <span class="calc-feature-desc">${f.desc}</span>
-      </div>
-    </div>
-  `).join("");
-
-	featuresEl.querySelectorAll(".calc-feature").forEach((el) => {
-		el.addEventListener("click", () => {
-			hoverSound();
-			const id = el.dataset.id;
-			if (selectedFeatures.includes(id)) {
-				selectedFeatures = selectedFeatures.filter((x) => x !== id);
-			} else {
-				selectedFeatures.push(id);
-			}
-			el.classList.toggle("active", selectedFeatures.includes(id));
-		});
-	});
-
-	function updateSatire() {
-		const val = parseInt(slider.value, 10);
-		amountEl.textContent = val.toLocaleString("ru-RU") + " ₽";
-		const s = getSatiricalComment(val);
-		verdictEl.innerHTML = `
-      <div class="calc-verdict-title">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3L20 7.5V16.5L12 21L4 16.5V7.5L12 3Z"></path><path d="M12 8V12"></path><path d="M12 16H12.01"></path></svg>
-        <span>${s.title}</span>
-      </div>
-      <p class="calc-verdict-desc">${s.desc}</p>
-    `;
-	}
-
-	slider.addEventListener("input", () => {
-		hoverSound();
-		updateSatire();
-	});
-	updateSatire();
-
-	injectBtn.addEventListener("click", () => {
-		clickSound();
-		const preset = coreTemplates.find((t) => t.id === selectedPreset);
-		if (!preset) return;
-		const feats = selectedFeatures.map((f) => {
-			if (f === "1c") return "1С-Синхронизация";
-			if (f === "pay") return "Приём оплат";
-			if (f === "fast") return "CDN-ускорение";
-			return f;
-		}).join(", ");
-		const msg = `Интересует: ${preset.title}. Опции: [${feats || "нет"}]. Донат: ${parseInt(slider.value).toLocaleString("ru-RU")} руб.`;
-		const textarea = document.querySelector('textarea[name="msg"]');
-		if (textarea) textarea.value = msg;
-		showToast("Смета перенесена в бриф!");
-		gsap.to(window, { duration: 0.8, scrollTo: { y: "#contact", offsetY: 80 }, ease: "power2.inOut" });
-	});
 }
 
 // ===== CONTACT FORM (real GAS submission) =====
@@ -535,13 +415,6 @@ function initContact() {
 				successEl.style.display = "flex";
 				showToast("Заявка отправлена!");
 				form.reset();
-
-				const presetBtns = document.querySelectorAll(".calc-preset");
-				const firstPreset = presetBtns.length > 0 ? presetBtns[0] : null;
-				if (firstPreset) {
-					presetBtns.forEach((b) => b.classList.remove("active"));
-					firstPreset.classList.add("active");
-				}
 
 				setTimeout(() => { successEl.style.display = "none"; }, 6000);
 			} else {
@@ -764,7 +637,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	initPreloader();
 	initHeader();
 	initTemplates();
-	initCalculator();
 	initContact();
 	initPrivacy();
 	initTerminal();

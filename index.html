@@ -36,7 +36,7 @@
       .preloader { display: none !important; }
       body { overflow: auto !important; }
       .hero-badge, .hero-title, .hero-desc, .hero-actions,
-      .manifesto, .template-card, .calculator,
+      .manifesto, .template-card,
       .contact-info, .contact-form-wrap, .terminal-trigger, .footer {
         opacity: 1 !important;
         transform: none !important;
@@ -109,7 +109,7 @@
           <span>НАЧАТЬ ПРОЕКТ</span>
           <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
         </a>
-        <a href="#calculator" class="btn btn-ghost">Калькулятор доната</a>
+        <a href="#templates" class="btn btn-ghost">Что мы делаем</a>
       </div>
     </section>
 
@@ -203,44 +203,10 @@
       <div class="templates-grid" id="templates-grid"></div>
     </section>
 
-    <!-- CALCULATOR -->
-    <section class="calculator" id="calculator">
-      <div class="calculator-header">
-        <span class="label-tag">04 // КАЛЬКУЛЯТОР ДОНАТА</span>
-        <h2 class="section-title">Интерактивный расчёт</h2>
-        <p class="section-subtitle">Выберите решение и укажите комфортную сумму доната. Система подскажет, что входит в эту цену.</p>
-      </div>
-      <div class="calculator-body">
-        <div class="calc-step">
-          <span class="calc-step-label">А) Выберите кодовый пресет</span>
-          <div class="calc-presets" id="calc-presets"></div>
-        </div>
-        <div class="calc-step">
-          <span class="calc-step-label">Б) Дополнительные опции</span>
-          <div class="calc-features" id="calc-features"></div>
-        </div>
-        <div class="calc-step">
-          <div class="calc-slider-header">
-            <span class="calc-step-label">В) Размер добровольного доната:</span>
-            <span class="calc-amount" id="calc-amount">10 000 ₽</span>
-          </div>
-          <label for="calc-slider" class="sr-only">Сумма доната</label>
-          <input type="range" class="calc-slider" id="calc-slider" min="500" max="50000" step="500" value="10000">
-          <div class="calc-slider-labels">
-            <span>500 ₽ (студент)</span>
-            <span>25 000 ₽ (золотая середина)</span>
-            <span>50 000 ₽ (уважение к коду)</span>
-          </div>
-        </div>
-        <div class="calc-verdict" id="calc-verdict"></div>
-        <button class="btn btn-primary btn-block" id="calc-inject">ЗАФИКСИРОВАТЬ СМЕТУ И ПЕРЕНЕСТИ В БРИФ</button>
-      </div>
-    </section>
-
     <!-- CONTACT -->
     <section class="contact" id="contact">
       <div class="section-header">
-        <span class="label-tag">05 // СВЯЗАТЬСЯ</span>
+        <span class="label-tag">04 // СВЯЗАТЬСЯ</span>
         <h2 class="section-title">Напишите нам</h2>
       </div>
       <div class="contact-grid">
