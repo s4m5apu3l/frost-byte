@@ -30,7 +30,6 @@
 </head>
 <body>
   <a href="#main-content" class="skip-link">Пропустить навигацию</a>
-
   <noscript>
     <style>
       .preloader { display: none !important; }
@@ -43,11 +42,7 @@
       }
     </style>
   </noscript>
-
-  <!-- ===== NOISE OVERLAY ===== -->
   <div class="noise-overlay" aria-hidden="true"></div>
-
-  <!-- ===== PRELOADER ===== -->
   <div id="preloader" class="preloader">
     <div class="preloader-grid"></div>
     <div class="preloader-content">
@@ -56,14 +51,10 @@
       </span>
     </div>
   </div>
-
-  <!-- ===== AMBIENT BG ===== -->
   <div class="ambient">
     <div class="ambient-blob ambient-blob-1"></div>
     <div class="ambient-blob ambient-blob-2"></div>
   </div>
-
-  <!-- ===== HEADER ===== -->
   <header class="header">
     <div class="header-inner">
       <nav class="header-brand" aria-label="Главная навигация">
@@ -90,11 +81,7 @@
       </div>
     </div>
   </header>
-
-  <!-- ===== MAIN ===== -->
-  <main class="main" id="main-content">
-
-    <!-- HERO -->
+  <main class="main l-main" id="main-content">
     <section class="hero" id="hero">
       <div class="hero-badge">
         <span class="hero-ping"></span>
@@ -112,8 +99,6 @@
         <a href="#templates" class="btn btn-ghost">Что мы делаем</a>
       </div>
     </section>
-
-    <!-- MANIFESTO / PHILOSOPHY -->
     <section class="manifesto" id="manifesto">
       <div class="section-label">
         <span class="label-tag">01 // ФИЛОСОФИЯ</span>
@@ -126,8 +111,6 @@
         <p>Это не благотворительность и не распродажа. Это доверие: я верю, что качественная работа говорит сама за себя. И что малый бизнес заслуживает того же качества, что и корпорации - только доступнее.</p>
       </div>
     </section>
-
-    <!-- COMPARISON -->
     <section class="comparison" id="comparison">
       <div class="section-header">
         <span class="label-tag">02 // СРАВНЕНИЕ</span>
@@ -171,9 +154,7 @@
           </div>
           <div class="comparison-meta">2 - 4 месяца</div>
         </div>
-
         <div class="comparison-vs">VS</div>
-
         <div class="comparison-col comparison-iindev">
           <div class="comparison-header">
             <span class="comparison-badge comparison-badge-brand">iindev</span>
@@ -193,8 +174,6 @@
         </div>
       </div>
     </section>
-
-    <!-- SOLUTIONS -->
     <section class="templates" id="templates">
       <div class="section-header">
         <span class="label-tag">03 // РЕШЕНИЯ</span>
@@ -202,8 +181,6 @@
       </div>
       <div class="templates-grid" id="templates-grid"></div>
     </section>
-
-    <!-- CONTACT -->
     <section class="contact" id="contact">
       <div class="section-header">
         <span class="label-tag">04 // СВЯЗАТЬСЯ</span>
@@ -262,10 +239,7 @@
         </div>
       </div>
     </section>
-
   </main>
-
-  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-copy">
@@ -279,8 +253,6 @@
       </div>
     </div>
   </footer>
-
-  <!-- ===== TEMPLATE DRAWER ===== -->
   <div class="drawer-overlay" id="drawer-overlay" style="display:none;">
     <div class="drawer-backdrop" id="drawer-backdrop"></div>
     <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Детали решения">
@@ -314,8 +286,6 @@
       </div>
     </div>
   </div>
-
-  <!-- ===== TERMINAL ===== -->
   <div class="terminal" id="terminal" style="display:none;" role="dialog" aria-modal="true" aria-label="Терминал iindev">
     <div class="terminal-inner">
       <div class="terminal-header">
@@ -351,8 +321,6 @@
       </div>
     </div>
   </div>
-
-  <!-- ===== PRIVACY MODAL ===== -->
   <div class="privacy-modal" id="privacy" style="display:none;" role="dialog" aria-modal="true" aria-label="Политика конфиденциальности">
     <div class="privacy-backdrop" id="privacy-backdrop"></div>
     <div class="privacy-content">
@@ -365,13 +333,10 @@
       <p>По всем вопросам: <a href="mailto:iindev@tuta.io">iindev@tuta.io</a></p>
     </div>
   </div>
-
-  <!-- ===== TOAST ===== -->
   <div class="toast" id="toast">
     <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
     <span class="toast-text" id="toast-text"></span>
   </div>
-
   <script src="app.js" defer></script>
   <script src="terminal.js" defer></script>
 </body>
