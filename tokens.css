@@ -1,0 +1,82 @@
+/* Hallmark · genre: editorial · macrostructure: Manifesto · tone: technical
+ * theme: custom (vibe: "dark terminal teal, declaration energy")
+ * paper: oklch(5% 0.005 180) · accent: oklch(82% 0.14 180) teal
+ * display: JetBrains Mono 700 · body: Space Grotesk 400 · outlier: JetBrains Mono 300 (stat)
+ * diversification: first Hallmark run — no prior constraint
+ */
+
+:root {
+  /* ── paper (dark, teal-tinted) ── */
+  --color-paper:      oklch(3% 0.004 185);
+  --color-paper-2:    oklch(7% 0.006 185);
+  --color-paper-3:    oklch(10% 0.007 185);
+
+  /* ── ink (bright, slightly warm offset from paper) ── */
+  --color-ink:        oklch(94% 0.005 95);
+  --color-ink-2:      oklch(80% 0.005 95);
+  --color-ink-3:      oklch(62% 0.005 95);
+
+  /* ── rules ── */
+  --color-rule:       oklch(18% 0.005 185);
+  --color-rule-2:     oklch(26% 0.006 185);
+
+  /* ── accent (teal, ≤ 3 % per viewport) ── */
+  --color-accent:     oklch(82% 0.14 185);
+  --color-accent-2:   oklch(72% 0.12 185);
+  --color-accent-ink: oklch(18% 0.02 185);
+
+  /* ── focus ── */
+  --color-focus:      oklch(82% 0.16 185);
+
+  /* ── fonts ── */
+  --font-display:  "JetBrains Mono", ui-monospace, monospace;
+  --font-body:     "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-outlier:  "JetBrains Mono", ui-monospace, monospace;
+
+  /* ── spacing (4 pt scale, role-named) ── */
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 7rem;
+  --space-4xl: 12rem;
+
+  /* ── type scale (major third, 16 px base) ── */
+  --text-xs:   0.64rem;
+  --text-sm:   0.8rem;
+  --text-base: 1rem;
+  --text-md:   1.25rem;
+  --text-lg:   1.5625rem;
+  --text-xl:   1.9531rem;
+  --text-2xl:  2.4414rem;
+  --text-3xl:  3.0518rem;
+  --text-display: clamp(2.25rem, 6vw, 5rem);
+
+  /* ── easings ── */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ── durations ── */
+  --dur-short: 180ms;
+  --dur-md:    280ms;
+  --dur-long:  450ms;
+
+  /* ── radii ── */
+  --radius-sm:  0.25rem;
+  --radius-md:  0.5rem;
+  --radius-lg:  0.75rem;
+  --radius-pill: 9999px;
+
+  /* ── z-index ── */
+  --z-base:     1;
+  --z-raised:   10;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-modal:    400;
+  --z-toast:    500;
+}
