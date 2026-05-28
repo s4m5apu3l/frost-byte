@@ -270,8 +270,12 @@ function initAbout() {
 		});
 
 		const chars = line.querySelectorAll(".about-char");
+		const normalChars = line.querySelectorAll(".about-char:not(.about-char--accent)");
+		const accentChars = line.querySelectorAll(".about-char--accent");
+		const allChars = line.querySelectorAll(".about-char");
+
 		gsap.fromTo(
-			chars,
+			allChars,
 			{ opacity: 0.3, y: 20 },
 			{
 				opacity: 1,
@@ -287,7 +291,7 @@ function initAbout() {
 				},
 			},
 		);
-		gsap.to(chars, {
+		gsap.to(normalChars, {
 			color: "var(--text)",
 			scrollTrigger: {
 				trigger: line,
@@ -297,7 +301,7 @@ function initAbout() {
 			},
 			stagger: 0.03,
 		});
-		gsap.to(line.querySelectorAll(".about-char--accent"), {
+		gsap.to(accentChars, {
 			color: "var(--accent)",
 			scrollTrigger: {
 				trigger: line,

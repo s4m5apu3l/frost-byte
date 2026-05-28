@@ -766,12 +766,18 @@ body.menu-open {
 }
 
 .about-char {
-	display: inline-block;
+	display: inline;
 	color: var(--text-muted);
 }
 
 .about-char--accent {
 	color: var(--text-muted);
+}
+
+.about-line {
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .about-accent {
