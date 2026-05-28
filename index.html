@@ -3,115 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iindev — AI-автоматизация для бизнеса</title>
-  <meta name="description" content="iindev — AI-автоматизация процессов, сайты любой сложности, SEO, оптимизация и настройка под ключ для бизнеса.">
-  <meta name="author" content="iindev">
-  <meta name="robots" content="index, follow">
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#080c0d">
-  <link rel="canonical" href="https://iindev-solutions.github.io/iindev-landing/">
-  <meta property="og:title" content="iindev — AI-автоматизация для бизнеса">
-  <meta property="og:description" content="AI-автоматизация, сайты, SEO, оптимизация и настройка под ключ.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://iindev-solutions.github.io/iindev-landing/">
-  <meta property="og:locale" content="ru_RU">
-  <meta property="og:site_name" content="iindev">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="iindev — AI-автоматизация для бизнеса">
-  <meta name="twitter:description" content="AI-автоматизация, сайты, SEO, оптимизация под ключ.">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23080c0d'/%3E%3Crect x='2' y='2' width='60' height='60' rx='12' fill='none' stroke='%231c222c' stroke-width='1'/%3E%3Ctext x='32' y='38' fill='%235eead4' font-size='18' font-family='sans-serif' font-weight='600' text-anchor='middle' letter-spacing='1'%3Eiin%3C/text%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>iindev — Веб-разработка</title>
+  <meta name="description" content="Веб-разработка, AI-автоматизация, SEO. Быстро. Прозрачно.">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="app.js" defer></script>
 </head>
-<body>
-  <a href="#main" class="skip-link">Пропустить навигацию</a>
-  <header class="header">
-    <div class="header-inner">
-      <a href="#" class="wordmark">iindev.</a>
+<body aria-busy="true">
+
+  <div id="loader" role="status" aria-hidden="true" aria-label="Загрузка">
+    <div class="loader-word" id="loaderWord">
+      <span class="lc">i</span>
+      <span class="lc">i</span>
+      <span class="lc">n</span>
+      <span class="lc">d</span>
+      <span class="lw">i</span>
+      <span class="lw">i</span>
+      <span class="lw">n</span>
+      <span class="lw">d</span>
+      <span class="lw">a</span>
+      <span class="lv">e</span>
+      <span class="lv">v</span>
     </div>
-  </header>
-  <main class="main" id="main">
-    <section class="hero" id="hero">
-      <h1 class="hero-title">AI-автоматизация для бизнеса.</h1>
-      <p class="hero-sub">Сайты. SEO. Оптимизация. Настройка. Автоматизация.</p>
-      <p class="hero-desc">От простых лендингов до сложных систем с AI. Работаем с любым бизнесом — от кофейни до производства.</p>
-    </section>
-    <section class="prose" id="prose">
-      <p class="lead">В якутском языке есть слово <em>ииньдиньда</em> — добрая ирония над теми, кто слишком серьёзно относится к вещам, которые того не стоят.</p>
-      <p>Рынок IT-услуг в регионах именно такой. Агентства берут <span class="data">140–280 тыс. ₽</span> за шаблоны на конструкторах, которые грузятся по <span class="data">5 секунд</span>. Делают это <span class="data">2–4 месяца</span>. Малый бизнес не может себе этого позволить.</p>
-      <p>Мы делаем иначе. <span class="data">24–48 часов</span>. Современный стек. AI-ускорение. Вы получаете готовый продукт, а вопрос оплаты оставляем за вами.</p>
-      <p>Это не благотворительность и не распродажа. Это доверие. Качественная работа говорит сама за себя.</p>
-      <hr class="ornament">
-      <p>Что мы делаем:</p>
-      <ul class="services">
-        <li><strong>AI-автоматизация процессов</strong> — интеграция нейросетей в бизнес-процессы, автоматическая обработка заявок, генерация контента, чат-боты с AI</li>
-        <li><strong>Сайты любой сложности</strong> — лендинги, корпоративные сайты, интернет-магазины, внутренние порталы. От кофейни до производства</li>
-        <li><strong>SEO и оптимизация</strong> — технический аудит, скорость загрузки, структура, мета-теги, контент-стратегия. Выводим в топ поисковой выдачи</li>
-        <li><strong>Настройка и поддержка</strong> — домен, хостинг, почта, CRM-интеграции, аналитика, резервное копирование. Всё работает без вашего участия</li>
-      </ul>
-      <p>Мы не продаем шаблоны. Мы строим инструменты, которые работают на ваш бизнес.</p>
-      <p>Нужен сайт, AI-бот или автоматизация процессов — напишите. Поможем с доменом и хостингом. Начнём сегодня.</p>
-    </section>
-    <section class="contact" id="contact">
-      <h2 class="contact-head">Напишите нам</h2>
-      <form class="contact-form" id="contact-form" novalidate>
-        <div class="form-row">
-          <div class="form-field">
-            <label class="form-label" for="form-name">Имя или компания</label>
-            <input type="text" class="form-input" id="form-name" name="name" placeholder="Александр" required>
-            <span class="form-error" id="form-error-name" role="alert"></span>
-          </div>
-          <div class="form-field">
-            <label class="form-label" for="form-contact">Telegram или телефон</label>
-            <input type="text" class="form-input" id="form-contact" name="contact" placeholder="@alex_dev" required>
-            <span class="form-error" id="form-error-contact" role="alert"></span>
-          </div>
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="form-msg">Что нужно</label>
-          <textarea class="form-input form-textarea" id="form-msg" name="msg" rows="3" placeholder="Например: нужен сайт с AI-чатом и CRM-интеграцией."></textarea>
-        </div>
-        <button type="submit" class="btn btn-accent" id="form-submit">Отправить</button>
-        <div class="form-status form-status-loading" id="form-loading" style="display:none;">
-          <span>Отправка...</span>
-        </div>
-        <div class="form-success" id="form-success" style="display:none;">
-          <span>Свяжемся с вами в Telegram в течение 3 часов.</span>
-        </div>
-        <div class="form-error-msg" id="form-error-global" style="display:none;" role="alert">
-          <span>Ошибка отправки. Попробуйте позже или напишите в Telegram.</span>
-        </div>
-      </form>
-    </section>
-  </main>
-  <footer class="footer">
-    <div class="footer-inner">
-      <span class="footer-copy">&copy; 2026 iindev</span>
-      <div class="footer-links">
-        <a href="https://t.me/iindev" target="_blank" rel="noopener noreferrer">Telegram</a>
-        <a href="mailto:iindev@tuta.io">Email</a>
-        <a href="#privacy" class="footer-legal">Конфиденциальность</a>
+    <div class="loader-bar">
+      <div class="loader-bar-fill"></div>
+    </div>
+  </div>
+
+  <div class="noise"></div>
+
+  <header class="header" id="header">
+    <div class="l-wrapper">
+      <div class="header-inner">
+        <a href="#" class="header-logo">iin<span class="ev">dev</span></a>
+        <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+        </button>
       </div>
     </div>
-  </footer>
-  <div class="privacy-modal" id="privacy" style="display:none;" role="dialog" aria-modal="true" aria-label="Политика конфиденциальности">
-    <div class="privacy-backdrop" id="privacy-backdrop"></div>
-    <div class="privacy-content">
-      <button class="privacy-close" id="privacy-close" aria-label="Закрыть">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-      <h2>Политика конфиденциальности</h2>
-      <p>Мы не собираем персональные данные автоматически. Информация, которую вы отправляете через форму обратной связи, используется исключительно для связи с вами и не передаётся третьим лицам.</p>
-      <p>Сайт не использует файлы cookie для отслеживания.</p>
-      <p>По всем вопросам: <a href="mailto:iindev@tuta.io">iindev@tuta.io</a></p>
+  </header>
+
+  <div class="menu-overlay" id="menuOverlay">
+    <nav class="menu-nav">
+      <a href="#services" class="menu-link">Услуги</a>
+      <a href="#process" class="menu-link">Процесс</a>
+      <a href="#contact" class="menu-link">Контакты</a>
+    </nav>
+    <div class="menu-footer">
+      <a href="https://t.me/iindev" class="menu-social">Telegram</a>
+      <a href="mailto:iindev@tuta.io" class="menu-social">iindev@tuta.io</a>
     </div>
   </div>
-  <div class="toast" id="toast">
-    <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-    <span class="toast-text" id="toast-text"></span>
-  </div>
-  <script src="app.js" defer></script>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="l-wrapper">
+        <div class="hero-inner">
+          <h1 class="hero-title" id="heroTitle">
+            <span class="hc">i</span><span class="hc">i</span><span class="hc">n</span><span class="hc">d</span>
+            <span class="hero-suffix-wrap">
+              <span class="hero-suffix" id="heroSuffix">ev</span>
+            </span>
+          </h1>
+          <p class="hero-tag">Веб-разработка · AI · SEO</p>
+          <a href="#contact" class="btn-primary">
+            Обсудить проект <span class="btn-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
 </body>
 </html>
