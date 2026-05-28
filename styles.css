@@ -22,6 +22,59 @@ body {
 	color: var(--text);
 	overflow-x: hidden;
 	-webkit-font-smoothing: antialiased;
+	cursor: none;
+}
+
+.cursor {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 8px;
+	height: 8px;
+	background: var(--accent);
+	border-radius: 50%;
+	pointer-events: none;
+	z-index: 99999;
+	mix-blend-mode: difference;
+	transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: transform;
+}
+
+.cursor.hover {
+	transform: scale(4);
+	opacity: 0.5;
+}
+
+.cursor-trail {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 32px;
+	height: 32px;
+	border: 1px solid var(--accent);
+	border-radius: 50%;
+	pointer-events: none;
+	z-index: 99998;
+	opacity: 0.3;
+	transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+	will-change: transform;
+}
+
+.cursor-trail.hover {
+	transform: scale(1.5);
+	opacity: 0.6;
+	border-color: var(--text);
+}
+
+@media (max-width: 768px) {
+	body {
+		cursor: auto;
+	}
+
+	.cursor,
+	.cursor-trail {
+		display: none;
+	}
 }
 
 body.is-loading main {

@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		el.textContent = new Date().getFullYear();
 	});
 
+	initCursor();
+
 	const loader = document.getElementById("loader");
 	if (!loader) return;
 
@@ -730,4 +732,43 @@ function initHeaderScroll() {
 		},
 		{ passive: true },
 	);
+}
+
+function initCursor() {
+	const cursor = document.getElementById("cursor");
+	const trail = document.getElementById("cursorTrail");
+	if (!cursor || !trail) return;
+
+	let mx = 0;
+	let my = 0;
+	let tx = 0;
+	let ty = 0;
+
+	document.addEventListener("mousemove", (e) => {
+		mx = e.clientX;
+		my = e.clientY;
+		cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+	});
+
+	function animateTrail() {
+		tx += (mx - tx) * 0.15;
+		ty += (my - ty) * 0.15;
+		trail.style.transform = `translate(${tx - 16}px, ${ty - 16}px)`;
+		requestAnimationFrame(animateTrail);
+	}
+	animateTrail();
+
+	const hoverTargets = document.querySelectorAll(
+		"a, button, .work-card, .services-card, .menu-link, .cta-btn",
+	);
+	hoverTargets.forEach((el) => {
+		el.addEventListener("mouseenter", () => {
+			cursor.classList.add("hover");
+			trail.classList.add("hover");
+		});
+		el.addEventListener("mouseleave", () => {
+			cursor.classList.remove("hover");
+			trail.classList.remove("hover");
+		});
+	});
 }
