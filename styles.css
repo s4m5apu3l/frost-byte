@@ -182,15 +182,45 @@ body.menu-open {
 }
 
 .header-logo {
-	font-size: 1.25rem;
-	font-weight: 700;
-	letter-spacing: -0.03em;
 	text-decoration: none;
-	color: var(--accent);
+	display: inline-flex;
 }
 
-.header-logo .ev {
-	color: var(--text);
+.logo-svg {
+	width: 80px;
+	height: 24px;
+	overflow: visible;
+}
+
+.logo-text {
+	font-family: var(--font);
+	font-size: 16px;
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	fill: none;
+	stroke: var(--accent);
+	stroke-width: 1.5;
+	stroke-dasharray: 100;
+	stroke-dashoffset: 100;
+	animation: logoDraw 1s ease forwards;
+}
+
+.logo-ev {
+	stroke: var(--text);
+	animation-delay: 0.5s;
+}
+
+@keyframes logoDraw {
+	to {
+		stroke-dashoffset: 0;
+		fill: var(--accent);
+	}
+}
+
+.logo-ev.logoDraw {
+	to {
+		fill: var(--text);
+	}
 }
 
 .burger {
