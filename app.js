@@ -2,6 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
   history.scrollRestoration = 'manual';
   window.scrollTo(0, 0);
 
+  document.querySelectorAll('.year').forEach(el => {
+    el.textContent = new Date().getFullYear();
+  });
+
   const loader = document.getElementById('loader');
   if (!loader) return;
 
@@ -123,6 +127,7 @@ function showHero() {
   initAbout();
   initServices();
   initProcess();
+  initCta();
 }
 
 function initAbout() {
@@ -181,24 +186,58 @@ function cycleSuffix() {
 function initBurger() {
   const burger = document.getElementById('burger');
   const overlay = document.getElementById('menuOverlay');
+  const leftPanel = overlay.querySelector('.menu-panel-left');
+  const rightPanel = overlay.querySelector('.menu-panel-right');
   const links = overlay.querySelectorAll('.menu-link');
-  const socials = overlay.querySelectorAll('.menu-social');
+  const linkLabels = overlay.querySelectorAll('.menu-link-label');
+  const linkTexts = overlay.querySelectorAll('.menu-link-text');
+  const socialsLabel = overlay.querySelector('.menu-socials-label');
+  const socialLinks = overlay.querySelectorAll('.menu-social-link');
+  const footer = overlay.querySelector('.menu-footer');
+
+  gsap.set(leftPanel, { xPercent: -100 });
+  gsap.set(rightPanel, { xPercent: 100 });
+  gsap.set(linkLabels, { opacity: 0, y: 10 });
+  gsap.set(linkTexts, { opacity: 0, y: 30 });
+  gsap.set(socialsLabel, { opacity: 0, y: 10 });
+  gsap.set(socialLinks, { opacity: 0, y: 15 });
+  gsap.set(footer, { opacity: 0, y: 10 });
 
   menuTl = gsap.timeline({ paused: true });
 
-  menuTl.to(overlay, {
-    visibility: 'visible', opacity: 1, duration: 0.4, ease: 'power2.inOut'
-  })
-  .fromTo(links, {
-    opacity: 0, y: 40
-  }, {
-    opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power3.out'
-  }, '-=0.2')
-  .fromTo(socials, {
-    opacity: 0, y: 15
-  }, {
-    opacity: 1, y: 0, duration: 0.4, stagger: 0.06, ease: 'power3.out'
-  }, '-=0.2');
+  menuTl
+    .set(overlay, { visibility: 'visible' })
+    .to(leftPanel, {
+      xPercent: 0, duration: 0.7, ease: 'power3.inOut'
+    }, 0)
+    .to(rightPanel, {
+      xPercent: 0, duration: 0.7, ease: 'power3.inOut'
+    }, 0)
+    .fromTo(linkLabels, {
+      opacity: 0, y: 10
+    }, {
+      opacity: 1, y: 0, duration: 0.4, stagger: 0.06, ease: 'power3.out'
+    }, '-=0.4')
+    .fromTo(linkTexts, {
+      opacity: 0, y: 30
+    }, {
+      opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power3.out'
+    }, '-=0.5')
+    .fromTo(socialsLabel, {
+      opacity: 0, y: 10
+    }, {
+      opacity: 1, y: 0, duration: 0.4, ease: 'power3.out'
+    }, '-=0.4')
+    .fromTo(socialLinks, {
+      opacity: 0, y: 15
+    }, {
+      opacity: 1, y: 0, duration: 0.4, stagger: 0.06, ease: 'power3.out'
+    }, '-=0.3')
+    .fromTo(footer, {
+      opacity: 0, y: 10
+    }, {
+      opacity: 1, y: 0, duration: 0.4, ease: 'power3.out'
+    }, '-=0.2');
 
   burger.addEventListener('click', () => {
     menuOpen = !menuOpen;
@@ -340,6 +379,52 @@ function initProcess() {
   }, {
     opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out',
     scrollTrigger: { trigger: '.process-track', start: 'top 80%' }
+  });
+}
+
+function initCta() {
+  gsap.fromTo('.cta-label', {
+    opacity: 0, y: 20
+  }, {
+    opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+    scrollTrigger: { trigger: '.cta', start: 'top 80%' }
+  });
+
+  gsap.fromTo('.cta-line', {
+    opacity: 0, y: 40
+  }, {
+    opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out',
+    scrollTrigger: { trigger: '.cta', start: 'top 75%' }
+  });
+
+  gsap.fromTo('.cta-desc', {
+    opacity: 0, y: 20
+  }, {
+    opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+    scrollTrigger: { trigger: '.cta', start: 'top 70%' },
+    delay: 0.2
+  });
+
+  gsap.fromTo('.cta-btn', {
+    opacity: 0, y: 20
+  }, {
+    opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+    scrollTrigger: { trigger: '.cta', start: 'top 65%' },
+    delay: 0.3
+  });
+
+  gsap.fromTo('.footer-card', {
+    opacity: 0, y: 60
+  }, {
+    opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+    scrollTrigger: { trigger: '.footer', start: 'top 85%' }
+  });
+
+  gsap.fromTo('.footer-links-col', {
+    opacity: 0, y: 20
+  }, {
+    opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out',
+    scrollTrigger: { trigger: '.footer-main', start: 'top 85%' }
   });
 }
 
