@@ -139,15 +139,12 @@ document.addEventListener("DOMContentLoaded", () => {
 gsap.registerPlugin(ScrollTrigger);
 
 const suffixes = [
-	"ev",
-	"iinda",
-	"iiaaana",
-	"jhons",
-	"ustria",
-	"spesodejdu",
-	"a",
-	"jigirinch",
-	"igidon",
+	"iindiinda",
+	"iindigidon",
+	"iindiiana djons",
+	"iindustria spesodejdy",
+	"iindiebit baay da",
+	"iindigistan",
 ];
 let suffixIndex = 0;
 let cycling = false;
