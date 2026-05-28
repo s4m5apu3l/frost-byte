@@ -753,7 +753,7 @@ body.menu-open {
 }
 
 .about-title {
-	font-size: clamp(2rem, 5vw, 4rem);
+	font-size: clamp(1.1rem, 5vw, 3rem);
 	font-weight: 700;
 	letter-spacing: -0.03em;
 	line-height: 1.1;
