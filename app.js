@@ -1,5 +1,5 @@
-/* Hallmark · Letter · warm hand-crafted trust
- * Minimal JS — form, privacy, toast, smooth scroll
+/* Hallmark · Marquee Hero + Long Document · minimal JS
+ * Form · Privacy · Toast · Smooth scroll
  */
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxzwm-NuZULK_iXCx5AVHYYzG372HkOAK1uhUSUrcgsJIjU1-bjrJApxVQ9f7Luv3yV/exec';
@@ -67,7 +67,7 @@ function initContact() {
 				body: JSON.stringify({
 					name: name,
 					phone: contact,
-					type: "сайт / бот / Mini App",
+					type: "AI / сайт / SEO / настройка",
 					message: msg,
 				}),
 			});
