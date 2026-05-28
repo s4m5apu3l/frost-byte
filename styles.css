@@ -37,7 +37,6 @@ body {
 	z-index: 99999;
 	mix-blend-mode: difference;
 	transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-	will-change: transform;
 }
 
 .cursor.hover {
@@ -57,7 +56,6 @@ body {
 	z-index: 99998;
 	opacity: 0.3;
 	transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
-	will-change: transform;
 }
 
 .cursor-trail.hover {
@@ -111,7 +109,6 @@ body.menu-open {
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
-	will-change: transform, border-radius;
 }
 
 .loader-word {
@@ -120,7 +117,6 @@ body.menu-open {
 	font-size: clamp(2.5rem, 7vw, 5rem);
 	font-weight: 700;
 	letter-spacing: -0.04em;
-	will-change: transform;
 }
 
 .lc {
@@ -128,7 +124,6 @@ body.menu-open {
 	display: inline-block;
 	opacity: 0;
 	transform: translateY(30px);
-	will-change: transform, opacity;
 }
 
 .lw {
@@ -136,14 +131,12 @@ body.menu-open {
 	display: inline-block;
 	opacity: 0;
 	transform: translateY(30px);
-	will-change: transform, opacity;
 }
 
 .lv {
 	color: var(--text);
 	display: inline-block;
 	opacity: 0;
-	will-change: transform, opacity;
 }
 
 .loader-bar {
@@ -175,7 +168,6 @@ body.menu-open {
 	backdrop-filter: blur(20px);
 	-webkit-backdrop-filter: blur(20px);
 	border-bottom: 1px solid var(--border);
-	will-change: transform;
 }
 
 .header.hidden {
@@ -218,7 +210,6 @@ body.menu-open {
 	height: 2px;
 	background: var(--text);
 	border-radius: 2px;
-	will-change: transform, opacity;
 }
 
 .burger.active .burger-line:nth-child(1) {
@@ -255,7 +246,6 @@ body.menu-open {
 	width: 50%;
 	background: var(--bg);
 	overflow: hidden;
-	will-change: transform;
 }
 
 .menu-panel-left {

@@ -227,7 +227,10 @@ function showHero() {
 			},
 			null,
 			"+=2",
-		);
+		)
+		.call(() => {
+			gsap.set(".hero-line", { willChange: "auto" });
+		});
 
 	initBurger();
 	initHeaderScroll();
@@ -275,7 +278,7 @@ function initAbout() {
 
 function initAmbient() {
 	gsap.utils.toArray(".hero-orb").forEach((orb, i) => {
-		gsap.to(orb, {
+		const tween = gsap.to(orb, {
 			x: gsap.utils.random(-60, 60),
 			y: gsap.utils.random(-40, 40),
 			duration: gsap.utils.random(18, 28),
@@ -283,6 +286,16 @@ function initAmbient() {
 			yoyo: true,
 			ease: "sine.inOut",
 			delay: i * 3,
+		});
+
+		ScrollTrigger.create({
+			trigger: ".hero",
+			start: "top bottom",
+			end: "bottom top",
+			onEnter: () => tween.play(),
+			onLeave: () => tween.pause(),
+			onEnterBack: () => tween.play(),
+			onLeaveBack: () => tween.pause(),
 		});
 	});
 }
@@ -479,31 +492,23 @@ function initTilt() {
 	const cards = document.querySelectorAll("[data-tilt]");
 
 	cards.forEach((card) => {
+		const rxTo = gsap.quickTo(card, "rotateX", { duration: 0.4, ease: "power2.out" });
+		const ryTo = gsap.quickTo(card, "rotateY", { duration: 0.4, ease: "power2.out" });
+		gsap.set(card, { transformPerspective: 1000 });
+
 		card.addEventListener("mousemove", (e) => {
 			const rect = card.getBoundingClientRect();
 			const x = e.clientX - rect.left;
 			const y = e.clientY - rect.top;
 			const centerX = rect.width / 2;
 			const centerY = rect.height / 2;
-			const rotateX = ((y - centerY) / centerY) * -8;
-			const rotateY = ((x - centerX) / centerX) * 8;
-
-			gsap.to(card, {
-				rotateX: rotateX,
-				rotateY: rotateY,
-				duration: 0.4,
-				ease: "power2.out",
-				transformPerspective: 1000,
-			});
+			rxTo(((y - centerY) / centerY) * -8);
+			ryTo(((x - centerX) / centerX) * 8);
 		});
 
 		card.addEventListener("mouseleave", () => {
-			gsap.to(card, {
-				rotateX: 0,
-				rotateY: 0,
-				duration: 0.6,
-				ease: "power3.out",
-			});
+			rxTo(0);
+			ryTo(0);
 		});
 	});
 }
@@ -717,18 +722,23 @@ function initCta() {
 function initHeaderScroll() {
 	const header = document.getElementById("header");
 	let lastScroll = 0;
+	let ticking = false;
 
 	window.addEventListener(
 		"scroll",
 		() => {
-			if (menuOpen) return;
-			const current = window.scrollY;
-			if (current > lastScroll && current > 100) {
-				header.classList.add("hidden");
-			} else {
-				header.classList.remove("hidden");
-			}
-			lastScroll = current;
+			if (menuOpen || ticking) return;
+			ticking = true;
+			requestAnimationFrame(() => {
+				const current = window.scrollY;
+				if (current > lastScroll && current > 100) {
+					header.classList.add("hidden");
+				} else {
+					header.classList.remove("hidden");
+				}
+				lastScroll = current;
+				ticking = false;
+			});
 		},
 		{ passive: true },
 	);
@@ -739,24 +749,17 @@ function initCursor() {
 	const trail = document.getElementById("cursorTrail");
 	if (!cursor || !trail) return;
 
-	let mx = 0;
-	let my = 0;
-	let tx = 0;
-	let ty = 0;
+	const xTo = gsap.quickTo(cursor, "x", { duration: 0.15, ease: "power3" });
+	const yTo = gsap.quickTo(cursor, "y", { duration: 0.15, ease: "power3" });
+	const txTo = gsap.quickTo(trail, "x", { duration: 0.35, ease: "power3" });
+	const tyTo = gsap.quickTo(trail, "y", { duration: 0.35, ease: "power3" });
 
 	document.addEventListener("mousemove", (e) => {
-		mx = e.clientX;
-		my = e.clientY;
-		cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+		xTo(e.clientX - 4);
+		yTo(e.clientY - 4);
+		txTo(e.clientX - 16);
+		tyTo(e.clientY - 16);
 	});
-
-	function animateTrail() {
-		tx += (mx - tx) * 0.15;
-		ty += (my - ty) * 0.15;
-		trail.style.transform = `translate(${tx - 16}px, ${ty - 16}px)`;
-		requestAnimationFrame(animateTrail);
-	}
-	animateTrail();
 
 	const hoverTargets = document.querySelectorAll(
 		"a, button, .work-card, .services-card, .menu-link, .cta-btn",
