@@ -23,42 +23,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js" defer></script>
 </head>
 <body>
-  <a href="#main-content" class="skip-link">Пропустить навигацию</a>
+  <a href="#main" class="skip-link">Пропустить навигацию</a>
   <noscript>
     <style>
       .preloader { display: none !important; }
-      body { overflow-x: hidden !important; }
-      .hero-title, .hero-desc, .hero-actions,
-      .manifesto, .template-card,
-      .contact-info, .contact-form-wrap, .footer {
-        opacity: 1 !important;
-        transform: none !important;
-      }
+      body { overflow-x: clip !important; }
+      .hero-title, .hero-desc, .hero-actions, .bento-cell { opacity: 1 !important; transform: none !important; }
     </style>
   </noscript>
-  <div class="noise-overlay" aria-hidden="true"></div>
   <div id="preloader" class="preloader">
-    <div class="preloader-grid"></div>
-    <div class="preloader-content">
+    <div class="preloader-inner">
       <span class="preloader-word">
         <span class="preloader-root">iind</span><span class="preloader-suffix" id="preloader-suffix">iinda</span>
       </span>
     </div>
   </div>
-  <div class="ambient" aria-hidden="true">
-    <div class="ambient-blob ambient-blob-1"></div>
-    <div class="ambient-blob ambient-blob-2"></div>
-  </div>
   <header class="header">
     <div class="header-inner">
-      <a href="#" class="wordmark" id="logo">
+      <a href="#" class="wordmark">
         <span class="wordmark-accent">iind</span>ev<span class="wordmark-dot">.</span>
       </a>
       <div class="header-meta">
@@ -72,125 +60,124 @@
             терминал
           </button>
         </div>
-        <span class="header-weather" id="header-weather">-°C</span>
-        <button class="sound-toggle" id="sound-toggle" title="Включить аудио-отклик интерфейса">
-          <svg class="sound-icon" id="sound-on" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-          <svg class="sound-icon" id="sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-        </button>
       </div>
     </div>
   </header>
-  <main class="main l-main" id="main-content">
+  <main class="main" id="main">
     <section class="hero" id="hero">
-      <h1 class="hero-title">Сайт — как бейдж.<br>Каждому бизнесу нужен.</h1>
-      <p class="hero-desc">iindev — просто и современно, без предоплаты. Лендинг у контор от 50к, магазин от 150к — перебор. Сначала покажем, потом разговор о цене.</p>
+      <h1 class="hero-title">iindev.</h1>
+      <p class="hero-desc">Сайты для бизнеса. Вы определяете цену.</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn btn-accent btn-xl">
-          <span>НАЧАТЬ ПРОЕКТ</span>
-          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-        </a>
+        <a href="#contact" class="btn btn-accent">Начать проект</a>
         <a href="#manifesto" class="btn btn-ghost">Философия</a>
       </div>
     </section>
-    <section class="manifesto bleed-section" id="manifesto">
-      <div class="bleed-block">
-        <p class="bleed-claim">В якутском языке есть слово <em>ииньдиньда</em> — добрая ирония над теми, кто слишком серьёзно относится к вещам, которые того не стоят.</p>
-      </div>
-      <div class="bleed-block bleed-block-accent">
-        <p class="bleed-claim">Рынок веб-разработки в регионах именно такой. Агентства берут 50–90 тысяч рублей за шаблоны на конструкторах, которые грузятся по 5 секунд. Малый бизнес не может себе этого позволить — и остаётся только в Instagram и WhatsApp.</p>
-      </div>
-      <div class="bleed-block">
-        <blockquote class="bleed-quote">Я считаю, что лучший способ доказать качество — сделать работу первым. Вы получаете готовый продукт, а вопрос оплаты оставляю за вами.</blockquote>
-      </div>
-      <div class="bleed-block bleed-block-faint">
-        <p class="bleed-claim">Это не благотворительность и не распродажа. Это доверие: качественная работа говорит сама за себя. Малый бизнес заслуживает того же качества, что и корпорации — только доступнее.</p>
-      </div>
-    </section>
-    <section class="split" id="comparison">
-      <div class="split-col">
-        <span class="split-label">Классическая разработка</span>
-        <span class="split-stat">140–280 тыс. ₽</span>
-        <span class="split-detail">ТЗ · Дизайн · Вёрстка · Бэкенд · Интеграции · Тестирование</span>
-        <span class="split-meta">2–4 месяца</span>
-      </div>
-      <div class="split-vs"><span>VS</span></div>
-      <div class="split-col split-col-accent">
-        <span class="split-label">iindev</span>
-        <span class="split-stat">Вы определяете цену</span>
-        <span class="split-detail">Всё включено · AI-ускорение · Современный стек</span>
-        <span class="split-meta">24–48 часов</span>
-      </div>
-    </section>
-    <section class="claims" id="templates">
-      <h2 class="section-head">Что мы делаем</h2>
-      <div class="claims-grid" id="templates-grid"></div>
-    </section>
-    <section class="contact" id="contact">
-      <h2 class="section-head">Напишите нам</h2>
-      <div class="contact-grid">
-        <div class="contact-info">
-          <p class="contact-desc">Расскажите о бизнесе — подберём решение и начнём. Поможем с доменом и хостингом.</p>
-          <div class="contact-channels">
-            <button class="contact-channel" data-copy="@iindev">
-              <div>
+    <section class="bento" id="bento">
+      <article class="bento-cell bento-cell-manifesto" id="manifesto">
+        <p class="bento-lead">В якутском языке есть слово <em>ииньдиньда</em> — добрая ирония над теми, кто слишком серьёзно относится к вещам, которые того не стоят.</p>
+        <p>Рынок веб-разработки в регионах именно такой. Агентства берут 50–90 тысяч рублей за шаблоны на конструкторах, которые грузятся по 5 секунд.</p>
+        <blockquote>Я считаю, что лучший способ доказать качество — сделать работу первым. Вы получаете готовый продукт, а вопрос оплаты оставляю за вами.</blockquote>
+        <p>Это не благотворительность и не распродажа. Это доверие: качественная работа говорит сама за себя. Малый бизнес заслуживает того же качества, что и корпорации — только доступнее.</p>
+      </article>
+      <article class="bento-cell bento-cell-stat">
+        <span class="stat-label">Срок разработки</span>
+        <span class="stat-value">24–48</span>
+        <span class="stat-unit">часов</span>
+      </article>
+      <article class="bento-cell bento-cell-stat">
+        <span class="stat-label">Рыночная цена</span>
+        <span class="stat-value">140–280</span>
+        <span class="stat-unit">тыс. ₽</span>
+      </article>
+      <article class="bento-cell bento-cell-accent">
+        <span class="stat-label">iindev</span>
+        <span class="stat-value stat-value-accent">Вы определяете цену</span>
+        <span class="stat-unit">Сначала покажем, потом разговор</span>
+      </article>
+      <article class="bento-cell bento-cell-template" data-id="site">
+        <span class="template-label">Сайт</span>
+        <h3 class="template-title">Лендинг или корпоративный</h3>
+        <p class="template-desc">От кофейни до строительной компании. Быстрый, удобный на телефоне.</p>
+        <span class="template-action">Подробнее</span>
+      </article>
+      <article class="bento-cell bento-cell-template" data-id="tma">
+        <span class="template-label">Mini App</span>
+        <h3 class="template-title">Приложение в Telegram</h3>
+        <p class="template-desc">Магазин, каталог, личный кабинет — прямо в чате.</p>
+        <span class="template-action">Подробнее</span>
+      </article>
+      <article class="bento-cell bento-cell-template" data-id="crm">
+        <span class="template-label">CRM</span>
+        <h3 class="template-title">Интеграция с CRM</h3>
+        <p class="template-desc">Заявки с сайта автоматически в AmoCRM или Битрикс24.</p>
+        <span class="template-action">Подробнее</span>
+      </article>
+      <article class="bento-cell bento-cell-template" data-id="bot">
+        <span class="template-label">Бот</span>
+        <h3 class="template-title">Telegram-бот</h3>
+        <p class="template-desc">Автоматическая запись, приём оплат, ответы 24/7.</p>
+        <span class="template-action">Подробнее</span>
+      </article>
+      <article class="bento-cell bento-cell-contact" id="contact">
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h2 class="contact-head">Напишите нам</h2>
+            <p class="contact-desc">Расскажите о бизнесе — подберём решение и начнём.</p>
+            <div class="contact-channels">
+              <button class="contact-channel" data-copy="@iindev">
                 <span class="channel-label">Telegram</span>
                 <span class="channel-value">@iindev</span>
-              </div>
-              <span class="channel-action">copy</span>
-            </button>
-            <button class="contact-channel" data-copy="iindev@tuta.io">
-              <div>
+                <span class="channel-action">copy</span>
+              </button>
+              <button class="contact-channel" data-copy="iindev@tuta.io">
                 <span class="channel-label">Email</span>
                 <span class="channel-value">iindev@tuta.io</span>
+                <span class="channel-action">copy</span>
+              </button>
+            </div>
+          </div>
+          <div class="contact-form-wrap">
+            <form class="contact-form" id="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-field">
+                  <label class="form-label" for="form-name">Ваше имя или компания *</label>
+                  <input type="text" class="form-input" id="form-name" name="name" placeholder="Александр" required>
+                  <span class="form-error" id="form-error-name" role="alert"></span>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="form-contact">Telegram или телефон *</label>
+                  <input type="text" class="form-input" id="form-contact" name="contact" placeholder="@alex_dev" required>
+                  <span class="form-error" id="form-error-contact" role="alert"></span>
+                </div>
               </div>
-              <span class="channel-action">copy</span>
-            </button>
+              <div class="form-field">
+                <label class="form-label" for="form-msg">Что вам нужно</label>
+                <textarea class="form-input form-textarea" id="form-msg" name="msg" rows="3" placeholder="Например: кофейне нужен сайт с меню и картой."></textarea>
+              </div>
+              <button type="submit" class="btn btn-accent btn-block" id="form-submit">Отправить заявку</button>
+              <div class="form-status form-status-loading" id="form-loading" style="display:none;">
+                <span>Отправка...</span>
+              </div>
+              <div class="form-success" id="form-success" style="display:none;">
+                <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Я свяжусь с вами в Telegram в течение 3 часов.</span>
+              </div>
+              <div class="form-error-msg" id="form-error-global" style="display:none;" role="alert">
+                <span>Ошибка отправки. Попробуйте позже или напишите в Telegram.</span>
+              </div>
+            </form>
           </div>
         </div>
-        <div class="contact-form-wrap">
-          <form class="contact-form" id="contact-form" novalidate>
-            <div class="form-row">
-              <div class="form-field">
-                <label class="form-label" for="form-name">Ваше имя или компания *</label>
-                <input type="text" class="form-input" id="form-name" name="name" placeholder="Александр" required>
-                <span class="form-error" id="form-error-name" role="alert"></span>
-              </div>
-              <div class="form-field">
-                <label class="form-label" for="form-contact">Telegram или телефон *</label>
-                <input type="text" class="form-input" id="form-contact" name="contact" placeholder="@alex_dev или +7..." required>
-                <span class="form-error" id="form-error-contact" role="alert"></span>
-              </div>
-            </div>
-            <div class="form-field">
-              <label class="form-label" for="form-msg">Что вам нужно</label>
-              <textarea class="form-input form-textarea" id="form-msg" name="msg" rows="3" placeholder="Например: кофейне нужен сайт с меню и картой. Или: хочу Telegram-бота для записи клиентов."></textarea>
-            </div>
-            <button type="submit" class="btn btn-accent btn-block" id="form-submit">ОТПРАВИТЬ ЗАЯВКУ</button>
-            <div class="form-status form-status-loading" id="form-loading" style="display:none;">
-              <span>Отправка...</span>
-            </div>
-            <div class="form-success" id="form-success" style="display:none;">
-              <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>Я свяжусь с вами в Telegram в течение 3 часов.</span>
-            </div>
-            <div class="form-error-msg" id="form-error-global" style="display:none;" role="alert">
-              <span>Ошибка отправки. Попробуйте позже или напишите в Telegram.</span>
-            </div>
-          </form>
-        </div>
-      </div>
+      </article>
     </section>
   </main>
   <footer class="footer">
     <div class="footer-inner">
-      <div class="footer-copy">
-        <p>&copy; 2026 <span class="text-brand">iind</span>ev (iindiinda project).</p>
-        <p class="footer-motto">КАЧЕСТВО, ДОСТУПНОЕ КАЖДОМУ</p>
-      </div>
+      <span class="footer-copy">&copy; 2026 iindev (iindiinda project)</span>
       <div class="footer-links">
-        <a href="https://t.me/iindev" target="_blank" rel="noopener noreferrer">TELEGRAM</a>
-        <a href="mailto:iindev@tuta.io">EMAIL</a>
-        <a href="#privacy" class="footer-legal">КОНФИДЕНЦИАЛЬНОСТЬ</a>
+        <a href="https://t.me/iindev" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <a href="mailto:iindev@tuta.io">Email</a>
+        <a href="#privacy" class="footer-legal">Конфиденциальность</a>
       </div>
     </div>
   </footer>
@@ -223,7 +210,7 @@
         </div>
       </div>
       <div class="drawer-footer">
-        <button class="btn btn-accent btn-block" id="drawer-goto">ПЕРЕЙТИ К КОНТАКТАМ</button>
+        <button class="btn btn-accent btn-block" id="drawer-goto">Перейти к контактам</button>
       </div>
     </div>
   </div>

@@ -1,7 +1,8 @@
-/* ===== GSAP REGISTER ===== */
+/* Hallmark · Bento Grid · austere minimalism
+ * GSAP register + config + interactions
+ */
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-// ===== CONFIG =====
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxzwm-NuZULK_iXCx5AVHYYzG372HkOAK1uhUSUrcgsJIjU1-bjrJApxVQ9f7Luv3yV/exec';
 
 const coreTemplates = [
@@ -50,33 +51,6 @@ const coreTemplates = [
 		architecture: "Работает без перерыва",
 	},
 ];
-
-
-
-// ===== AUDIO =====
-let soundEnabled = false;
-
-function beep(freq, duration, vol = 0.02) {
-	if (!soundEnabled) return;
-	try {
-		const AC = window.AudioContext || window.webkitAudioContext;
-		if (!AC) return;
-		const ctx = new AC();
-		const osc = ctx.createOscillator();
-		const gain = ctx.createGain();
-		osc.connect(gain);
-		gain.connect(ctx.destination);
-		osc.frequency.setValueAtTime(freq, ctx.currentTime);
-		gain.gain.setValueAtTime(vol, ctx.currentTime);
-		gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
-		osc.start();
-		osc.stop(ctx.currentTime + duration);
-	} catch {}
-}
-
-const hoverSound = () => beep(850, 0.05, 0.008);
-const clickSound = () => beep(440, 0.08, 0.025);
-const powerSound = () => beep(1200, 0.25, 0.03);
 
 // ===== TOAST =====
 function showToast(msg) {
@@ -130,12 +104,8 @@ function initPreloader() {
 		.to("#preloader-suffix", { y: -30, opacity: 0, duration: 0.3, ease: "power2.in" })
 		.add(() => {
 			suffix.textContent = "ev.";
-			suffix.style.color = "var(--brand)";
+			suffix.style.color = "var(--color-accent)";
 			gsap.set(suffix, { y: 40, opacity: 0 });
-			if (soundEnabled) {
-				beep(600, 0.15);
-				setTimeout(() => beep(900, 0.2), 100);
-			}
 		})
 		.to("#preloader-suffix", { y: 0, opacity: 1, duration: 0.5, ease: "back.out(1.7)" })
 		.to({}, { duration: 0.5 });
@@ -147,94 +117,52 @@ function initEntranceAnimations() {
 	gsap.to(".hero-desc", { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.5 });
 	gsap.to(".hero-actions", { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.7 });
 
-	gsap.to(".manifesto", {
-		scrollTrigger: { trigger: ".manifesto", start: "top 80%", toggleActions: "play none none none" },
-		y: 0, opacity: 1, duration: 1, ease: "power2.out",
-	});
-
-	gsap.to(".template-card", {
-		scrollTrigger: { trigger: ".templates-grid", start: "top 75%" },
-		y: 0, opacity: 1, duration: 0.9, stagger: 0.15, ease: "power2.out",
-	});
-
-	gsap.to(".contact-info", {
-		scrollTrigger: { trigger: ".contact", start: "top 80%" },
-		x: 0, opacity: 1, duration: 0.9, ease: "power2.out",
-	});
-	gsap.to(".contact-form-wrap", {
-		scrollTrigger: { trigger: ".contact", start: "top 80%" },
-		x: 0, opacity: 1, duration: 0.9, ease: "power2.out", delay: 0.2,
+	gsap.utils.toArray(".bento-cell").forEach((cell, i) => {
+		gsap.to(cell, {
+			scrollTrigger: { trigger: cell, start: "top 85%", toggleActions: "play none none none" },
+			y: 0, opacity: 1, duration: 0.7, ease: "power2.out", delay: i * 0.05,
+		});
 	});
 
 	gsap.to(".footer", {
 		scrollTrigger: { trigger: ".footer", start: "top 90%" },
 		y: 0, opacity: 1, duration: 0.6, ease: "power2.out",
 	});
-
-	gsap.to(".ambient-blob-1", {
-		scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: 1 },
-		y: -120, ease: "none",
-	});
-	gsap.to(".ambient-blob-2", {
-		scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: 1 },
-		y: 120, ease: "none",
-	});
 }
 
 // ===== HEADER =====
 function initHeader() {
-	const weatherEl = document.getElementById("header-weather");
-	const soundBtn = document.getElementById("sound-toggle");
-	const soundOn = document.getElementById("sound-on");
-	const soundOff = document.getElementById("sound-off");
+	// Mode toggle: site / cli
+	const modeToggle = document.getElementById("mode-toggle");
+	const modeSite = document.getElementById("mode-site");
+	const modeCli = document.getElementById("mode-cli");
 
-	fetch("https://api.open-meteo.com/v1/forecast?latitude=62.0355&longitude=129.6755&current_weather=true")
-		.then((r) => r.json())
-		.then((d) => { if (d?.current_weather) weatherEl.textContent = `${Math.round(d.current_weather.temperature)}°C`; })
-		.catch(() => { weatherEl.textContent = "-°C"; });
-
-	soundBtn.addEventListener("click", () => {
-		soundEnabled = !soundEnabled;
-		soundBtn.classList.toggle("on", soundEnabled);
-		soundOn.style.display = soundEnabled ? "block" : "none";
-		soundOff.style.display = soundEnabled ? "none" : "block";
-		if (soundEnabled) beep(750, 0.12, 0.015);
-	});
+	if (modeToggle) {
+		modeToggle.addEventListener("click", (e) => {
+			const btn = e.target.closest(".mode-btn");
+			if (!btn) return;
+			const mode = btn.dataset.mode;
+			if (mode === "cli") {
+				document.getElementById("terminal").style.display = "flex";
+				document.body.style.overflow = "hidden";
+				if (typeof initTerminal === "function") initTerminal();
+			}
+			modeSite.classList.toggle("active", mode === "site");
+			modeCli.classList.toggle("active", mode === "cli");
+		});
+	}
 }
 
-// ===== TEMPLATES =====
+// ===== TEMPLATES / BENTO CELLS =====
 function initTemplates() {
-	const grid = document.getElementById("templates-grid");
 	const drawerOverlay = document.getElementById("drawer-overlay");
 	const drawerBackdrop = document.getElementById("drawer-backdrop");
 	const drawerClose = document.getElementById("drawer-close");
 	const drawerGoto = document.getElementById("drawer-goto");
 
-	grid.innerHTML = coreTemplates.map((t) => `
-    <div class="template-card" data-id="${t.id}">
-      <div class="template-card-body">
-        <div class="template-card-header">
-          <span class="template-card-label">${t.category}</span>
-          <span class="template-card-badge">${t.speed}</span>
-        </div>
-        <h3 class="template-card-title">${t.title}</h3>
-        <p class="template-card-desc">${t.desc}</p>
-      </div>
-      <div class="template-card-footer">
-        <span class="template-card-tech">${t.tech}</span>
-        <span class="template-card-action">
-          ПОДРОБНЕЕ
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </span>
-      </div>
-    </div>
-  `).join("");
-
-	grid.querySelectorAll(".template-card").forEach((card) => {
-		card.addEventListener("mouseenter", hoverSound);
-		card.addEventListener("click", () => {
-			clickSound();
-			const t = coreTemplates.find((x) => x.id === card.dataset.id);
+	document.querySelectorAll(".bento-cell-template").forEach((cell) => {
+		cell.addEventListener("click", () => {
+			const t = coreTemplates.find((x) => x.id === cell.dataset.id);
 			if (t) openDrawer(t);
 		});
 	});
@@ -248,7 +176,6 @@ function initTemplates() {
 		document.getElementById("drawer-tech").textContent = t.tech;
 
 		drawerGoto.onclick = () => {
-			clickSound();
 			closeDrawer();
 			gsap.to(window, { duration: 0.8, scrollTo: { y: "#contact", offsetY: 80 }, ease: "power2.inOut" });
 		};
@@ -263,10 +190,10 @@ function initTemplates() {
 	}
 
 	drawerBackdrop.addEventListener("click", closeDrawer);
-	drawerClose.addEventListener("click", () => { clickSound(); closeDrawer(); });
+	drawerClose.addEventListener("click", closeDrawer);
 }
 
-// ===== CONTACT FORM (real GAS submission) =====
+// ===== CONTACT FORM =====
 function initContact() {
 	document.querySelectorAll(".contact-channel").forEach((btn) => {
 		btn.addEventListener("click", () => {
@@ -293,7 +220,6 @@ function initContact() {
 
 	form.addEventListener("submit", async (e) => {
 		e.preventDefault();
-		clickSound();
 		clearErrors();
 
 		const name = document.getElementById("form-name").value.trim();
@@ -339,7 +265,6 @@ function initContact() {
 				successEl.style.display = "flex";
 				showToast("Заявка отправлена!");
 				form.reset();
-
 				setTimeout(() => { successEl.style.display = "none"; }, 6000);
 			} else {
 				throw new Error(result?.error || "Unknown error");
@@ -351,7 +276,7 @@ function initContact() {
 			showToast("Ошибка отправки. Попробуйте позже.");
 		} finally {
 			submitBtn.disabled = false;
-			submitBtn.textContent = "ОТПРАВИТЬ ЗАЯВКУ";
+			submitBtn.textContent = "Отправить заявку";
 		}
 	});
 }
@@ -378,7 +303,7 @@ function initPrivacy() {
 	});
 
 	backdrop.addEventListener("click", closePrivacy);
-	closeBtn.addEventListener("click", () => { clickSound(); closePrivacy(); });
+	closeBtn.addEventListener("click", closePrivacy);
 
 	document.addEventListener("keydown", (e) => {
 		if (e.key === "Escape" && modal.style.display !== "none") {
@@ -386,7 +311,6 @@ function initPrivacy() {
 		}
 	});
 }
-
 
 // ===== SMOOTH SCROLL =====
 function initSmoothScroll() {
@@ -398,7 +322,6 @@ function initSmoothScroll() {
 		const target = document.querySelector(href);
 		if (!target) return;
 		e.preventDefault();
-		hoverSound();
 		gsap.to(window, { duration: 0.8, scrollTo: { y: target, offsetY: 80 }, ease: "power2.inOut" });
 	});
 }
@@ -410,6 +333,5 @@ document.addEventListener("DOMContentLoaded", () => {
 	initTemplates();
 	initContact();
 	initPrivacy();
-	initTerminal();
 	initSmoothScroll();
 });
