@@ -43,8 +43,9 @@ Design tokens, typography, and motion rules are in `DESIGN.md` at project root.
 
 ## Code style
 
-- **No comments** in HTML, CSS, JS — ever. Code must be self-explanatory.
+- **No comments** in HTML, CSS, JS - ever. Code must be self-explanatory.
 - Remove all existing comments when editing files.
+- Always use regular hyphens (`-`) instead of long dashes (`—`).
 
 ## Iteration rules
 
