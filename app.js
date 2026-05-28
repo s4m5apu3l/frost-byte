@@ -240,31 +240,72 @@ function showHero() {
 }
 
 function initAbout() {
-	gsap.fromTo(
-		".about-line",
-		{
-			opacity: 0,
-			y: 60,
-		},
-		{
-			opacity: 1,
-			y: 0,
-			duration: 0.8,
-			stagger: 0.1,
-			ease: "power3.out",
-			scrollTrigger: { trigger: ".about", start: "top 75%" },
-		},
-	);
+	gsap.utils.toArray(".about-line").forEach((line) => {
+		const textNodes = [];
+		line.childNodes.forEach((node) => {
+			if (node.nodeType === 3 && node.textContent.trim()) {
+				const chars = node.textContent.split("");
+				const frag = document.createDocumentFragment();
+				chars.forEach((char) => {
+					const span = document.createElement("span");
+					span.className = "about-char";
+					span.textContent = char === " " ? "\u00A0" : char;
+					frag.appendChild(span);
+				});
+				textNodes.push({ node, frag });
+			} else if (node.nodeType === 1 && node.classList.contains("about-accent")) {
+				const chars = node.textContent.split("");
+				const frag = document.createDocumentFragment();
+				chars.forEach((char) => {
+					const span = document.createElement("span");
+					span.className = "about-char about-char--accent";
+					span.textContent = char === " " ? "\u00A0" : char;
+					frag.appendChild(span);
+				});
+				textNodes.push({ node, frag });
+			}
+		});
+		textNodes.forEach(({ node, frag }) => {
+			node.parentNode.replaceChild(frag, node);
+		});
 
-	gsap.utils.toArray(".about-line").forEach((line, i) => {
-		gsap.to(line, {
+		const chars = line.querySelectorAll(".about-char");
+		gsap.fromTo(
+			chars,
+			{ opacity: 0.3, y: 20 },
+			{
+				opacity: 1,
+				y: 0,
+				duration: 0.4,
+				stagger: 0.03,
+				ease: "power3.out",
+				scrollTrigger: {
+					trigger: line,
+					start: "top 80%",
+					end: "top 40%",
+					scrub: 1,
+				},
+			},
+		);
+		gsap.to(chars, {
 			color: "var(--text)",
 			scrollTrigger: {
 				trigger: line,
 				start: "top 80%",
 				end: "top 40%",
-				scrub: true,
+				scrub: 1,
 			},
+			stagger: 0.03,
+		});
+		gsap.to(line.querySelectorAll(".about-char--accent"), {
+			color: "var(--accent)",
+			scrollTrigger: {
+				trigger: line,
+				start: "top 80%",
+				end: "top 40%",
+				scrub: 1,
+			},
+			stagger: 0.03,
 		});
 	});
 
