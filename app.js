@@ -139,12 +139,12 @@ document.addEventListener("DOMContentLoaded", () => {
 gsap.registerPlugin(ScrollTrigger);
 
 const suffixes = [
-	"iindiinda",
-	"iindigidon",
-	"iindiiana djons",
-	"iindustria spesodejdy",
-	"iindiebit baay da",
-	"iindigistan",
+	"iinda",
+	"igidon",
+	"iiana djons",
+	"ustria spesodejdy",
+	"iebit baay da",
+	"igistan",
 ];
 let suffixIndex = 0;
 let cycling = false;
@@ -255,6 +255,18 @@ function initAbout() {
 			scrollTrigger: { trigger: ".about", start: "top 75%" },
 		},
 	);
+
+	gsap.utils.toArray(".about-line").forEach((line, i) => {
+		gsap.to(line, {
+			color: "var(--text)",
+			scrollTrigger: {
+				trigger: line,
+				start: "top 80%",
+				end: "top 40%",
+				scrub: true,
+			},
+		});
+	});
 
 	gsap.fromTo(
 		".about-stat",

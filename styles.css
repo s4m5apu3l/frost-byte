@@ -763,6 +763,11 @@ body.menu-open {
 .about-line {
 	display: block;
 	overflow: hidden;
+	color: var(--text-muted);
+}
+
+.about-line.is-active {
+	color: var(--text);
 }
 
 .about-accent {
