@@ -81,18 +81,19 @@ document.addEventListener("DOMContentLoaded", () => {
 			ease: "power2.in",
 		})
 		.set(".lw", { display: "none" })
+		.set(".lv", { display: "inline-block" })
 		.fromTo(
 			".lv",
 			{
 				opacity: 0,
-				y: 15,
+				y: 80,
 			},
 			{
 				opacity: 1,
 				y: 0,
-				duration: 0.4,
-				stagger: 0.08,
-				ease: "power3.out",
+				duration: 0.5,
+				stagger: 0.06,
+				ease: "back.out(1.4)",
 			},
 		)
 		.to(
@@ -220,6 +221,16 @@ function showHero() {
 				y: 0,
 				duration: 0.6,
 				ease: "power3.out",
+			},
+			"-=0.4",
+		)
+		.to(
+			".hero-orb",
+			{
+				opacity: 0.1,
+				duration: 2.5,
+				stagger: 0.4,
+				ease: "power2.out",
 			},
 			"-=0.4",
 		)
