@@ -209,6 +209,7 @@ let menuOpen = false;
 let menuTl = null;
 
 function showHero() {
+	if (!document.querySelector(".hero")) return;
 	const header = document.getElementById("header");
 
 	gsap.set(header, { y: -80, opacity: 0 });
@@ -400,6 +401,7 @@ function initAbout() {
 }
 
 function initAmbient() {
+	if (!document.querySelector(".hero-orb")) return;
 	gsap.utils.toArray(".hero-orb").forEach((orb, i) => {
 		const tween = gsap.to(orb, {
 			x: gsap.utils.random(-60, 60),
@@ -573,6 +575,7 @@ function initWork() {
 }
 
 function initTilt() {
+	if (!document.querySelector("[data-tilt]")) return;
 	const cards = document.querySelectorAll("[data-tilt]:not([data-project])");
 	const rectCache = new WeakMap();
 
