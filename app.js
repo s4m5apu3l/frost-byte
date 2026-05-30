@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const isTransition = sessionStorage.getItem("iindev-transition");
 	if (isTransition) {
 		sessionStorage.removeItem("iindev-transition");
+		document.documentElement.classList.remove("skip-loader");
 		const loader = document.getElementById("loader");
 		if (loader) {
 			loader.style.visibility = "hidden";
