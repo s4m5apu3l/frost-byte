@@ -4,6 +4,7 @@
 
 Веб-разработка и AI-автоматизация.
 
-[iindev.ru](https://iindev.ru)
+[iindev.xyz](https://iindev.xyz)
 
 Telegram: [@iindev](https://t.me/iindev)
+Email: iindev@tuta.io
