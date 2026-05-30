@@ -1,14 +1,7 @@
 window.addEventListener("pageshow", (e) => {
 	if (e.persisted) {
-		document.querySelectorAll(".page-transition").forEach((el) => el.remove());
-		const transitionOverlay = document.getElementById("transitionOverlay");
-		if (transitionOverlay) transitionOverlay.style.display = "none";
-		document.documentElement.classList.remove("skip-loader");
 		sessionStorage.removeItem("iindev-transition");
-		document.body.classList.remove("is-loading", "is-transitioning", "menu-open");
-		document.body.style.overflow = "";
-		const loader = document.getElementById("loader");
-		if (loader) { loader.style.visibility = "hidden"; loader.style.display = "none"; }
+		location.reload();
 	}
 });
 
@@ -315,6 +308,7 @@ function showHero() {
 }
 
 function initAbout() {
+	if (!document.querySelector(".about")) return;
 	gsap.utils.toArray(".about-line").forEach((line) => {
 		const textNodes = [];
 		line.childNodes.forEach((node) => {
@@ -541,6 +535,7 @@ function initBurger() {
 }
 
 function initWork() {
+	if (!document.querySelector(".work")) return;
 	gsap.fromTo(
 		".work-title",
 		{
@@ -616,6 +611,7 @@ function initTilt() {
 }
 
 function initServices() {
+	if (!document.querySelector(".services")) return;
 	const track = document.querySelector(".services-track");
 	const wrapper = document.querySelector(".services-track-wrapper");
 	if (!track || !wrapper) return;
@@ -677,6 +673,7 @@ function initServices() {
 }
 
 function initProcess() {
+	if (!document.querySelector(".process")) return;
 	gsap.fromTo(
 		".process-label",
 		{
@@ -726,6 +723,7 @@ function initProcess() {
 }
 
 function initCta() {
+	if (!document.querySelector(".cta")) return;
 	gsap.fromTo(
 		".cta-label",
 		{

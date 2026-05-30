@@ -162,13 +162,8 @@
 	<script>
 	window.addEventListener('pageshow', function(e) {
 		if (e.persisted) {
-			document.querySelectorAll('.page-transition').forEach(function(el) { el.remove(); });
-			var to = document.getElementById('transitionOverlay');
-			if (to) to.style.display = 'none';
-			document.documentElement.classList.remove('skip-loader');
 			sessionStorage.removeItem('iindev-transition');
-			document.body.classList.remove('is-loading', 'is-transitioning', 'menu-open');
-			document.body.style.overflow = '';
+			location.reload();
 		}
 	});
 	</script>
