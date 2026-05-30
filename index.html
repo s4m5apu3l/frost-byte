@@ -56,7 +56,7 @@
 		/>
 		<link rel="stylesheet" href="styles.css" />
 		<script>if(sessionStorage.getItem('iindev-transition')){document.documentElement.classList.add('skip-loader')}</script>
-		<style>.skip-loader #loader{display:none!important}.skip-loader body{opacity:1!important}</style>
+		<style>.skip-loader #loader{display:none!important}.skip-loader .transition-overlay{display:flex!important}.skip-loader body{overflow:hidden!important}</style>
 		<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
 			defer
@@ -68,6 +68,7 @@
 		<script src="app.js" defer></script>
 	</head>
 	<body class="is-loading" aria-busy="true">
+		<div class="transition-overlay" id="transitionOverlay"><span class="page-transition-logo">iind<span class="ev">ev</span></span></div>
 		<div class="cursor" id="cursor"></div>
 		<div class="cursor-trail" id="cursorTrail"></div>
 		<div id="loader" role="status" aria-hidden="true" aria-label="Загрузка">

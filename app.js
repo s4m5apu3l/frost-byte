@@ -1,6 +1,9 @@
 window.addEventListener("pageshow", (e) => {
 	if (e.persisted) {
 		document.querySelectorAll(".page-transition").forEach((el) => el.remove());
+		const transitionOverlay = document.getElementById("transitionOverlay");
+		if (transitionOverlay) transitionOverlay.style.display = "none";
+		document.documentElement.classList.remove("skip-loader");
 		sessionStorage.removeItem("iindev-transition");
 		document.body.classList.remove("is-loading", "is-transitioning", "menu-open");
 		document.body.style.overflow = "";
@@ -23,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	const isTransition = sessionStorage.getItem("iindev-transition");
 	if (isTransition) {
 		sessionStorage.removeItem("iindev-transition");
-		document.documentElement.classList.remove("skip-loader");
 		const loader = document.getElementById("loader");
 		if (loader) {
 			loader.style.visibility = "hidden";
@@ -32,15 +34,13 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.body.removeAttribute("aria-busy");
 		document.body.classList.remove("is-loading");
 
-		var overlay = document.createElement("div");
-		overlay.className = "page-transition";
-		overlay.innerHTML = '<span class="page-transition-logo">iind<span class="ev">ev</span></span>';
-		document.body.appendChild(overlay);
+		const transitionOverlay = document.getElementById("transitionOverlay");
 
-		gsap.fromTo(overlay,
+		gsap.fromTo(transitionOverlay,
 			{ yPercent: 0 },
 			{ yPercent: -100, duration: 0.7, ease: "power3.inOut", onComplete: function() {
-				overlay.remove();
+				transitionOverlay.style.display = "none";
+				document.documentElement.classList.remove("skip-loader");
 			}}
 		);
 

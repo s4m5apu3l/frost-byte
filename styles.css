@@ -2037,14 +2037,19 @@ body.menu-open {
 	text-decoration: underline;
 }
 
-.page-transition {
+.page-transition,
+.transition-overlay {
 	position: fixed;
 	inset: 0;
 	z-index: 10000;
 	background: var(--bg);
-	display: flex;
+	display: none;
 	align-items: center;
 	justify-content: center;
+}
+
+.transition-overlay {
+	display: none;
 }
 
 .page-transition-logo {
