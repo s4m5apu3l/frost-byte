@@ -1,7 +1,20 @@
 window.addEventListener("pageshow", (e) => {
 	if (e.persisted) {
+		document.querySelectorAll(".page-transition").forEach((el) => el.remove());
+		const transitionOverlay = document.getElementById("transitionOverlay");
+		if (transitionOverlay) transitionOverlay.style.display = "none";
+		document.documentElement.classList.remove("skip-loader");
 		sessionStorage.removeItem("iindev-transition");
-		location.reload();
+		document.body.classList.remove("is-loading", "is-transitioning", "menu-open");
+		document.body.style.overflow = "";
+		const loader = document.getElementById("loader");
+		if (loader) { loader.style.visibility = "hidden"; loader.style.display = "none"; }
+		ScrollTrigger.getAll().forEach((st) => st.kill());
+		initWork();
+		initAbout();
+		initServices();
+		initProcess();
+		initCta();
 	}
 });
 
@@ -189,6 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 gsap.registerPlugin(ScrollTrigger);
+gsap.config({ suppressWarnings: true });
 
 gsap.matchMedia().add("(prefers-reduced-motion: reduce)", () => {
 	gsap.defaults({ duration: 0.01 });
