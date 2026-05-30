@@ -590,7 +590,7 @@ body.menu-open {
 	}
 
 	.hero {
-		padding: 6rem 0 3rem;
+		padding: 4rem 0 2rem;
 	}
 
 	.hero-inner {
@@ -624,7 +624,7 @@ body.menu-open {
 }
 
 .work {
-	padding: 6rem 0;
+	padding: 4rem 0;
 }
 
 .work-header {
@@ -731,7 +731,7 @@ body.menu-open {
 
 @media (max-width: 768px) {
 	.work {
-		padding: 5rem 0;
+		padding: 3.5rem 0;
 	}
 
 	.work-bento {
@@ -760,7 +760,7 @@ body.menu-open {
 }
 
 .about {
-	padding: 7rem 0;
+	padding: 5rem 0;
 }
 
 .about-inner {
@@ -1094,7 +1094,7 @@ body.menu-open {
 }
 
 .process {
-	padding: 6rem 0;
+	padding: 4rem 0;
 }
 
 .process-header {
@@ -1175,7 +1175,7 @@ body.menu-open {
 
 @media (max-width: 768px) {
 	.process {
-		padding: 5rem 0;
+		padding: 3.5rem 0;
 	}
 
 	.process-track {
@@ -1199,7 +1199,7 @@ body.menu-open {
 }
 
 .cta {
-	padding: 8rem 0 4rem;
+	padding: 5rem 0 3rem;
 	overflow: hidden;
 }
 
@@ -1255,7 +1255,7 @@ body.menu-open {
 
 @media (max-width: 768px) {
 	.cta {
-		padding: 6rem 0 4rem;
+		padding: 4rem 0 2.5rem;
 	}
 
 	.cta-content {
@@ -1480,7 +1480,7 @@ body.menu-open {
 }
 
 .works-hero {
-	padding: 8rem 0 4rem;
+	padding: 5rem 0 3rem;
 }
 
 .works-label {
@@ -1509,7 +1509,7 @@ body.menu-open {
 }
 
 .works-philosophy {
-	padding: 6rem 0;
+	padding: 4rem 0;
 	border-top: 1px solid var(--border);
 	border-bottom: 1px solid var(--border);
 }
@@ -1533,7 +1533,7 @@ body.menu-open {
 }
 
 .works-grid-section {
-	padding: 2rem 0 8rem;
+	padding: 1.5rem 0 5rem;
 }
 
 .works-grid {
@@ -1591,7 +1591,7 @@ body.menu-open {
 
 @media (max-width: 768px) {
 	.works-hero {
-		padding: 6rem 0 3rem;
+		padding: 4rem 0 2rem;
 	}
 
 	.works-grid {
