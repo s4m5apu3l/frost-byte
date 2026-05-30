@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 
 	initCursor();
+	initContact();
 
 	const loader = document.getElementById("loader");
 	if (!loader) return;
@@ -138,6 +139,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 gsap.registerPlugin(ScrollTrigger);
 
+gsap.matchMedia().add("(prefers-reduced-motion: reduce)", () => {
+	gsap.defaults({ duration: 0.01 });
+	ScrollTrigger.getAll().forEach((st) => st.kill());
+});
+
 const suffixes = [
 	"iinda",
 	"igidon",
@@ -237,6 +243,7 @@ function showHero() {
 	initServices();
 	initProcess();
 	initCta();
+	initSlideover();
 }
 
 function initAbout() {
@@ -393,93 +400,53 @@ function initBurger() {
 	const socialLinks = overlay.querySelectorAll(".menu-social-link");
 	const footer = overlay.querySelector(".menu-footer");
 
-	gsap.set(leftPanel, { xPercent: -100 });
-	gsap.set(rightPanel, { xPercent: 100 });
-	gsap.set(links, { opacity: 0, y: 30 });
-	gsap.set(socialsLabel, { opacity: 0, y: 10 });
-	gsap.set(socialLinks, { opacity: 0, y: 15 });
-	gsap.set(footer, { opacity: 0, y: 10 });
+	const mm = gsap.matchMedia();
 
-	menuTl = gsap.timeline({ paused: true });
+	mm.add("(min-width: 769px)", () => {
+		gsap.set(leftPanel, { xPercent: -100 });
+		gsap.set(rightPanel, { xPercent: 100 });
 
-	menuTl
-		.set(overlay, { visibility: "visible" })
-		.to(
-			leftPanel,
-			{
-				xPercent: 0,
-				duration: 0.7,
-				ease: "power3.inOut",
-			},
-			0,
-		)
-		.to(
-			rightPanel,
-			{
-				xPercent: 0,
-				duration: 0.7,
-				ease: "power3.inOut",
-			},
-			0,
-		)
-		.fromTo(
-			links,
-			{
-				opacity: 0,
-				y: 30,
-			},
-			{
-				opacity: 1,
-				y: 0,
-				duration: 0.5,
-				stagger: 0.08,
-				ease: "power3.out",
-			},
-			"-=0.4",
-		)
-		.fromTo(
-			socialsLabel,
-			{
-				opacity: 0,
-				y: 10,
-			},
-			{
-				opacity: 1,
-				y: 0,
-				duration: 0.4,
-				ease: "power3.out",
-			},
-			"-=0.4",
-		)
-		.fromTo(
-			socialLinks,
-			{
-				opacity: 0,
-				y: 15,
-			},
-			{
-				opacity: 1,
-				y: 0,
-				duration: 0.4,
-				stagger: 0.06,
-				ease: "power3.out",
-			},
-			"-=0.3",
-		)
-		.fromTo(
-			footer,
-			{
-				opacity: 0,
-				y: 10,
-			},
-			{
-				opacity: 1,
-				y: 0,
-				duration: 0.4,
-				ease: "power3.out",
-			},
-			"-=0.2",
-		);
+		menuTl = gsap.timeline({ paused: true });
+
+		menuTl
+			.set(overlay, { visibility: "visible" })
+			.to(leftPanel, { xPercent: 0, duration: 0.7, ease: "power3.inOut" }, 0)
+			.to(rightPanel, { xPercent: 0, duration: 0.7, ease: "power3.inOut" }, 0)
+			.fromTo(links, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "power3.out" }, "-=0.4")
+			.fromTo(socialsLabel, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, "-=0.4")
+			.fromTo(socialLinks, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.06, ease: "power3.out" }, "-=0.3");
+
+		if (footer) {
+			menuTl.fromTo(footer, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, "-=0.2");
+		}
+
+		return () => {
+			if (menuTl) menuTl.kill();
+			gsap.set([leftPanel, rightPanel, links, socialsLabel, socialLinks, footer], { clearProps: "all" });
+		};
+	});
+
+	mm.add("(max-width: 768px)", () => {
+		gsap.set(rightPanel, { xPercent: 100 });
+		gsap.set(links, { opacity: 0, y: 30 });
+
+		menuTl = gsap.timeline({ paused: true });
+
+		menuTl
+			.set(overlay, { visibility: "visible" })
+			.to(rightPanel, { xPercent: 0, duration: 0.6, ease: "power3.inOut" })
+			.fromTo(links, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "power3.out" }, "-=0.3");
+
+		if (footer) {
+			gsap.set(footer, { opacity: 0, y: 10 });
+			menuTl.fromTo(footer, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, "-=0.2");
+		}
+
+		return () => {
+			if (menuTl) menuTl.kill();
+			gsap.set([rightPanel, links, footer], { clearProps: "all" });
+		};
+	});
 
 	burger.addEventListener("click", () => {
 		menuOpen = !menuOpen;
@@ -499,7 +466,7 @@ function initBurger() {
 			menuOpen = false;
 			burger.classList.remove("active");
 			burger.setAttribute("aria-expanded", "false");
-			document.body.classList.remove("menu-open");
+		document.body.classList.remove("menu-open");
 			menuTl.reverse();
 		});
 	});
@@ -543,7 +510,7 @@ function initWork() {
 }
 
 function initTilt() {
-	const cards = document.querySelectorAll("[data-tilt]");
+	const cards = document.querySelectorAll("[data-tilt]:not([data-project])");
 
 	cards.forEach((card) => {
 		const rxTo = gsap.quickTo(card, "rotateX", { duration: 0.4, ease: "power2.out" });
@@ -726,18 +693,17 @@ function initCta() {
 	);
 
 	gsap.fromTo(
-		".cta-btn",
+		".cta-form",
 		{
 			opacity: 0,
-			y: 20,
+			y: 30,
 		},
 		{
 			opacity: 1,
 			y: 0,
-			duration: 0.6,
+			duration: 0.7,
 			ease: "power3.out",
 			scrollTrigger: { trigger: ".cta", start: "top 65%" },
-			delay: 0.3,
 		},
 	);
 
@@ -816,7 +782,7 @@ function initCursor() {
 	});
 
 	const hoverTargets = document.querySelectorAll(
-		"a, button, .work-card, .services-card, .menu-link, .cta-btn",
+		"a, button, .work-card, .services-card, .menu-link, .form-submit, .slideover-close",
 	);
 	hoverTargets.forEach((el) => {
 		el.addEventListener("mouseenter", () => {
@@ -827,5 +793,162 @@ function initCursor() {
 			cursor.classList.remove("hover");
 			trail.classList.remove("hover");
 		});
+	});
+}
+
+const projects = {
+	lendos: {
+		tag: "Live",
+		title: "iindev lendos",
+		desc: "От 30К за лендинг - норма рынка. Мы сломали формат. Делаем сайт из ваших данных, даём демо, вы сами называете цену. Никаких обязательств до результата.",
+		list: [
+			["Данные", "Из ваших соцсетей и карт"],
+			["Демо", "Временно размещаем бесплатно"],
+			["Оплата", "Любая сумма"],
+			["Домен", "Вы покупаете"],
+			["Код", "Полностью ваш"],
+		],
+		cta: "https://t.me/iindev",
+		ctaText: "Хочу такой сайт",
+	},
+};
+
+function initSlideover() {
+	const slideover = document.getElementById("slideover");
+	const backdrop = document.getElementById("slideoverBackdrop");
+	const closeBtn = document.getElementById("slideoverClose");
+	const content = document.getElementById("slideoverContent");
+
+	function open(projectId) {
+		const p = projects[projectId];
+		if (!p) return;
+
+		let listHtml = "";
+		p.list.forEach(([key, value]) => {
+			listHtml += `<div class="slideover-list-item"><span class="slideover-list-key">${key}</span><span class="slideover-list-value">${value}</span></div>`;
+		});
+
+		content.innerHTML = `
+			<span class="slideover-tag">${p.tag}</span>
+			<h3 class="slideover-title">${p.title}</h3>
+			<p class="slideover-desc">${p.desc}</p>
+			<div class="slideover-list">${listHtml}</div>
+			<a href="${p.cta}" class="slideover-cta" target="_blank">${p.ctaText} <span>\u2197</span></a>
+		`;
+
+		slideover.classList.add("active");
+		document.body.classList.add("menu-open");
+	}
+
+	function close() {
+		slideover.classList.remove("active");
+		document.body.classList.remove("menu-open");
+	}
+
+	backdrop.addEventListener("click", close);
+	closeBtn.addEventListener("click", close);
+
+	document.addEventListener("keydown", (e) => {
+		if (e.key === "Escape" && slideover.classList.contains("active")) close();
+	});
+
+	document.querySelectorAll("[data-project]").forEach((card) => {
+		card.style.cursor = "pointer";
+		card.addEventListener("click", () => open(card.dataset.project));
+	});
+}
+
+const GAS_URL = "https://script.google.com/macros/s/AKfycbxzwm-NuZULK_iXCx5AVHYYzG372HkOAK1uhUSUrcgsJIjU1-bjrJApxVQ9f7Luv3yV/exec";
+
+function showToast(msg) {
+	const toast = document.getElementById("toast");
+	const text = document.getElementById("toast-text");
+	text.textContent = msg;
+	toast.classList.remove("hide");
+	toast.classList.add("show");
+	setTimeout(() => {
+		toast.classList.remove("show");
+		toast.classList.add("hide");
+		setTimeout(() => toast.classList.remove("hide"), 300);
+	}, 2500);
+}
+
+function initContact() {
+	const form = document.getElementById("contact-form");
+	if (!form) return;
+
+	const submitBtn = document.getElementById("form-submit");
+	const successEl = document.getElementById("form-success");
+	const loadingEl = document.getElementById("form-loading");
+	const errorEl = document.getElementById("form-error-global");
+	const errorName = document.getElementById("form-error-name");
+	const errorContact = document.getElementById("form-error-contact");
+
+	function clearErrors() {
+		[errorName, errorContact, errorEl].forEach((el) => {
+			if (el) { el.style.display = "none"; el.textContent = ""; }
+		});
+	}
+
+	form.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		clearErrors();
+
+		const name = document.getElementById("form-name").value.trim();
+		const contact = document.getElementById("form-contact").value.trim();
+		const msg = document.querySelector('textarea[name="msg"]').value.trim();
+
+		let hasError = false;
+		if (!name) {
+			errorName.textContent = "Укажите имя или компанию";
+			errorName.style.display = "block";
+			hasError = true;
+		}
+		if (!contact) {
+			errorContact.textContent = "Укажите Telegram или телефон";
+			errorContact.style.display = "block";
+			hasError = true;
+		}
+		if (hasError) return;
+
+		submitBtn.disabled = true;
+		submitBtn.textContent = "Отправка...";
+		loadingEl.style.display = "block";
+		successEl.style.display = "none";
+		errorEl.style.display = "none";
+
+		try {
+			const response = await fetch(GAS_URL, {
+				method: "POST",
+				body: JSON.stringify({
+					name: name,
+					phone: contact,
+					type: "AI / сайт / SEO / настройка",
+					message: msg,
+				}),
+			});
+
+			if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+			const result = await response.json();
+
+			if (result && result.success) {
+				loadingEl.style.display = "none";
+				successEl.style.display = "block";
+				showToast("Заявка отправлена!");
+				form.reset();
+				setTimeout(() => { successEl.style.display = "none"; }, 6000);
+			} else {
+				throw new Error(result?.error || "Unknown error");
+			}
+		} catch (err) {
+			console.error("Form submission error:", err);
+			loadingEl.style.display = "none";
+			errorEl.style.display = "block";
+			showToast("Ошибка отправки. Попробуйте позже.");
+		} finally {
+			submitBtn.disabled = false;
+			submitBtn.textContent = "Отправить";
+		}
 	});
 }
