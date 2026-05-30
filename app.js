@@ -266,7 +266,7 @@ function showHero() {
 		.to(
 			".hero-orb",
 			{
-				opacity: 0.1,
+				opacity: 1,
 				duration: 2.5,
 				stagger: 0.4,
 				ease: "power2.out",
@@ -561,6 +561,18 @@ function initWork() {
 
 function initTilt() {
 	const cards = document.querySelectorAll("[data-tilt]:not([data-project])");
+	const rectCache = new WeakMap();
+
+	function getRect(card) {
+		return rectCache.get(card);
+	}
+
+	function updateRects() {
+		cards.forEach((card) => rectCache.set(card, card.getBoundingClientRect()));
+	}
+
+	updateRects();
+	window.addEventListener("resize", updateRects);
 
 	cards.forEach((card) => {
 		const rxTo = gsap.quickTo(card, "rotateX", { duration: 0.4, ease: "power2.out" });
@@ -568,7 +580,8 @@ function initTilt() {
 		gsap.set(card, { transformPerspective: 1000 });
 
 		card.addEventListener("mousemove", (e) => {
-			const rect = card.getBoundingClientRect();
+			const rect = getRect(card);
+			if (!rect) return;
 			const x = e.clientX - rect.left;
 			const y = e.clientY - rect.top;
 			const centerX = rect.width / 2;
