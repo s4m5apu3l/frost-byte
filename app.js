@@ -1,3 +1,14 @@
+window.addEventListener("pageshow", (e) => {
+	if (e.persisted) {
+		document.querySelectorAll(".page-transition").forEach((el) => el.remove());
+		sessionStorage.removeItem("iindev-transition");
+		document.body.classList.remove("is-loading", "is-transitioning", "menu-open");
+		document.body.style.overflow = "";
+		const loader = document.getElementById("loader");
+		if (loader) { loader.style.visibility = "hidden"; loader.style.display = "none"; }
+	}
+});
+
 document.addEventListener("DOMContentLoaded", () => {
 	history.scrollRestoration = "manual";
 	window.scrollTo(0, 0);

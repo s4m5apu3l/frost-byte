@@ -164,6 +164,14 @@
 	</div>
 
 	<script>
+	window.addEventListener('pageshow', function(e) {
+		if (e.persisted) {
+			document.querySelectorAll('.page-transition').forEach(function(el) { el.remove(); });
+			sessionStorage.removeItem('iindev-transition');
+			document.body.classList.remove('is-loading', 'is-transitioning', 'menu-open');
+			document.body.style.overflow = '';
+		}
+	});
 	(function(){
 		var pt = document.getElementById('pageTransition');
 		var isTransition = sessionStorage.getItem('iindev-transition');
