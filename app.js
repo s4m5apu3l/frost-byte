@@ -101,7 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				pointerEvents: "none",
 			});
 			loader.style.willChange = "auto";
-			document.getElementById("loaderWord").style.willChange = "auto";
+			const loaderWord = document.getElementById("loaderWord");
+			if (loaderWord) loaderWord.style.willChange = "auto";
 			document.body.style.overflow = "";
 			document.body.removeAttribute("aria-busy");
 			document.body.classList.remove("is-loading");
@@ -445,6 +446,7 @@ function cycleSuffix() {
 	if (!cycling) return;
 
 	const el = document.getElementById("heroPreSuffix");
+	if (!el) { cycling = false; return; }
 	suffixIndex = (suffixIndex + 1) % suffixes.length;
 
 	const tl = gsap.timeline({
@@ -473,6 +475,7 @@ function cycleSuffix() {
 function initBurger() {
 	const burger = document.getElementById("burger");
 	const overlay = document.getElementById("menuOverlay");
+	if (!burger || !overlay) return;
 	const leftPanel = overlay.querySelector(".menu-panel-left");
 	const rightPanel = overlay.querySelector(".menu-panel-right");
 	const links = overlay.querySelectorAll(".menu-link");
@@ -839,6 +842,7 @@ function initCta() {
 
 function initHeaderScroll() {
 	const header = document.getElementById("header");
+	if (!header) return;
 	let lastScroll = 0;
 	let ticking = false;
 
