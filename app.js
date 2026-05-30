@@ -903,6 +903,7 @@ const projects = {
 
 function initSlideover() {
 	const slideover = document.getElementById("slideover");
+	if (!slideover) return;
 	const backdrop = document.getElementById("slideoverBackdrop");
 	const closeBtn = document.getElementById("slideoverClose");
 	const content = document.getElementById("slideoverContent");
