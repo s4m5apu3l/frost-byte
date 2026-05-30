@@ -10,11 +10,13 @@ window.addEventListener("pageshow", (e) => {
 		const loader = document.getElementById("loader");
 		if (loader) { loader.style.visibility = "hidden"; loader.style.display = "none"; }
 		ScrollTrigger.getAll().forEach((st) => st.kill());
+		gsap.matchMedia().forEach((ctx) => ctx.kill());
 		initWork();
 		initAbout();
 		initServices();
 		initProcess();
 		initCta();
+		ScrollTrigger.refresh();
 	}
 });
 
