@@ -2037,7 +2037,16 @@ body.menu-open {
 	text-decoration: underline;
 }
 
-.page-transition,
+.page-transition {
+	position: fixed;
+	inset: 0;
+	z-index: 10000;
+	background: var(--bg);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .transition-overlay {
 	position: fixed;
 	inset: 0;
@@ -2046,10 +2055,6 @@ body.menu-open {
 	display: none;
 	align-items: center;
 	justify-content: center;
-}
-
-.transition-overlay {
-	display: none;
 }
 
 .page-transition-logo {

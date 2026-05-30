@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	initCursor();
 	initContact();
 
-	const isTransition = sessionStorage.getItem("iindev-transition");
+	const isTransition = document.documentElement.classList.contains("skip-loader");
 	if (isTransition) {
 		sessionStorage.removeItem("iindev-transition");
 		const loader = document.getElementById("loader");
@@ -35,22 +35,28 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.body.classList.remove("is-loading");
 
 		const transitionOverlay = document.getElementById("transitionOverlay");
+		if (transitionOverlay) {
+			gsap.fromTo(transitionOverlay,
+				{ yPercent: 0 },
+				{ yPercent: -100, duration: 0.7, ease: "power3.inOut", onComplete: function() {
+					transitionOverlay.style.display = "none";
+					document.documentElement.classList.remove("skip-loader");
+				}}
+			);
+		}
 
-		gsap.fromTo(transitionOverlay,
-			{ yPercent: 0 },
-			{ yPercent: -100, duration: 0.7, ease: "power3.inOut", onComplete: function() {
-				transitionOverlay.style.display = "none";
-				document.documentElement.classList.remove("skip-loader");
-			}}
-		);
+		if (loader) {
+			showHero();
+			initAmbient();
+			initWork();
+			initAbout();
+			initServices();
+			initProcess();
+			initCta();
+		}
 
-		showHero();
-		initAmbient();
-		initWork();
-		initAbout();
-		initServices();
-		initProcess();
-		initCta();
+		initBurger();
+		initHeaderScroll();
 		initSlideover();
 		return;
 	}
@@ -1070,7 +1076,7 @@ function navigateWithTransition(url) {
 }
 
 document.addEventListener("click", (e) => {
-	const link = e.target.closest("[data-transition]");
+	const link = e.target.closest("[data-transition], [data-transition-back]");
 	if (link) {
 		e.preventDefault();
 		navigateWithTransition(link.getAttribute("href"));

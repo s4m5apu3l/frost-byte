@@ -4,22 +4,15 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Работы - iindev lendos</title>
-	<style>
-		:root{--bg:#050505;--accent:#5eead4;--text:#f2f2f2;--font:"Onest",sans-serif}
-		.page-transition{position:fixed;inset:0;z-index:10000;background:var(--bg);display:flex;align-items:center;justify-content:center}
-		.page-transition-logo{font-size:2.5rem;font-weight:700;letter-spacing:-0.03em;color:var(--accent);font-family:var(--font)}
-		.page-transition-logo .ev{color:var(--text)}
-		body.is-transitioning main,body.is-transitioning header{opacity:0}
-	</style>
+	<script>if(sessionStorage.getItem('iindev-transition')){document.documentElement.classList.add('skip-loader')}</script>
+	<style>.skip-loader .transition-overlay{display:flex!important}.skip-loader body{overflow:hidden!important}</style>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="../styles.css">
 </head>
 <body class="is-transitioning">
-	<div class="cursor" id="cursor"></div>
-	<div class="cursor-trail" id="cursorTrail"></div>
-	<div class="page-transition" id="pageTransition">
+	<div class="transition-overlay" id="transitionOverlay">
 		<span class="page-transition-logo">iind<span class="ev">ev</span></span>
 	</div>
 
@@ -61,10 +54,10 @@
 				</nav>
 				<div class="menu-footer">
 					<span class="menu-footer-copy">&copy; <span class="year">2025</span> <span class="accent">iind</span>ev</span>
-					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
 	<main>
 		<section class="works-hero">
@@ -158,6 +151,9 @@
 		</div>
 	</footer>
 
+	<div class="cursor" id="cursor"></div>
+	<div class="cursor-trail" id="cursorTrail"></div>
+
 	<div class="toast" id="toast">
 		<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
 		<span class="toast-text" id="toast-text"></span>
@@ -167,68 +163,14 @@
 	window.addEventListener('pageshow', function(e) {
 		if (e.persisted) {
 			document.querySelectorAll('.page-transition').forEach(function(el) { el.remove(); });
+			var to = document.getElementById('transitionOverlay');
+			if (to) to.style.display = 'none';
+			document.documentElement.classList.remove('skip-loader');
 			sessionStorage.removeItem('iindev-transition');
 			document.body.classList.remove('is-loading', 'is-transitioning', 'menu-open');
 			document.body.style.overflow = '';
 		}
 	});
-	(function(){
-		var pt = document.getElementById('pageTransition');
-		var isTransition = sessionStorage.getItem('iindev-transition');
-
-		function exitTransition(url) {
-			sessionStorage.setItem('iindev-transition', '1');
-			var overlay = document.createElement('div');
-			overlay.className = 'page-transition';
-			overlay.innerHTML = '<span class="page-transition-logo">iind<span class="ev">ev</span></span>';
-			document.body.appendChild(overlay);
-			var s = document.createElement('script');
-			s.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js';
-			s.onload = function() {
-				gsap.fromTo(overlay, { yPercent: 100 }, {
-					yPercent: 0, duration: 0.6, ease: 'power3.inOut',
-					onComplete: function() { window.location = url; }
-				});
-			};
-			document.head.appendChild(s);
-		}
-
-		document.addEventListener('click', function(e) {
-			var link = e.target.closest('[data-transition-back]');
-			if (link) { e.preventDefault(); exitTransition(link.getAttribute('href')); }
-		});
-
-		if (isTransition) {
-			sessionStorage.removeItem('iindev-transition');
-			document.body.classList.add('is-transitioning');
-
-			window.addEventListener('load', function() {
-				setTimeout(function() {
-					var overlay = document.createElement('div');
-					overlay.className = 'page-transition';
-					overlay.innerHTML = '<span class="page-transition-logo">iind<span class="ev">ev</span></span>';
-					document.body.appendChild(overlay);
-					pt.style.display = 'none';
-
-					var s = document.createElement('script');
-					s.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js';
-					s.onload = function() {
-						gsap.fromTo(overlay,
-							{ yPercent: 0 },
-							{ yPercent: -100, duration: 0.7, ease: 'power3.inOut', onComplete: function() {
-								overlay.remove();
-								document.body.classList.remove('is-transitioning');
-							}}
-						);
-					};
-					document.head.appendChild(s);
-				}, 100);
-			});
-		} else {
-			pt.style.display = 'none';
-			document.body.classList.remove('is-transitioning');
-		}
-	})();
 	</script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
