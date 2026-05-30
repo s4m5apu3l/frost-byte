@@ -12,26 +12,86 @@
 
 **Целевая аудитория:** Малый бизнес в Якутске и не только. Кто не может позволить 150К за сайт.
 
+**Философия lendos:** Студии берут предоплату за обещание. Мы берём оплату за результат. Сначала делаем. Потом вы решаете, сколько это стоит. Если не стоит — не платите. Это не щедрость. Это стандарт, до которого рынок ещё не дошёл.
+
+## Architecture
+
+Static multi-page site. No framework. GSAP for all animation.
+
+```
+index.html              — main landing
+works/
+  lendos.html           — iindev lendos works page
+styles.css              — shared CSS (all pages)
+app.js                  — shared JS (all pages)
+```
+
+### Page transition system
+
+Cross-page navigation with black overlay + iindev logo.
+
+- `sessionStorage.iindev-transition` = flag between pages
+- `data-transition` attr on links = JS intercepts, shows overlay, navigates
+- `data-transition-back` attr = same but for back navigation
+- Target page: inline `<style>` + `<script>` in `<head>` renders overlay before external CSS loads (prevents white flash)
+- On index.html: `app.js` checks sessionStorage on load, skips loader animation if transition flag set
+
+### Loader animation (index.html only)
+
+Word morph: `.lc` (i,i,n,d) → `.lw` (i,i,n,d,a) → `.lw` fly out → `.lv` (e,v) rise from below → iindev. `.lv` starts `display:none` so invisible chars don't occupy flex space.
+
+### Custom cursor
+
+`.cursor` (6px dot) + `.cursor-trail` (24px ring). Hover on interactive elements via **event delegation** (`mouseover`/`mouseout` + `e.target.closest()`), not per-element — works with dynamic content (slideover, etc). `cursor: none` on body + all interactive elements in CSS.
+
+### Menu overlay
+
+**Must be outside `<header>`** — `backdrop-filter` on header creates containing block that traps `position:fixed` children. Menu overlay is a sibling of header, direct child of `<body>`.
+
+### Slideover
+
+Project detail panel. Data-driven from `projects` object in app.js. Supports: tag, title, desc, list, philosophy (array of strings, last = accent), worksUrl (link to works page), cta. Rendered dynamically on open.
+
+### Form
+
+Inside `.cta-right` (not full-width card). No card styling — clean fields, stacked vertically. Floating labels. Posts to Google Apps Script.
+
+## Sections (index.html)
+
+| Section | Desktop padding | Mobile padding | Notes |
+|---|---|---|---|
+| Hero | 5rem 0 3rem | 4rem 0 2rem | 100dvh, orbs fade in 2.5s after text |
+| Work | 4rem 0 | 3.5rem 0 | Bento grid, project cards open slideover |
+| About | 5rem 0 | 6rem 0 | Animated chars, stats grid |
+| Services | 100dvh pinned | auto | Horizontal scroll pinned |
+| Process | 4rem 0 | 3.5rem 0 | 5-step grid |
+| CTA | 5rem 0 3rem | 4rem 0 2.5rem | Title + inline form |
+| Footer | 0 | 0 | Card with ambient orbs |
+
+## Design tokens
+
+- **Colors:** bg #050505, surface #161616, accent #5eead4, text #f2f2f2, muted #888888
+- **Font:** Onest (Google Fonts)
+- **Border:** rgba(255,255,255,0.08)
+- **Radius:** 20px cards, 100px buttons, 10px inputs
+
 ## Always load these skills
 
 1. **caveman** — `C:/Users/slavk/.agents/skills/caveman/SKILL.md` (mode: full)
 2. **karpathy-guidelines** — `C:/Users/slavk/.agents/skills/karpathy-guidelines/SKILL.md`
-3. **gsap-core** — `C:/Users/slavk/Desktop/iindev/iindev-landing/.agents/skills/gsap-core/SKILL.md`
-4. **gsap-scrolltrigger** — `C:/Users/slavk/Desktop/iindev/iindev-landing/.agents/skills/gsap-scrolltrigger/SKILL.md`
-5. **gsap-timeline** — `C:/Users/slavk/Desktop/iindev/iindev-landing/.agents/skills/gsap-timeline/SKILL.md`
-6. **gsap-performance** — `C:/Users/slavk/Desktop/iindev/iindev-landing/.agents/skills/gsap-performance/SKILL.md`
+3. **review-first** — `C:/Users/slavk/.agents/skills/review-first/SKILL.md`
+4. **gsap-core** — `C:/Users/slavk/Desktop/iindev/iindev-landing/.agents/skills/gsap-core/SKILL.md`
+5. **gsap-scrolltrigger** — `C:/Users/slavk/Desktop/iindev/iindev-landing/.agents/skills/gsap-scrolltrigger/SKILL.md`
+6. **gsap-timeline** — `C:/Users/slavk/Desktop/iindev/iindev-landing/.agents/skills/gsap-timeline/SKILL.md`
+7. **gsap-performance** — `C:/Users/slavk/Desktop/iindev/iindev-landing/.agents/skills/gsap-performance/SKILL.md`
 
 ## Default behavior
 
 - Use caveman-full communication style
 - Follow karpathy-guidelines for all coding work
+- Follow review-first: every issue = problem → why → fix → "Approve?" before code
 - Always use GSAP for animations (no CSS-only animation)
 - Default mode: `minimalistic` — clean, ultra-smooth, premium
-
-## Design system
-
-**Read DESIGN.md before any design work.**  
-Design tokens, typography, and motion rules are in `DESIGN.md` at project root.
 
 ## Tone
 
