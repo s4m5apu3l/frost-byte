@@ -9,8 +9,47 @@ document.addEventListener("DOMContentLoaded", () => {
 	initCursor();
 	initContact();
 
+	const isTransition = sessionStorage.getItem("iindev-transition");
+	if (isTransition) {
+		sessionStorage.removeItem("iindev-transition");
+		const loader = document.getElementById("loader");
+		if (loader) {
+			loader.style.visibility = "hidden";
+			loader.style.display = "none";
+		}
+		document.body.removeAttribute("aria-busy");
+		document.body.classList.remove("is-loading");
+
+		var overlay = document.createElement("div");
+		overlay.className = "page-transition";
+		overlay.innerHTML = '<span class="page-transition-logo">iind<span class="ev">ev</span></span>';
+		document.body.appendChild(overlay);
+
+		gsap.fromTo(overlay,
+			{ yPercent: 0 },
+			{ yPercent: -100, duration: 0.7, ease: "power3.inOut", onComplete: function() {
+				overlay.remove();
+			}}
+		);
+
+		showHero();
+		initAmbient();
+		initWork();
+		initAbout();
+		initServices();
+		initProcess();
+		initCta();
+		initSlideover();
+		return;
+	}
+
 	const loader = document.getElementById("loader");
-	if (!loader) return;
+	if (!loader) {
+		initBurger();
+		initHeaderScroll();
+		initSlideover();
+		return;
+	}
 
 	const prefersReduced = window.matchMedia(
 		"(prefers-reduced-motion: reduce)",
@@ -240,7 +279,7 @@ function showHero() {
 				cycleSuffix();
 			},
 			null,
-			"+=2",
+			"+=0.5",
 		)
 		.call(() => {
 			gsap.set(".hero-line", { willChange: "auto" });
@@ -786,24 +825,26 @@ function initCursor() {
 	const tyTo = gsap.quickTo(trail, "y", { duration: 0.35, ease: "power3" });
 
 	document.addEventListener("mousemove", (e) => {
-		xTo(e.clientX - 4);
-		yTo(e.clientY - 4);
-		txTo(e.clientX - 16);
-		tyTo(e.clientY - 16);
+		xTo(e.clientX - 3);
+		yTo(e.clientY - 3);
+		txTo(e.clientX - 12);
+		tyTo(e.clientY - 12);
 	});
 
-	const hoverTargets = document.querySelectorAll(
-		"a, button, .work-card, .services-card, .menu-link, .form-submit, .slideover-close",
-	);
-	hoverTargets.forEach((el) => {
-		el.addEventListener("mouseenter", () => {
+	const hoverSelector = "a, button, [role=\"button\"], input, textarea, select, .work-card, .services-card, .menu-link, .form-submit, .slideover-close, .slideover-cta, .slideover-works";
+
+	document.addEventListener("mouseover", (e) => {
+		if (e.target.closest(hoverSelector)) {
 			cursor.classList.add("hover");
 			trail.classList.add("hover");
-		});
-		el.addEventListener("mouseleave", () => {
+		}
+	});
+
+	document.addEventListener("mouseout", (e) => {
+		if (e.target.closest(hoverSelector)) {
 			cursor.classList.remove("hover");
 			trail.classList.remove("hover");
-		});
+		}
 	});
 }
 
@@ -812,6 +853,11 @@ const projects = {
 		tag: "Live",
 		title: "iindev lendos",
 		desc: "От 30К за лендинг - норма рынка. Мы сломали формат. Делаем сайт из ваших данных, даём демо, вы сами называете цену. Никаких обязательств до результата.",
+		philosophy: [
+			"Студии берут предоплату за обещание. Мы берём оплату за результат.",
+			"Сначала делаем. Потом вы решаете, сколько это стоит. Если не стоит - не платите.",
+			"Это не щедрость. Это стандарт, до которого рынок ещё не дошёл.",
+		],
 		list: [
 			["Данные", "Из ваших соцсетей и карт"],
 			["Демо", "Временно размещаем бесплатно"],
@@ -819,6 +865,8 @@ const projects = {
 			["Домен", "Вы покупаете"],
 			["Код", "Полностью ваш"],
 		],
+		worksUrl: "works/lendos.html",
+		worksText: "Смотреть работы",
 		cta: "https://t.me/iindev",
 		ctaText: "Хочу такой сайт",
 	},
@@ -839,11 +887,21 @@ function initSlideover() {
 			listHtml += `<div class="slideover-list-item"><span class="slideover-list-key">${key}</span><span class="slideover-list-value">${value}</span></div>`;
 		});
 
+		const worksHtml = p.worksUrl
+			? `<a href="${p.worksUrl}" class="slideover-works" data-transition>${p.worksText} <span>\u2192</span></a>`
+			: '';
+
+		const philosophyHtml = p.philosophy
+			? `<div class="slideover-philosophy">${p.philosophy.map(line => `<p>${line}</p>`).join('')}</div>`
+			: '';
+
 		content.innerHTML = `
 			<span class="slideover-tag">${p.tag}</span>
 			<h3 class="slideover-title">${p.title}</h3>
 			<p class="slideover-desc">${p.desc}</p>
 			<div class="slideover-list">${listHtml}</div>
+			${philosophyHtml}
+			${worksHtml}
 			<a href="${p.cta}" class="slideover-cta" target="_blank">${p.ctaText} <span>\u2197</span></a>
 		`;
 
@@ -963,3 +1021,33 @@ function initContact() {
 		}
 	});
 }
+
+function navigateWithTransition(url) {
+	const overlay = document.createElement("div");
+	overlay.className = "page-transition";
+	overlay.innerHTML = '<span class="page-transition-logo">iind<span class="ev">ev</span></span>';
+	document.body.appendChild(overlay);
+
+	sessionStorage.setItem("iindev-transition", "1");
+
+	gsap.fromTo(
+		overlay,
+		{ yPercent: 100 },
+		{
+			yPercent: 0,
+			duration: 0.6,
+			ease: "power3.inOut",
+			onComplete: () => {
+				window.location = url;
+			},
+		},
+	);
+}
+
+document.addEventListener("click", (e) => {
+	const link = e.target.closest("[data-transition]");
+	if (link) {
+		e.preventDefault();
+		navigateWithTransition(link.getAttribute("href"));
+	}
+});
