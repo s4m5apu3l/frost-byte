@@ -139,6 +139,22 @@
   transform: perspective(800px) rotateY(0deg) scale(1.03);
 }
 
+.work-card-screenshot {
+  width: 65%;
+  max-width: 340px;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  transform: perspective(800px) rotateY(-5deg);
+  opacity: 0.5;
+  filter: brightness(0.6) saturate(0.7);
+}
+
+.work-card-project:hover .work-card-screenshot {
+  transform: perspective(800px) rotateY(0deg) scale(1.03);
+  opacity: 0.7;
+  filter: brightness(0.75) saturate(0.85);
+}
+
 .mockup-bar {
   display: flex;
   gap: 4px;

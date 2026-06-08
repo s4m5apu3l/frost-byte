@@ -10,21 +10,25 @@ import { projects } from '@/data/projects';
     <div class="work-bento">
       {projects.map((p) => (
         <div class="work-card work-card-large work-card-project" data-project={p.id}>
-          {p.mockup && (
+          {(p.mockup || p.image) && (
             <div class="work-card-image">
               <div class="work-card-image-inner">
-                <div class="work-card-mockup">
-                  <div class="mockup-bar"><span></span><span></span><span></span></div>
-                  <div class="mockup-content">
-                    <div class="mockup-nav"></div>
-                    <div class="mockup-hero"></div>
-                    <div class="mockup-blocks">
-                      <div class="mockup-block"></div>
-                      <div class="mockup-block"></div>
-                      <div class="mockup-block mockup-block-short"></div>
+                {p.image ? (
+                  <img src={p.image} alt={p.label} class="work-card-screenshot" loading="lazy" />
+                ) : (
+                  <div class="work-card-mockup">
+                    <div class="mockup-bar"><span></span><span></span><span></span></div>
+                    <div class="mockup-content">
+                      <div class="mockup-nav"></div>
+                      <div class="mockup-hero"></div>
+                      <div class="mockup-blocks">
+                        <div class="mockup-block"></div>
+                        <div class="mockup-block"></div>
+                        <div class="mockup-block mockup-block-short"></div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           )}

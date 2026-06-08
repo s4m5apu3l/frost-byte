@@ -13,16 +13,15 @@ interface Props {
   image?: string;
   canonical?: string;
   noindex?: boolean;
-  preloadFonts?: boolean;
 }
 
-const { preloadFonts, ...seo } = Astro.props;
+const { ...seo } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="ru">
   <head>
-    <Head {...seo} preloadFonts={preloadFonts} />
+    <Head {...seo} />
   </head>
   <body class="is-loading" aria-busy="true">
     <Loader />

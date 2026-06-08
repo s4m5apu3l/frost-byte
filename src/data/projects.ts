@@ -20,6 +20,7 @@ export interface Project {
   cta: string;
   ctaText: string;
   mockup?: boolean;
+  image?: string;
   badge?: 'Live' | 'Coming soon';
   sublabel?: string;
 }
@@ -95,6 +96,7 @@ export const projects: Project[] = [
       ['Алфавит', 'Новгородов 1917'],
       ['Код', 'Открытый'],
     ],
+    image: '/assets/works/novgorodov-alphabet.png',
     cta: 'https://iindev-solutions.github.io/sakha-alphabet-novgorodov/',
     ctaText: 'Открыть проект',
     badge: 'Live',

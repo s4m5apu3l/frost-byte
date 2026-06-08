@@ -1,5 +1,6 @@
 ---
 import { projects } from '@/data/projects';
+import type { Project } from '@/data/projects';
 ---
 
 <div class="slideover" id="slideover">
@@ -14,8 +15,9 @@ import { projects } from '@/data/projects';
   </div>
 </div>
 
-<script is:inline define:vars={{ projects }}>
-  const PROJECTS = projects;
+<script>
+  import { gsap } from 'gsap';
+  import { projects } from '@/data/projects';
 
   function initSlideover() {
     const slideover = document.getElementById('slideover');
@@ -23,19 +25,20 @@ import { projects } from '@/data/projects';
     if (slideover.dataset.init) return;
     slideover.dataset.init = '1';
     const backdrop = document.getElementById('slideoverBackdrop');
+    const panel = document.getElementById('slideoverPanel');
     const closeBtn = document.getElementById('slideoverClose');
     const content = document.getElementById('slideoverContent');
 
-    function escapeHtml(s) {
-      return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    function escapeHtml(s: string) {
+      return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
     }
 
-    function open(projectId) {
-      const p = PROJECTS.find((x) => x.id === projectId);
+    function open(projectId: string) {
+      const p = projects.find((x) => x.id === projectId);
       if (!p) return;
       const listHtml = p.list.map(([k, v]) => `<div class="slideover-list-item"><span class="slideover-list-key">${escapeHtml(k)}</span><span class="slideover-list-value">${escapeHtml(v)}</span></div>`).join('');
       const philosophyHtml = p.philosophy ? `<div class="slideover-philosophy">${p.philosophy.map((l) => `<p>${escapeHtml(l)}</p>`).join('')}</div>` : '';
-      content.innerHTML = `
+      content!.innerHTML = `
         <span class="slideover-tag">${escapeHtml(p.tag)}</span>
         <h3 class="slideover-title">${escapeHtml(p.title)}</h3>
         <p class="slideover-desc">${escapeHtml(p.desc)}</p>
@@ -45,11 +48,21 @@ import { projects } from '@/data/projects';
       `;
       slideover.classList.add('active');
       document.body.classList.add('menu-open');
+      gsap.fromTo(backdrop!, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power2.out' });
+      gsap.fromTo(panel!, { x: '100%' }, { x: '0%', duration: 0.5, ease: 'power3.out' });
     }
 
     function close() {
-      slideover.classList.remove('active');
-      document.body.classList.remove('menu-open');
+      gsap.to(backdrop!, { opacity: 0, duration: 0.3, ease: 'power2.in' });
+      gsap.to(panel!, {
+        x: '100%',
+        duration: 0.4,
+        ease: 'power3.inOut',
+        onComplete() {
+          slideover.classList.remove('active');
+          document.body.classList.remove('menu-open');
+        },
+      });
     }
 
     backdrop?.addEventListener('click', close);
@@ -58,8 +71,8 @@ import { projects } from '@/data/projects';
       if (e.key === 'Escape' && slideover.classList.contains('active')) close();
     });
     document.querySelectorAll('[data-project]').forEach((card) => {
-      card.style.cursor = 'pointer';
-      card.addEventListener('click', () => open(card.dataset.project));
+      (card as HTMLElement).style.cursor = 'pointer';
+      card.addEventListener('click', () => open((card as HTMLElement).dataset.project!));
     });
   }
 

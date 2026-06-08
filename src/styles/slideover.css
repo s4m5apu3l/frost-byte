@@ -2,12 +2,12 @@
   position: fixed;
   inset: 0;
   z-index: 200;
-  visibility: hidden;
+  pointer-events: none;
   overflow: hidden;
 }
 
 .slideover.active {
-  visibility: visible;
+  pointer-events: auto;
 }
 
 .slideover-backdrop {
@@ -15,7 +15,6 @@
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
   opacity: 0;
-  transition: opacity 0.4s ease;
 }
 
 .slideover.active .slideover-backdrop {
@@ -32,12 +31,7 @@
   background: var(--surface);
   border-left: 1px solid var(--border);
   transform: translateX(100%);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   overflow-y: auto;
-}
-
-.slideover.active .slideover-panel {
-  transform: translateX(0);
 }
 
 .slideover-close {
