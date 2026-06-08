@@ -1,0 +1,65 @@
+---
+import { projects, placeholders } from '@/data/projects';
+---
+
+<section class="work" id="work">
+  <div class="l-wrapper">
+    <div class="work-header">
+      <h2 class="work-title">Наши проекты</h2>
+    </div>
+    <div class="work-bento">
+      {projects.map((p) => (
+        <div class="work-card work-card-large work-card-project" data-project={p.id}>
+          {p.mockup && (
+            <div class="work-card-image">
+              <div class="work-card-image-inner">
+                <div class="work-card-mockup">
+                  <div class="mockup-bar"><span></span><span></span><span></span></div>
+                  <div class="mockup-content">
+                    <div class="mockup-nav"></div>
+                    <div class="mockup-hero"></div>
+                    <div class="mockup-blocks">
+                      <div class="mockup-block"></div>
+                      <div class="mockup-block"></div>
+                      <div class="mockup-block mockup-block-short"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          <div class="work-card-bg"></div>
+          <div class="work-card-inner">
+            <span class="work-card-label"><span class="accent">iind</span>ev {p.id}</span>
+            <span class="work-card-sublabel">{p.sublabel}</span>
+            <span class="work-card-badge">{p.badge}</span>
+          </div>
+        </div>
+      ))}
+      <div class="work-card" data-tilt>
+        <div class="work-card-bg"></div>
+        <div class="work-card-inner">
+          <span class="work-card-label">Ваш проект</span>
+          <span class="work-card-sublabel">Тут может быть ваш сайт</span>
+          <span class="work-card-badge">Coming soon</span>
+        </div>
+      </div>
+      <div class="work-card" data-tilt>
+        <div class="work-card-bg"></div>
+        <div class="work-card-inner">
+          <span class="work-card-label">Ваш проект</span>
+          <span class="work-card-sublabel">Тут может быть ваш сайт</span>
+          <span class="work-card-badge">Coming soon</span>
+        </div>
+      </div>
+      <div class="work-card work-card-wide" data-tilt>
+        <div class="work-card-bg"></div>
+        <div class="work-card-inner">
+          <span class="work-card-label">Ваш проект</span>
+          <span class="work-card-sublabel">Тут может быть ваш сайт</span>
+          <span class="work-card-badge">Coming soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,34 @@
+---
+const cards = [
+  { num: '01', title: 'Веб-разработка', text: 'Лендинги, корпоративные сайты, магазины. AI-ускорение дает сроки в 2-4 недели без потери качества.' },
+  { num: '02', title: 'AI и автоматизация', text: 'Интеграция AI-ассистентов, сценарии автоматизации, CRM-настройки. Экономия часов вашей команды.' },
+  { num: '03', title: 'SEO и оптимизация', text: 'Скорость, структура, контент. Выводим в топ поисковых систем и удерживаем позиции.' },
+  { num: '04', title: 'Telegram боты', text: 'Боты для продаж, поддержки, внутренних процессов. Mini Apps и интеграции с вашими системами.' },
+];
+---
+
+<section class="services" id="services">
+  <div class="services-inner">
+    <div class="services-intro">
+      <span class="services-label">Услуги</span>
+      <h2 class="services-title">
+        <span class="services-line">Все под одной крышей.</span>
+        <span class="services-line">Без бюрократии и задержек.</span>
+      </h2>
+    </div>
+    <div class="services-track-wrapper">
+      <div class="services-track">
+        {cards.map((c) => (
+          <div class="services-card">
+            <span class="services-card-ghost">{c.num}</span>
+            <div class="services-card-content">
+              <h3 class="services-card-title">{c.title}</h3>
+              <p class="services-card-text">{c.text}</p>
+              <span class="services-card-link">Подробнее <span class="services-card-arrow">↗</span></span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

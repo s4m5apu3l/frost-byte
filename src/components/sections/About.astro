@@ -1,0 +1,32 @@
+---
+const stats = [
+  { title: 'Скорость', num: '2', text: 'недели от старта до запуска.' },
+  { title: 'Прозрачность', num: '100%', text: 'Код и доступы — ваши, без исключений.' },
+  { title: 'Поддержка', num: '∞', text: 'Остаемся на связи после сдачи.' },
+];
+---
+
+<section class="about" id="about">
+  <div class="l-wrapper">
+    <div class="about-inner">
+      <div class="about-left">
+        <h2 class="about-title">
+          <span class="about-line">Мы не классическое агентство.</span>
+          <span class="about-line">Мы используем <span class="about-accent">AI, чтобы быстрее</span></span>
+          <span class="about-line">и лучше создавать.</span>
+        </h2>
+      </div>
+      <div class="about-right">
+        <div class="about-grid">
+          {stats.map((s) => (
+            <div class="about-stat">
+              <h3 class="about-stat-title">{s.title}</h3>
+              <span class="about-stat-num">{s.num}</span>
+              <p class="about-stat-text">{s.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

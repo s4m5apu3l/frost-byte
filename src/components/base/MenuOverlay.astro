@@ -1,0 +1,30 @@
+---
+import { NAV, SITE } from '@/consts';
+---
+
+<div class="menu-overlay" id="menuOverlay" transition:persist>
+  <div class="menu-panel menu-panel-left">
+    <div class="menu-panel-inner">
+      <div class="menu-socials">
+        <span class="menu-socials-label">Контакты</span>
+        <div class="menu-social-links">
+          <a href={SITE.telegram} class="menu-social-link">Telegram <span>@iindev</span></a>
+          <a href={`mailto:${SITE.email}`} class="menu-social-link">Email <span>{SITE.email}</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="menu-panel menu-panel-right">
+    <div class="menu-panel-inner">
+      <nav class="menu-nav">
+        <a href="/" class="menu-link">Главная</a>
+        {NAV.map(({ href, label }) => (
+          <a href={href} class="menu-link">{label}</a>
+        ))}
+      </nav>
+      <div class="menu-footer">
+        <span class="menu-footer-copy">&copy; <span class="year">2025</span> <span class="accent">iind</span>ev</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Work from '@components/sections/Work.astro';
+import About from '@components/sections/About.astro';
+import Services from '@components/sections/Services.astro';
+import Process from '@components/sections/Process.astro';
+import Cta from '@components/sections/Cta.astro';
+---
+
+<BaseLayout>
+  <section class="hero" id="hero">
+    <div class="hero-ambient">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-orb hero-orb-3"></div>
+    </div>
+    <div class="l-wrapper">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="hero-pre" id="heroPre">
+            <span class="hero-pre-base">iind</span><span class="hero-pre-suffix" id="heroPreSuffix">iinda</span>
+          </div>
+          <h1 class="hero-title">
+            <span class="hero-line-wrap"><span class="hero-line">Месяцы на сайт?</span></span>
+            <span class="hero-line-wrap"><span class="hero-line hero-line-accent">У нас две недели</span></span>
+          </h1>
+        </div>
+        <div class="hero-right">
+          <p class="hero-desc">
+            Мы не классическая студия. У нас другой подход.
+            AI ускоряет, мы контролируем. Результат быстрее и лучше.
+          </p>
+          <a href="#contact" class="btn-primary">
+            Получить оценку за 24ч <span class="btn-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Work />
+  <About />
+  <Services />
+  <Process />
+  <Cta />
+
+  <div id="heroLoader" slot="hero-loader" class="hero-loader" aria-hidden="true">
+    <div class="loader-word" id="loaderWord">
+      <span class="lc">i</span>
+      <span class="lc">i</span>
+      <span class="lc">n</span>
+      <span class="lc">d</span>
+      <span class="lw">i</span>
+      <span class="lw">i</span>
+      <span class="lw">n</span>
+      <span class="lw">d</span>
+      <span class="lw">a</span>
+      <span class="lv">e</span>
+      <span class="lv">v</span>
+    </div>
+    <div class="loader-bar">
+      <div class="loader-bar-fill"></div>
+    </div>
+  </div>
+</BaseLayout>

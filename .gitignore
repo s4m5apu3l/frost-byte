@@ -1,1 +1,10 @@
-new/\nnew-v2/\nnew-v3/\nnul\nskills-lock.json\nnode_modules/
+node_modules/
+dist/
+.astro/
+.env
+.env.local
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.log

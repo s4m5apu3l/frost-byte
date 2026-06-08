@@ -1,0 +1,67 @@
+---
+import { projects } from '@/data/projects';
+---
+
+<div class="slideover" id="slideover">
+  <div class="slideover-backdrop" id="slideoverBackdrop"></div>
+  <div class="slideover-panel" id="slideoverPanel">
+    <button class="slideover-close" id="slideoverClose" aria-label="Закрыть">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="slideover-content" id="slideoverContent"></div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ projects }}>
+  const PROJECTS = projects;
+
+  function initSlideover() {
+    const slideover = document.getElementById('slideover');
+    if (!slideover) return;
+    const backdrop = document.getElementById('slideoverBackdrop');
+    const closeBtn = document.getElementById('slideoverClose');
+    const content = document.getElementById('slideoverContent');
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    function open(projectId) {
+      const p = PROJECTS.find((x) => x.id === projectId);
+      if (!p) return;
+      const listHtml = p.list.map(([k, v]) => `<div class="slideover-list-item"><span class="slideover-list-key">${escapeHtml(k)}</span><span class="slideover-list-value">${escapeHtml(v)}</span></div>`).join('');
+      const worksHtml = p.worksUrl ? `<a href="${p.worksUrl}" class="slideover-works">${escapeHtml(p.worksText || 'Подробнее')} <span>→</span></a>` : '';
+      const philosophyHtml = p.philosophy ? `<div class="slideover-philosophy">${p.philosophy.map((l) => `<p>${escapeHtml(l)}</p>`).join('')}</div>` : '';
+      content.innerHTML = `
+        <span class="slideover-tag">${escapeHtml(p.tag)}</span>
+        <h3 class="slideover-title">${escapeHtml(p.title)}</h3>
+        <p class="slideover-desc">${escapeHtml(p.desc)}</p>
+        <div class="slideover-list">${listHtml}</div>
+        ${philosophyHtml}
+        ${worksHtml}
+        <a href="${p.cta}" class="slideover-cta" target="_blank" rel="noopener">${escapeHtml(p.ctaText)} <span>↗</span></a>
+      `;
+      slideover.classList.add('active');
+      document.body.classList.add('menu-open');
+    }
+
+    function close() {
+      slideover.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    }
+
+    backdrop?.addEventListener('click', close);
+    closeBtn?.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && slideover.classList.contains('active')) close();
+    });
+    document.querySelectorAll('[data-project]').forEach((card) => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => open(card.dataset.project));
+    });
+  }
+
+  document.addEventListener('astro:page-load', initSlideover);
+</script>

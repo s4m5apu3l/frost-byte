@@ -1,0 +1,29 @@
+---
+const steps = [
+  { num: '01', title: 'Обсуждение', text: 'Фиксируем цели, аудиторию и функционал. Без длинных брифов - 30 минут и понятно.' },
+  { num: '02', title: 'Дизайн', text: 'Прототип и визуал. AI-ускорение позволяет итерации за часы, не дни.' },
+  { num: '03', title: 'Разработка', text: 'Чистый код, адаптив, скорость. Показываем промежуточные результаты каждые 2-3 дня.' },
+  { num: '04', title: 'Запуск', text: 'Домен, хостинг, SSL, аналитика. Передаем доступы и исходный код. Все ваше.' },
+  { num: '05', title: 'Поддержка', text: 'Обновления, доработки, консультации. Остаемся на связи после сдачи.' },
+];
+---
+
+<section class="process" id="process">
+  <div class="l-wrapper">
+    <div class="process-header">
+      <span class="process-label">Процесс</span>
+      <h2 class="process-title">От идеи до запуска</h2>
+    </div>
+    <div class="process-track">
+      {steps.map((s) => (
+        <div class="process-step">
+          <span class="process-step-num">{s.num}</span>
+          <div class="process-step-content">
+            <h3 class="process-step-title">{s.title}</h3>
+            <p class="process-step-text">{s.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

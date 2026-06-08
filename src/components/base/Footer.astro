@@ -1,0 +1,48 @@
+---
+import { SITE } from '@/consts';
+---
+
+<footer class="footer">
+  <div class="footer-card">
+    <div class="footer-ambient">
+      <div class="footer-orb footer-orb-1"></div>
+      <div class="footer-orb footer-orb-2"></div>
+    </div>
+    <div class="footer-inner">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a href="/" class="footer-logo">iind<span class="ev">ev</span></a>
+          <p class="footer-brand-desc">
+            Студия, которая делает быстрее остальных,
+            без срезания углов. Веб, AI, автоматизация.
+            Все внутри.
+          </p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-links-col">
+            <span class="footer-links-title">Услуги</span>
+            <a href="/#services" class="footer-link">Веб-разработка</a>
+            <a href="/#services" class="footer-link">AI и автоматизация</a>
+            <a href="/#services" class="footer-link">SEO</a>
+            <a href="/#services" class="footer-link">Telegram боты</a>
+          </div>
+          <div class="footer-links-col">
+            <span class="footer-links-title">Компания</span>
+            <a href="/#about" class="footer-link">О нас</a>
+            <a href="/#work" class="footer-link">Работы</a>
+            <a href="/#contact" class="footer-link">Контакты</a>
+          </div>
+          <div class="footer-links-col">
+            <span class="footer-links-title">Связь</span>
+            <a href={SITE.telegram} class="footer-link">Telegram</a>
+            <a href={`mailto:${SITE.email}`} class="footer-link">Email</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copyright"><span class="year">2025</span> <span class="accent">iind</span>ev. All rights reserved.</span>
+        <a href={`mailto:${SITE.email}`} class="footer-email">{SITE.email}</a>
+      </div>
+    </div>
+  </div>
+</footer>

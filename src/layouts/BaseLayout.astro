@@ -1,0 +1,102 @@
+---
+import '@/styles/global.css';
+import Head from '@components/base/Head.astro';
+import Header from '@components/base/Header.astro';
+import Loader from '@components/base/Loader.astro';
+import Cursor from '@components/base/Cursor.astro';
+import Slideover from '@components/base/Slideover.astro';
+import Footer from '@components/base/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
+  preloadFonts?: boolean;
+}
+
+const { preloadFonts, ...seo } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <Head {...seo} preloadFonts={preloadFonts} />
+  </head>
+  <body class="is-loading" aria-busy="true">
+    <Loader />
+    <Cursor />
+    <slot name="hero-loader" />
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Slideover />
+    <Footer />
+    <div class="toast" id="toast" transition:persist>
+      <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+      <span class="toast-text" id="toast-text"></span>
+    </div>
+
+    <script>
+      import { initCursor } from '@scripts/cursor';
+      import { initBurger } from '@scripts/burger';
+      import { initLoader, initTransitionHandlers } from '@scripts/loader';
+      import { initHeroAnimations, initScrollAnimations } from '@scripts/animations';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      const w = window as any;
+      if (!w.__iindev) w.__iindev = {};
+      const state = w.__iindev;
+
+      function runPageAnimations() {
+        const header = document.getElementById('header');
+        if (document.querySelector('.hero')) {
+          initHeroAnimations();
+        } else {
+          if (header) gsap.set(header, { y: 0, opacity: 1 });
+        }
+        if (
+          document.querySelector('.work') ||
+          document.querySelector('.about') ||
+          document.querySelector('.services') ||
+          document.querySelector('.process') ||
+          document.querySelector('.cta') ||
+          document.querySelector('.footer')
+        ) {
+          initScrollAnimations();
+        }
+      }
+
+      function boot() {
+        if (!state.once) {
+          state.once = true;
+          document.documentElement.classList.add('skip-loader');
+          initCursor();
+          initBurger();
+          initTransitionHandlers();
+          document.querySelectorAll('.year').forEach((el) => {
+            el.textContent = String(new Date().getFullYear());
+          });
+        }
+        if (!state.loaderInited) {
+          state.loaderInited = true;
+          initLoader(() => {
+            runPageAnimations();
+          });
+        } else {
+          ScrollTrigger.getAll().forEach((st) => st.kill());
+          runPageAnimations();
+        }
+      }
+
+      if (!state.listener) {
+        state.listener = true;
+        document.addEventListener('astro:page-load', boot);
+      }
+    </script>
+  </body>
+</html>

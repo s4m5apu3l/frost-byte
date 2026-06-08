@@ -1,0 +1,25 @@
+---
+import MenuOverlay from '@components/base/MenuOverlay.astro';
+---
+
+<header transition:persist>
+  <div class="header" id="header">
+    <div class="l-wrapper">
+      <div class="header-inner">
+        <a href="/" class="header-logo">iind<span class="ev">ev</span></a>
+        <button
+          class="burger"
+          id="burger"
+          aria-label="Меню"
+          aria-expanded="false"
+        >
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<MenuOverlay />
