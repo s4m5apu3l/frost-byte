@@ -1,0 +1,246 @@
+.work {
+  padding: 4rem 0;
+}
+
+.work-header {
+  margin-bottom: 2.5rem;
+}
+
+.work-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+
+.work-bento {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 360px;
+  gap: 1.5rem;
+}
+
+.work-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.work-card:hover {
+  border-color: rgba(94, 234, 212, 0.3);
+}
+
+.work-card-large {
+  grid-row: span 1;
+}
+
+.work-card-wide {
+  grid-column: span 2;
+}
+
+.work-card-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(94, 234, 212, 0.05) 0%,
+    transparent 50%,
+    rgba(94, 234, 212, 0.03) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.work-card:hover .work-card-bg {
+  opacity: 1;
+}
+
+.work-card-inner {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem;
+}
+
+.work-card-label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+.work-card:hover .work-card-label {
+  color: var(--text);
+}
+
+.work-card-sublabel {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.work-card-badge {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--accent);
+  background: rgba(94, 234, 212, 0.1);
+  padding: 0.4rem 0.8rem;
+  border-radius: 100px;
+  border: 1px solid rgba(94, 234, 212, 0.2);
+}
+
+.work-card-image {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.work-card-image-inner {
+  position: absolute;
+  inset: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.work-card-project .work-card-inner {
+  position: relative;
+  z-index: 2;
+  justify-content: flex-end;
+}
+
+.work-card-project:hover .work-card-label {
+  color: var(--accent);
+}
+
+.work-card-mockup {
+  width: 65%;
+  max-width: 340px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  transform: perspective(800px) rotateY(-5deg);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.work-card-project:hover .work-card-mockup {
+  transform: perspective(800px) rotateY(0deg) scale(1.03);
+}
+
+.mockup-bar {
+  display: flex;
+  gap: 4px;
+  padding: 8px 10px;
+  background: var(--surface-elevated);
+  border-bottom: 1px solid var(--border);
+}
+
+.mockup-bar span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  opacity: 0.3;
+}
+
+.mockup-bar span:nth-child(1) {
+  background: #ff5f57;
+  opacity: 0.7;
+}
+
+.mockup-bar span:nth-child(2) {
+  background: #febc2e;
+  opacity: 0.7;
+}
+
+.mockup-bar span:nth-child(3) {
+  background: #28c840;
+  opacity: 0.7;
+}
+
+.mockup-content {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mockup-nav {
+  height: 8px;
+  background: var(--surface-elevated);
+  border-radius: 4px;
+  width: 60%;
+}
+
+.mockup-hero {
+  height: 32px;
+  background: linear-gradient(
+    135deg,
+    rgba(94, 234, 212, 0.08),
+    rgba(94, 234, 212, 0.03)
+  );
+  border-radius: 6px;
+  border: 1px solid rgba(94, 234, 212, 0.1);
+}
+
+.mockup-blocks {
+  display: flex;
+  gap: 6px;
+}
+
+.mockup-block {
+  flex: 1;
+  height: 24px;
+  background: var(--surface-elevated);
+  border-radius: 4px;
+}
+
+.mockup-block-short {
+  flex: 0.5;
+}
+
+@media (max-width: 768px) {
+  .work {
+    padding: 3.5rem 0;
+  }
+
+  .work-bento {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+
+  .work-card-large {
+    grid-column: span 1;
+    grid-row: span 1;
+    aspect-ratio: 16 / 10;
+  }
+
+  .work-card-wide {
+    grid-column: span 1;
+    aspect-ratio: 16 / 10;
+  }
+
+  .work-card {
+    aspect-ratio: 16 / 10;
+  }
+
+  .work-header {
+    margin-bottom: 2.5rem;
+  }
+}

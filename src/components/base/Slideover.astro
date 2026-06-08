@@ -32,7 +32,6 @@ import { projects } from '@/data/projects';
       const p = PROJECTS.find((x) => x.id === projectId);
       if (!p) return;
       const listHtml = p.list.map(([k, v]) => `<div class="slideover-list-item"><span class="slideover-list-key">${escapeHtml(k)}</span><span class="slideover-list-value">${escapeHtml(v)}</span></div>`).join('');
-      const worksHtml = p.worksUrl ? `<a href="${p.worksUrl}" class="slideover-works">${escapeHtml(p.worksText || 'Подробнее')} <span>→</span></a>` : '';
       const philosophyHtml = p.philosophy ? `<div class="slideover-philosophy">${p.philosophy.map((l) => `<p>${escapeHtml(l)}</p>`).join('')}</div>` : '';
       content.innerHTML = `
         <span class="slideover-tag">${escapeHtml(p.tag)}</span>
@@ -40,8 +39,7 @@ import { projects } from '@/data/projects';
         <p class="slideover-desc">${escapeHtml(p.desc)}</p>
         <div class="slideover-list">${listHtml}</div>
         ${philosophyHtml}
-        ${worksHtml}
-        <a href="${p.cta}" class="slideover-cta" target="_blank" rel="noopener">${escapeHtml(p.ctaText)} <span>↗</span></a>
+        <a href="${p.cta}" class="slideover-cta" ${p.cta.startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>${escapeHtml(p.ctaText)} <span>↗</span></a>
       `;
       slideover.classList.add('active');
       document.body.classList.add('menu-open');

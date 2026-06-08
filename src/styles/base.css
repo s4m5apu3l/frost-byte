@@ -1,0 +1,79 @@
+:root {
+  --bg: #050505;
+  --surface: #161616;
+  --surface-elevated: #111111;
+  --text: #f2f2f2;
+  --text-muted: #888888;
+  --accent: #5eead4;
+  --accent-glow: rgba(94, 234, 212, 0.15);
+  --border: rgba(255, 255, 255, 0.08);
+  --font: "Onest", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.875rem 1.75rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 100px;
+  opacity: 0;
+  transform: translateY(15px);
+  transition:
+    transform 0.3s cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.15);
+  font-size: 0.7rem;
+  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.btn-primary:hover .btn-arrow {
+  transform: translate(2px, -2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hero-orb,
+  .footer-orb {
+    display: none;
+  }
+
+  .noise {
+    display: none;
+  }
+}

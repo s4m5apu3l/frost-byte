@@ -37,10 +37,16 @@ import { SITE } from '@/consts';
             <a href={SITE.telegram} class="footer-link">Telegram</a>
             <a href={`mailto:${SITE.email}`} class="footer-link">Email</a>
           </div>
+          <div class="footer-links-col">
+            <span class="footer-links-title">Документы</span>
+            <a href="/legal/privacy" class="footer-link">Конфиденциальность</a>
+            <a href="/legal/terms" class="footer-link">Соглашение</a>
+            <a href="/legal/consent" class="footer-link">Согласие на ПД</a>
+          </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copyright"><span class="year">2025</span> <span class="accent">iind</span>ev. All rights reserved.</span>
+        <span class="footer-copyright">&copy; <span class="year">{new Date().getFullYear()}</span> <span class="accent">iind</span>ev</span>
         <a href={`mailto:${SITE.email}`} class="footer-email">{SITE.email}</a>
       </div>
     </div>

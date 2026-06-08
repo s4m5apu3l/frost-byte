@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { lendosProjects } from '@/data/projects';
 ---
 
 <BaseLayout
@@ -28,25 +29,31 @@ import BaseLayout from '@layouts/BaseLayout.astro';
   <section class="works-grid-section">
     <div class="l-wrapper">
       <div class="works-grid" id="worksGrid">
-        <div class="works-card">
-          <div class="works-card-mockup">
-            <div class="work-card-mockup">
-              <div class="mockup-bar"><span></span><span></span><span></span></div>
-              <div class="mockup-content">
-                <div class="mockup-nav"></div>
-                <div class="mockup-hero"></div>
-                <div class="mockup-blocks">
-                  <div class="mockup-block"></div>
-                  <div class="mockup-block"></div>
+        {lendosProjects.map((lp) => (
+          <a href={lp.url} class="works-card" target="_blank" rel="noopener">
+            <div class="works-card-mockup">
+              {lp.image ? (
+                <img src={lp.image} alt={lp.name} class="works-card-screenshot" loading="lazy" />
+              ) : (
+                <div class="work-card-mockup">
+                  <div class="mockup-bar"><span></span><span></span><span></span></div>
+                  <div class="mockup-content">
+                    <div class="mockup-nav"></div>
+                    <div class="mockup-hero"></div>
+                    <div class="mockup-blocks">
+                      <div class="mockup-block"></div>
+                      <div class="mockup-block"></div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
-          </div>
-          <div class="works-card-info">
-            <h3 class="works-card-name">Ваш сайт здесь</h3>
-            <span class="works-card-type">Лендинг</span>
-          </div>
-        </div>
+            <div class="works-card-info">
+              <h3 class="works-card-name">{lp.name}</h3>
+              <span class="works-card-type">{lp.desc}</span>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   </section>

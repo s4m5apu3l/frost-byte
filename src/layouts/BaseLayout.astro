@@ -53,28 +53,15 @@ const { preloadFonts, ...seo } = Astro.props;
       const state = w.__iindev;
 
       function runPageAnimations() {
-        const header = document.getElementById('header');
-        if (document.querySelector('.hero')) {
-          initHeroAnimations();
-        } else {
-          if (header) gsap.set(header, { y: 0, opacity: 1 });
-        }
-        if (
-          document.querySelector('.work') ||
-          document.querySelector('.about') ||
-          document.querySelector('.services') ||
-          document.querySelector('.process') ||
-          document.querySelector('.cta') ||
-          document.querySelector('.footer')
-        ) {
-          initScrollAnimations();
-        }
+        initHeroAnimations();
+        initScrollAnimations();
       }
 
       function boot() {
         if (!state.once) {
           state.once = true;
           document.documentElement.classList.add('skip-loader');
+          window.scrollTo(0, 0);
           initCursor();
           initBurger();
           initTransitionHandlers();

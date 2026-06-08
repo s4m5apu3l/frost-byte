@@ -87,6 +87,10 @@ import { SITE } from '@/consts';
               <input type="text" class="brief-input" id="brief-deadline" name="deadline" placeholder=" " />
               <label class="brief-label" for="brief-deadline">Желаемые сроки (необязательно)</label>
             </div>
+            <div class="brief-consent">
+              <input type="checkbox" class="brief-checkbox" id="brief-consent" name="consent" required />
+              <label class="brief-consent-text" for="brief-consent">Я согласен на <a href="/legal/consent">обработку персональных данных</a> в соответствии с <a href="/legal/privacy">Политикой конфиденциальности</a> и <a href="/legal/terms">Пользовательским соглашением</a></label>
+            </div>
           </div>
         </div>
       </form>
@@ -143,14 +147,10 @@ import { SITE } from '@/consts';
       step.querySelectorAll('.brief-error').forEach(e => { e.textContent = ''; e.style.display = 'none'; });
 
       inputs.forEach(input => {
-        if (!input.value.trim()) {
-          valid = false;
-          const errorEl = step.querySelector('#brief-error-' + input.name);
-          if (errorEl) {
-            const label = input.closest('.brief-field')?.querySelector('.brief-label')?.textContent || 'Поле';
-            errorEl.textContent = 'Укажите ' + label.toLowerCase();
-            errorEl.style.display = 'block';
-          }
+        if (input.type === 'checkbox') {
+          if (!input.checked) valid = false;
+        } else {
+          if (!input.value.trim()) valid = false;
         }
       });
       return valid;

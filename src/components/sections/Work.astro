@@ -30,7 +30,7 @@ import { projects } from '@/data/projects';
           )}
           <div class="work-card-bg"></div>
           <div class="work-card-inner">
-            <span class="work-card-label">{p.label}</span>
+            <span class="work-card-label">{p.accentLabel ? <><span class="accent">{p.accentLabel}</span> {p.label}</> : p.label}</span>
             <span class="work-card-sublabel">{p.sublabel}</span>
             <span class="work-card-badge">{p.badge}</span>
           </div>

@@ -1,0 +1,141 @@
+.works-hero {
+  padding: 5rem 0 3rem;
+}
+
+.works-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.works-title {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+}
+
+.works-desc {
+  font-size: 1.0625rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+.works-philosophy {
+  padding: 4rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.works-philosophy-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 680px;
+}
+
+.works-philosophy-text p {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.works-philosophy-text p:nth-child(3) {
+  color: var(--accent);
+}
+
+.works-grid-section {
+  padding: 1.5rem 0 5rem;
+}
+
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.works-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.works-card:hover {
+  border-color: rgba(94, 234, 212, 0.3);
+}
+
+.works-card-mockup {
+	padding: 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 220px;
+	flex: 1;
+	background: linear-gradient(
+		135deg,
+		rgba(94, 234, 212, 0.03) 0%,
+		transparent 50%
+	);
+	position: relative;
+	overflow: hidden;
+}
+
+.works-card-screenshot {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 8px;
+	opacity: 0.35;
+	filter: brightness(0.6) saturate(0.7);
+	transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+.works-card:hover .works-card-screenshot {
+	opacity: 0.6;
+	filter: brightness(0.75) saturate(0.85);
+}
+
+.works-card-mockup .work-card-mockup {
+  width: 80%;
+}
+
+.works-card-info {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.works-card-name {
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+.works-card-type {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .works-hero {
+    padding: 4rem 0 2rem;
+  }
+
+  .works-grid {
+    grid-template-columns: 1fr;
+  }
+}

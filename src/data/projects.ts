@@ -1,11 +1,20 @@
+export interface LendosProject {
+  name: string;
+  url: string;
+  desc: string;
+  image?: string;
+}
+
 export interface Project {
   id: string;
   tag: string;
   label: string;
+  accentLabel?: string;
   title: string;
   desc: string;
   philosophy?: string[];
   list: [string, string][];
+  lendosProjects?: LendosProject[];
   worksUrl?: string;
   worksText?: string;
   cta: string;
@@ -15,11 +24,41 @@ export interface Project {
   sublabel?: string;
 }
 
+export const lendosProjects: LendosProject[] = [
+  {
+    name: 'YHYAQ Danang',
+    url: 'https://iindev-solutions.github.io/yhyaq-danang/',
+    desc: 'Ысыах в Дананге - туристический лендинг',
+    image: '/assets/works/yhyaq-danang.png',
+  },
+  {
+    name: 'meinekiene',
+    url: 'https://iindev.codeberg.page/mienekiene/',
+    desc: 'Портфолио фотографа',
+  },
+  {
+    name: 'AUTOBARON',
+    url: 'https://iindev.codeberg.page/autobaron/',
+    desc: 'Авто под бюджет с доставкой по РФ',
+  },
+  {
+    name: 'ВинСтрой',
+    url: 'https://iindev.codeberg.page/vinstroy/',
+    desc: 'Строительство частных домов в Якутии',
+  },
+  {
+    name: 'OmuqAuto',
+    url: 'https://iindev.codeberg.page/omuq_auto/',
+    desc: 'Авто из Японии и Кореи под заказ в Якутске',
+  },
+];
+
 export const projects: Project[] = [
   {
     id: 'lendos',
     tag: 'Live',
-    label: 'iind ev lendos',
+    label: 'lendos',
+    accentLabel: 'iindev',
     title: 'iindev lendos',
     desc: 'От 30К за лендинг - норма рынка. Мы сломали формат. Делаем сайт из ваших данных, даём демо, вы сами называете цену. Никаких обязательств до результата.',
     philosophy: [
@@ -34,10 +73,11 @@ export const projects: Project[] = [
       ['Домен', 'Вы покупаете'],
       ['Код', 'Полностью ваш'],
     ],
+    lendosProjects,
     worksUrl: '/works/lendos/',
     worksText: 'Смотреть работы',
-    cta: 'https://t.me/iindev',
-    ctaText: 'Хочу такой сайт',
+    cta: '/works/lendos/',
+    ctaText: 'Смотреть работы',
     mockup: true,
     badge: 'Live',
     sublabel: 'Лендинг. Любой прайс.',

@@ -1,0 +1,369 @@
+.brief-page {
+  display: flex;
+  height: 100dvh;
+  overflow: hidden;
+  padding-top: calc(4rem + 1px);
+}
+
+.brief-left {
+  position: relative;
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 3rem;
+  overflow: hidden;
+  border-right: 1px solid var(--border);
+}
+
+.brief-left-orbs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.brief-orb {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.brief-orb-1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(94, 234, 212, 0.12) 0%,
+    transparent 70%
+  );
+  top: 10%;
+  left: -10%;
+}
+
+.brief-orb-2 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(15, 42, 40, 0.3) 0%,
+    transparent 70%
+  );
+  top: 50%;
+  right: -5%;
+}
+
+.brief-orb-3 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(
+    circle,
+    rgba(94, 234, 212, 0.08) 0%,
+    transparent 70%
+  );
+  bottom: 10%;
+  left: 30%;
+}
+
+.brief-left-content {
+  position: relative;
+  z-index: 1;
+}
+
+.brief-left-tag {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 100px;
+  padding: 0.3rem 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.brief-left-title {
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+.brief-left-desc {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 340px;
+}
+
+.brief-progress {
+  position: relative;
+  z-index: 1;
+  margin-top: 2.5rem;
+  height: 2px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.brief-progress-bar {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  width: 33.33%;
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brief-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 4rem;
+  overflow-y: auto;
+}
+
+.brief-step-counter {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 2.5rem;
+}
+
+.brief-step {
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.brief-step-active {
+  display: flex;
+}
+
+.brief-step-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.brief-step-title {
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 0.25rem;
+}
+
+.brief-step-desc {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.brief-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.brief-field {
+  position: relative;
+}
+
+.brief-input {
+  width: 100%;
+  padding: 1.25rem 0 0.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.brief-input::placeholder {
+  color: transparent;
+}
+
+.brief-input:focus {
+  border-bottom-color: var(--accent);
+}
+
+.brief-label {
+  position: absolute;
+  top: 1.25rem;
+  left: 0;
+  font-size: 1rem;
+  color: var(--text-muted);
+  opacity: 0.5;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: left;
+}
+
+.brief-input:focus ~ .brief-label,
+.brief-input:not(:placeholder-shown) ~ .brief-label {
+  top: 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 1;
+  color: var(--accent);
+}
+
+.brief-label-textarea {
+  top: 1.25rem;
+}
+
+.brief-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.brief-select-wrap {
+  position: relative;
+}
+
+.brief-select {
+  width: 100%;
+  padding: 1.25rem 0 0.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1rem;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.brief-select:focus {
+  border-bottom-color: var(--accent);
+}
+
+.brief-select:invalid {
+  color: var(--text-muted);
+}
+
+.brief-select option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.brief-error {
+  font-size: 0.6875rem;
+  color: #f87171;
+  display: none;
+  padding-top: 0.35rem;
+}
+
+.brief-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.brief-btn-back {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: color 0.2s ease;
+}
+
+.brief-btn-back:hover {
+  color: var(--text);
+}
+
+.brief-btn-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition:
+    transform 0.3s cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 0.3s ease;
+}
+
+.brief-btn-next:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+.brief-btn-next:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.brief-btn-arrow {
+  font-size: 0.85rem;
+}
+
+.brief-success {
+  display: none;
+}
+
+.brief-success a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+  .brief-page {
+    flex-direction: column;
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  .brief-left {
+    width: 100%;
+    padding: 5rem 1.5rem 2rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    min-height: 200px;
+  }
+
+  .brief-right {
+    padding: 2rem 1.5rem;
+  }
+
+  .brief-orb-1 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .brief-orb-2 {
+    width: 150px;
+    height: 150px;
+  }
+
+  .brief-orb-3 {
+    width: 120px;
+    height: 120px;
+  }
+}

@@ -1,0 +1,164 @@
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-end;
+  padding: 8rem 0 4rem;
+  overflow: hidden;
+}
+
+.hero-ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.hero-orb-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(94, 234, 212, 0.15) 0%,
+    transparent 70%
+  );
+  top: 15%;
+  left: -5%;
+}
+
+.hero-orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(15, 42, 40, 0.3) 0%,
+    transparent 70%
+  );
+  top: 45%;
+  right: -8%;
+}
+
+.hero-orb-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(94, 234, 212, 0.12) 0%,
+    transparent 70%
+  );
+  bottom: 5%;
+  left: 35%;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4rem;
+  width: 100%;
+}
+
+.hero-left {
+  flex: 1;
+}
+
+.hero-pre {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.hero-pre-base {
+  color: var(--accent);
+}
+
+.hero-pre-suffix {
+  color: var(--text-muted);
+  display: inline-block;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.hero-line-wrap {
+  display: block;
+  overflow: hidden;
+}
+
+.hero-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.hero-line-accent {
+  color: var(--accent);
+}
+
+.hero-right {
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.hero-desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.hero .btn-primary {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 4rem 0 2rem;
+  }
+
+  .hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3rem;
+  }
+
+  .hero-right {
+    max-width: 100%;
+  }
+
+  .hero-orb-1 {
+    width: 300px;
+    height: 300px;
+  }
+
+  .hero-orb-2 {
+    width: 250px;
+    height: 250px;
+  }
+
+  .hero-orb-3 {
+    width: 200px;
+    height: 200px;
+  }
+}
