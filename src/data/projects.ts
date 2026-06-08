@@ -1,6 +1,7 @@
 export interface Project {
   id: string;
   tag: string;
+  label: string;
   title: string;
   desc: string;
   philosophy?: string[];
@@ -18,6 +19,7 @@ export const projects: Project[] = [
   {
     id: 'lendos',
     tag: 'Live',
+    label: 'iind ev lendos',
     title: 'iindev lendos',
     desc: 'От 30К за лендинг - норма рынка. Мы сломали формат. Делаем сайт из ваших данных, даём демо, вы сами называете цену. Никаких обязательств до результата.',
     philosophy: [
@@ -40,10 +42,23 @@ export const projects: Project[] = [
     badge: 'Live',
     sublabel: 'Лендинг. Любой прайс.',
   },
+  {
+    id: 'sakha',
+    tag: 'Live',
+    label: 'Алфавит Новгородова',
+    title: 'Саха Алфавит Новгородова',
+    desc: 'Транслитератор саха тыла из кириллицы в алфавит С.А. Новгородова (1917). Интерактивный веб-инструмент для работы с якутским латинским алфавитом.',
+    list: [
+      ['Тип', 'Веб-инструмент'],
+      ['Язык', 'Саха тыла / Якутский'],
+      ['Технология', 'Vanilla JS'],
+      ['Алфавит', 'Новгородов 1917'],
+      ['Код', 'Открытый'],
+    ],
+    cta: 'https://iindev-solutions.github.io/sakha-alphabet-novgorodov/',
+    ctaText: 'Открыть проект',
+    badge: 'Live',
+    sublabel: 'Транслитератор. Саха тыла.',
+  },
 ];
 
-export const placeholders: { sublabel: string }[] = [
-  { sublabel: 'Тут может быть ваш сайт' },
-  { sublabel: 'Тут может быть ваш сайт' },
-  { sublabel: 'Тут может быть ваш сайт' },
-];

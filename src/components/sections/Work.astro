@@ -1,5 +1,5 @@
 ---
-import { projects, placeholders } from '@/data/projects';
+import { projects } from '@/data/projects';
 ---
 
 <section class="work" id="work">
@@ -30,36 +30,12 @@ import { projects, placeholders } from '@/data/projects';
           )}
           <div class="work-card-bg"></div>
           <div class="work-card-inner">
-            <span class="work-card-label"><span class="accent">iind</span>ev {p.id}</span>
+            <span class="work-card-label">{p.label}</span>
             <span class="work-card-sublabel">{p.sublabel}</span>
             <span class="work-card-badge">{p.badge}</span>
           </div>
         </div>
       ))}
-      <div class="work-card" data-tilt>
-        <div class="work-card-bg"></div>
-        <div class="work-card-inner">
-          <span class="work-card-label">Ваш проект</span>
-          <span class="work-card-sublabel">Тут может быть ваш сайт</span>
-          <span class="work-card-badge">Coming soon</span>
-        </div>
-      </div>
-      <div class="work-card" data-tilt>
-        <div class="work-card-bg"></div>
-        <div class="work-card-inner">
-          <span class="work-card-label">Ваш проект</span>
-          <span class="work-card-sublabel">Тут может быть ваш сайт</span>
-          <span class="work-card-badge">Coming soon</span>
-        </div>
-      </div>
-      <div class="work-card work-card-wide" data-tilt>
-        <div class="work-card-bg"></div>
-        <div class="work-card-inner">
-          <span class="work-card-label">Ваш проект</span>
-          <span class="work-card-sublabel">Тут может быть ваш сайт</span>
-          <span class="work-card-badge">Coming soon</span>
-        </div>
-      </div>
     </div>
   </div>
 </section>

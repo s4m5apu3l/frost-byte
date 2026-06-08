@@ -1444,6 +1444,7 @@ body.is-loading #heroLoader {
 
 .footer-main {
 	display: flex;
+	flex-wrap: wrap;
 	gap: 4rem;
 	margin-bottom: 2rem;
 }
