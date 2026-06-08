@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://iindev.ru/sitemap-index.xml
