@@ -1,6 +1,6 @@
 export const SITE = {
   name: 'iindev',
-  url: 'https://iindev.ru',
+  url: 'https://iindev.xyz',
   ogImage: '/assets/og-image.png',
   logo: '/assets/favicon.svg',
   description:
@@ -14,5 +14,5 @@ export const NAV = [
   { href: '/#work', label: 'Работы' },
   { href: '/#about', label: 'О нас' },
   { href: '/#services', label: 'Услуги' },
-  { href: '/#contact', label: 'Контакты' },
+  { href: '/brief', label: 'Бриф' },
 ] as const;

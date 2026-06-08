@@ -1,9 +1,12 @@
 ---
 const stats = [
-  { title: 'Скорость', num: '2', text: 'недели от старта до запуска.' },
-  { title: 'Прозрачность', num: '100%', text: 'Код и доступы — ваши, без исключений.' },
-  { title: 'Поддержка', num: '∞', text: 'Остаемся на связи после сдачи.' },
+  { title: 'Опыт', num: '6', suffix: '+ лет', text: 'От госзаказов до стартапов.' },
+  { title: 'Прозрачность', num: '100', suffix: '%', text: 'Код и доступы - ваши. Без исключений.' },
+  { title: 'Оценка', num: '24', suffix: 'ч', text: 'Узнаете сроки и стоимость за сутки.' },
+  { title: 'Подход', num: '', suffix: 'Сначала делаем', text: 'Потом вы решаете, сколько это стоит.' },
 ];
+
+const tech = ['Битрикс', 'Тильда', 'WordPress', '1С', 'Telegram', 'SEO', 'Custom'];
 ---
 
 <section class="about" id="about">
@@ -11,17 +14,24 @@ const stats = [
     <div class="about-inner">
       <div class="about-left">
         <h2 class="about-title">
-          <span class="about-line">Мы не классическое агентство.</span>
-          <span class="about-line">Мы используем <span class="about-accent">AI, чтобы быстрее</span></span>
-          <span class="about-line">и лучше создавать.</span>
+          <span class="about-line">AI ускоряет. Человек решает.</span>
+          <span class="about-line">За каждым проектом - <span class="about-accent">живая команда</span>,</span>
+          <span class="about-line">а не промпт.</span>
         </h2>
+        <div class="about-tech">
+          {tech.map((t) => (
+            <span class="about-tech-pill">{t}</span>
+          ))}
+        </div>
       </div>
       <div class="about-right">
         <div class="about-grid">
           {stats.map((s) => (
             <div class="about-stat">
               <h3 class="about-stat-title">{s.title}</h3>
-              <span class="about-stat-num">{s.num}</span>
+              <span class="about-stat-num" data-count={s.num || undefined}>
+                {s.num ? s.num : ''}<span class="about-stat-suffix">{s.suffix}</span>
+              </span>
               <p class="about-stat-text">{s.text}</p>
             </div>
           ))}

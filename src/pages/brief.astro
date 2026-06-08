@@ -1,0 +1,212 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { SITE } from '@/consts';
+---
+
+<BaseLayout title="Бриф - iindev" description="Расскажите о проекте. Оценим за 24 часа." noindex={true}>
+  <div class="brief-page">
+    <div class="brief-left">
+      <div class="brief-left-orbs">
+        <div class="brief-orb brief-orb-1"></div>
+        <div class="brief-orb brief-orb-2"></div>
+        <div class="brief-orb brief-orb-3"></div>
+      </div>
+      <div class="brief-left-content">
+        <h2 class="brief-left-title">Расскажите о проекте</h2>
+        <p class="brief-left-desc">Оценим сроки и стоимость за 24 часа. Без обязательств.</p>
+      </div>
+      <div class="brief-progress">
+        <div class="brief-progress-bar" id="briefProgressBar"></div>
+      </div>
+    </div>
+    <div class="brief-right">
+      <div class="brief-step-counter"><span id="briefStepCurrent">01</span> / <span id="briefStepTotal">03</span></div>
+
+      <form class="brief-form" id="brief-form" novalidate>
+        <div class="brief-step brief-step-active" data-step="1">
+          <span class="brief-step-label">Шаг 1</span>
+          <h1 class="brief-step-title">Кто вы?</h1>
+          <p class="brief-step-desc">Начнём с основ.</p>
+          <div class="brief-fields">
+            <div class="brief-field">
+              <input type="text" class="brief-input" id="brief-name" name="name" placeholder=" " required autocomplete="name" />
+              <label class="brief-label" for="brief-name">Имя или компания</label>
+              <span class="brief-error" id="brief-error-name"></span>
+            </div>
+            <div class="brief-field">
+              <input type="text" class="brief-input" id="brief-contact" name="contact" placeholder=" " required />
+              <label class="brief-label" for="brief-contact">Telegram или телефон</label>
+              <span class="brief-error" id="brief-error-contact"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="brief-step" data-step="2">
+          <span class="brief-step-label">Шаг 2</span>
+          <h1 class="brief-step-title">Какой проект?</h1>
+          <p class="brief-step-desc">Понимаем задачу - предлагаем решение.</p>
+          <div class="brief-fields">
+            <div class="brief-field">
+              <div class="brief-select-wrap">
+                <select class="brief-select" id="brief-type" name="type">
+                  <option value="" disabled selected>Тип проекта</option>
+                  <option value="Лендинг">Лендинг</option>
+                  <option value="Корпоративный сайт">Корпоративный сайт</option>
+                  <option value="Интернет-магазин">Интернет-магазин</option>
+                  <option value="Telegram бот">Telegram бот</option>
+                  <option value="AI/автоматизация">AI и автоматизация</option>
+                  <option value="SEO">SEO и аналитика</option>
+                  <option value="Другое">Другое</option>
+                </select>
+              </div>
+            </div>
+            <div class="brief-field">
+              <div class="brief-select-wrap">
+                <select class="brief-select" id="brief-budget" name="budget">
+                  <option value="" disabled selected>Бюджет</option>
+                  <option value="до 30К">до 30 000 ₽</option>
+                  <option value="30-100К">30 000 - 100 000 ₽</option>
+                  <option value="100К+">100 000+ ₽</option>
+                  <option value="Не знаю">Пока не знаю</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="brief-step" data-step="3">
+          <span class="brief-step-label">Шаг 3</span>
+          <h1 class="brief-step-title">Детали</h1>
+          <p class="brief-step-desc">Чем подробнее - тем точнее оценка.</p>
+          <div class="brief-fields">
+            <div class="brief-field">
+              <textarea class="brief-input brief-textarea" id="brief-msg" name="msg" rows="4" placeholder=" "></textarea>
+              <label class="brief-label brief-label-textarea" for="brief-msg">Что нужно сделать</label>
+            </div>
+            <div class="brief-field">
+              <input type="text" class="brief-input" id="brief-deadline" name="deadline" placeholder=" " />
+              <label class="brief-label" for="brief-deadline">Желаемые сроки (необязательно)</label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="brief-nav">
+        <button class="brief-btn-back" id="brief-back" type="button" style="visibility:hidden;">Назад</button>
+        <button class="brief-btn-next" id="brief-next" type="button">Далее <span class="brief-btn-arrow">→</span></button>
+      </div>
+
+      <div class="brief-success" id="brief-success" style="display:none;">
+        <h1 class="brief-step-title">Отправлено</h1>
+        <p class="brief-step-desc">Свяжемся в течение 24 часов. Если срочно - пишите в <a href={SITE.telegram} target="_blank" rel="noopener">Telegram</a>.</p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script is:inline define:vars={{ gasUrl: "https://script.google.com/macros/s/AKfycbxzwm-NuZULK_iXCx5AVHYYzG372HkOAK1uhUSUrcgsJIjU1-bjrJApxVQ9f7Luv3yV/exec" }}>
+  function initBrief() {
+    const form = document.getElementById('brief-form');
+    if (!form || form.dataset.briefInit) return;
+    form.dataset.briefInit = '1';
+
+    const steps = form.querySelectorAll('.brief-step');
+    const totalSteps = steps.length;
+    const backBtn = document.getElementById('brief-back');
+    const nextBtn = document.getElementById('brief-next');
+    const progressBar = document.getElementById('briefProgressBar');
+    const stepCurrent = document.getElementById('briefStepCurrent');
+    const stepTotal = document.getElementById('briefStepTotal');
+    const successEl = document.getElementById('brief-success');
+
+    let current = 0;
+
+    stepTotal.textContent = '0' + totalSteps;
+
+    function showStep(index) {
+      steps.forEach((s, i) => {
+        s.classList.toggle('brief-step-active', i === index);
+      });
+      backBtn.style.visibility = index === 0 ? 'hidden' : 'visible';
+      nextBtn.textContent = index === totalSteps - 1 ? 'Отправить' : 'Далее';
+      if (index < totalSteps - 1) {
+        nextBtn.innerHTML = 'Далее <span class="brief-btn-arrow">\u2192</span>';
+      }
+      stepCurrent.textContent = '0' + (index + 1);
+      progressBar.style.width = ((index + 1) / totalSteps * 100) + '%';
+    }
+
+    function validateStep(index) {
+      const step = steps[index];
+      const inputs = step.querySelectorAll('[required]');
+      let valid = true;
+      step.querySelectorAll('.brief-error').forEach(e => { e.textContent = ''; e.style.display = 'none'; });
+
+      inputs.forEach(input => {
+        if (!input.value.trim()) {
+          valid = false;
+          const errorEl = step.querySelector('#brief-error-' + input.name);
+          if (errorEl) {
+            const label = input.closest('.brief-field')?.querySelector('.brief-label')?.textContent || 'Поле';
+            errorEl.textContent = 'Укажите ' + label.toLowerCase();
+            errorEl.style.display = 'block';
+          }
+        }
+      });
+      return valid;
+    }
+
+    nextBtn.addEventListener('click', async () => {
+      if (!validateStep(current)) return;
+
+      if (current < totalSteps - 1) {
+        current++;
+        showStep(current);
+        return;
+      }
+
+      const name = document.getElementById('brief-name').value.trim();
+      const contact = document.getElementById('brief-contact').value.trim();
+      const type = document.getElementById('brief-type').value;
+      const budget = document.getElementById('brief-budget').value;
+      const msg = document.getElementById('brief-msg').value.trim();
+      const deadline = document.getElementById('brief-deadline').value.trim();
+
+      nextBtn.disabled = true;
+      nextBtn.textContent = 'Отправка...';
+
+      try {
+        const r = await fetch(gasUrl, {
+          method: 'POST',
+          body: JSON.stringify({ name, phone: contact, type: type || 'Не указан', budget: budget || 'Не указан', message: msg, deadline: deadline || 'Не указан' }),
+        });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        const result = await r.json();
+        if (result && result.success) {
+          form.style.display = 'none';
+          successEl.style.display = 'block';
+          document.querySelector('.brief-nav').style.display = 'none';
+          progressBar.style.width = '100%';
+          stepCurrent.textContent = '0' + totalSteps;
+          if (window.__iindev?.showToast) window.__iindev.showToast('Бриф отправлен!');
+        } else {
+          throw new Error(result?.error || 'Unknown');
+        }
+      } catch (err) {
+        console.error('Brief error:', err);
+        nextBtn.disabled = false;
+        nextBtn.innerHTML = 'Далее <span class="brief-btn-arrow">\u2192</span>';
+        alert('Ошибка отправки. Напишите в Telegram: @iindev');
+      }
+    });
+
+    backBtn.addEventListener('click', () => {
+      if (current > 0) {
+        current--;
+        showStep(current);
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', initBrief);
+</script>

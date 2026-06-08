@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://iindev.ru',
+  site: 'https://iindev.xyz',
   output: 'static',
   trailingSlash: 'ignore',
   build: {

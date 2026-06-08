@@ -13,111 +13,11 @@ import { SITE } from '@/consts';
       </div>
       <div class="cta-right">
         <p class="cta-desc">Расскажите, что нужно. Оценим за 24 часа.</p>
-        <form class="cta-form" id="contact-form" novalidate>
-          <div class="form-field">
-            <input type="text" class="form-input" id="form-name" name="name" placeholder=" " required />
-            <label class="form-label" for="form-name">Имя или компания</label>
-            <span class="form-error" id="form-error-name" role="alert"></span>
-          </div>
-          <div class="form-field">
-            <input type="text" class="form-input" id="form-contact" name="contact" placeholder=" " required />
-            <label class="form-label" for="form-contact">Telegram или телефон</label>
-            <span class="form-error" id="form-error-contact" role="alert"></span>
-          </div>
-          <div class="form-field">
-            <textarea class="form-input form-textarea" id="form-msg" name="msg" rows="1" placeholder=" "></textarea>
-            <label class="form-label form-label-textarea" for="form-msg">Что нужно сделать</label>
-          </div>
-          <div class="form-footer">
-            <button type="submit" class="form-submit" id="form-submit">Отправить<span class="form-submit-arrow">↗</span></button>
-            <div class="form-status" id="form-loading" style="display:none;">Отправка...</div>
-            <div class="form-success" id="form-success" style="display:none;">Свяжемся в течение 24 часов ✓</div>
-            <div class="form-error-global" id="form-error-global" style="display:none;" role="alert">
-              Ошибка. Напишите в <a href={SITE.telegram} target="_blank" rel="noopener">Telegram</a>
-            </div>
-          </div>
-        </form>
+        <div class="cta-buttons">
+          <a href="/brief" class="cta-btn">Заполнить бриф <span class="cta-btn-arrow">→</span></a>
+          <a href={SITE.telegram} target="_blank" rel="noopener" class="cta-btn cta-btn-ghost">Написать в Telegram</a>
+        </div>
       </div>
     </div>
   </div>
 </section>
-
-<script is:inline define:vars={{ gasUrl: "https://script.google.com/macros/s/AKfycbxzwm-NuZULK_iXCx5AVHYYzG372HkOAK1uhUSUrcgsJIjU1-bjrJApxVQ9f7Luv3yV/exec" }}>
-  function showToast(msg) {
-    const toast = document.getElementById('toast');
-    const text = document.getElementById('toast-text');
-    if (!toast || !text) return;
-    text.textContent = msg;
-    toast.classList.remove('hide');
-    toast.classList.add('show');
-    setTimeout(() => {
-      toast.classList.remove('show');
-      toast.classList.add('hide');
-      setTimeout(() => toast.classList.remove('hide'), 300);
-    }, 2500);
-  }
-
-  function initContact() {
-    const form = document.getElementById('contact-form');
-    if (!form) return;
-
-    const submitBtn = document.getElementById('form-submit');
-    const successEl = document.getElementById('form-success');
-    const loadingEl = document.getElementById('form-loading');
-    const errorEl = document.getElementById('form-error-global');
-    const errorName = document.getElementById('form-error-name');
-    const errorContact = document.getElementById('form-error-contact');
-
-    function clearErrors() {
-      [errorName, errorContact, errorEl].forEach((el) => {
-        if (el) { el.style.display = 'none'; el.textContent = ''; }
-      });
-    }
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      clearErrors();
-      const name = document.getElementById('form-name').value.trim();
-      const contact = document.getElementById('form-contact').value.trim();
-      const msg = document.querySelector('textarea[name="msg"]').value.trim();
-      let hasError = false;
-      if (!name) { errorName.textContent = 'Укажите имя или компанию'; errorName.style.display = 'block'; hasError = true; }
-      if (!contact) { errorContact.textContent = 'Укажите Telegram или телефон'; errorContact.style.display = 'block'; hasError = true; }
-      if (hasError) return;
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Отправка...';
-      loadingEl.style.display = 'block';
-      successEl.style.display = 'none';
-      errorEl.style.display = 'none';
-
-      try {
-        const r = await fetch(gasUrl, {
-          method: 'POST',
-          body: JSON.stringify({ name, phone: contact, type: 'AI / сайт / SEO / настройка', message: msg }),
-        });
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        const result = await r.json();
-        if (result && result.success) {
-          loadingEl.style.display = 'none';
-          successEl.style.display = 'block';
-          showToast('Заявка отправлена!');
-          form.reset();
-          setTimeout(() => { successEl.style.display = 'none'; }, 6000);
-        } else {
-          throw new Error(result?.error || 'Unknown');
-        }
-      } catch (err) {
-        console.error('Form error:', err);
-        loadingEl.style.display = 'none';
-        errorEl.style.display = 'block';
-        showToast('Ошибка отправки. Попробуйте позже.');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Отправить';
-      }
-    });
-  }
-
-  document.addEventListener('astro:page-load', initContact);
-</script>

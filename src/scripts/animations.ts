@@ -153,6 +153,30 @@ function initAbout() {
   });
   gsap.fromTo('.about-stat', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.15, ease: 'power3.out', scrollTrigger: statST });
   scrollTriggers.push(statST);
+
+  document.querySelectorAll<HTMLElement>('.about-stat-num[data-count]').forEach((el) => {
+    const target = parseInt(el.dataset.count!, 10);
+    if (isNaN(target)) return;
+    const suffix = el.querySelector('.about-stat-suffix');
+    const suffixText = suffix?.textContent || '';
+    const obj = { val: 0 };
+    gsap.to(obj, {
+      val: target,
+      duration: 1.5,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 85%' },
+      onUpdate: () => {
+        el.innerHTML = Math.round(obj.val) + `<span class="about-stat-suffix">${suffixText}</span>`;
+      },
+    });
+  });
+
+  const techST = ScrollTrigger.create({
+    trigger: '.about-tech',
+    start: 'top 90%',
+  });
+  gsap.fromTo('.about-tech-pill', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.06, ease: 'power3.out', scrollTrigger: techST });
+  scrollTriggers.push(techST);
 }
 
 function initWork() {
@@ -213,16 +237,19 @@ function initServices() {
     const inner = document.querySelector<HTMLElement>('.services-inner');
     if (!inner) return;
     const getScrollAmount = () => -(inner.scrollWidth - window.innerWidth);
-    const pinST = ScrollTrigger.create({
-      trigger: '.services',
-      start: 'top top',
-      end: () => '+=' + Math.abs(getScrollAmount()),
-      pin: true,
-      scrub: 1,
-      invalidateOnRefresh: true,
+    const tween = gsap.to(inner, {
+      x: getScrollAmount,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.services',
+        start: 'top top',
+        end: () => '+=' + Math.abs(getScrollAmount()),
+        pin: true,
+        scrub: 1,
+        invalidateOnRefresh: true,
+      },
     });
-    gsap.to(inner, { x: getScrollAmount, ease: 'none', scrollTrigger: pinST });
-    scrollTriggers.push(pinST);
+    scrollTriggers.push(tween.scrollTrigger!);
   });
 }
 
