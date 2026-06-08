@@ -4,7 +4,7 @@ export const SITE = {
   ogImage: '/assets/og-image.png',
   logo: '/assets/favicon.svg',
   description:
-    'Веб-разработка, AI-автоматизация, SEO и Telegram-боты для малого бизнеса. Запуск за 2 недели. Код и доступы — ваши.',
+    'Веб-разработка, AI-автоматизация, SEO и Telegram-боты. Запуск за 2 недели. Код и доступы - ваши.',
   locale: 'ru_RU',
   telegram: 'https://t.me/iindev',
   email: 'iindev@tuta.io',

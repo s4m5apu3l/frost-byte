@@ -64,3 +64,18 @@ label[for],
     display: none;
   }
 }
+
+@media (prefers-reduced-motion: reduce) and (hover: hover) {
+  body,
+  a,
+  button,
+  [role="button"],
+  input,
+  textarea,
+  select,
+  label[for],
+  .work-card,
+  .services-card {
+    cursor: auto;
+  }
+}

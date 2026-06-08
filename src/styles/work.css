@@ -40,10 +40,6 @@
   grid-row: span 1;
 }
 
-.work-card-wide {
-  grid-column: span 2;
-}
-
 .work-card-bg {
   position: absolute;
   inset: 0;
@@ -228,11 +224,6 @@
   .work-card-large {
     grid-column: span 1;
     grid-row: span 1;
-    aspect-ratio: 16 / 10;
-  }
-
-  .work-card-wide {
-    grid-column: span 1;
     aspect-ratio: 16 / 10;
   }
 

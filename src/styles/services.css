@@ -42,22 +42,6 @@
   display: block;
 }
 
-.services-hint {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.services-hint::before {
-  content: "";
-  display: inline-block;
-  width: 40px;
-  height: 2px;
-  background: var(--accent);
-}
-
 .services-track-wrapper {
   width: max-content;
   overflow: visible;

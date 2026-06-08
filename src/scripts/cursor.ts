@@ -14,7 +14,7 @@ let dotXTo: QuickToFn | null = null;
 let dotYTo: QuickToFn | null = null;
 
 const hoverSelector =
-  'a, button, [role="button"], input, textarea, select, .work-card, .services-card, .menu-link, .form-submit, .slideover-close, .slideover-cta, .slideover-works';
+  'a, button, [role="button"], input, textarea, select, .work-card, .services-card, .menu-link, .slideover-close, .slideover-cta';
 
 const alphaCache: string[] = [];
 for (let i = 0; i < LENGTH; i++) {

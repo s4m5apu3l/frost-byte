@@ -8,6 +8,7 @@ let cycling = false;
 let suffixIndex = 0;
 let cycleTimeout: number | null = null;
 let scrollTriggers: ScrollTrigger[] = [];
+let headerScrollHandler: (() => void) | null = null;
 
 function cycleSuffix() {
   if (!cycling) return;
@@ -53,26 +54,25 @@ export function initHeroAnimations() {
 }
 
 function initHeaderScroll(header: HTMLElement) {
+  if (headerScrollHandler) window.removeEventListener('scroll', headerScrollHandler);
   let lastScroll = 0;
   let ticking = false;
-  window.addEventListener(
-    'scroll',
-    () => {
-      if (document.body.classList.contains('menu-open') || ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const current = window.scrollY;
-        if (current > lastScroll && current > 100) {
-          header.classList.add('hidden');
-        } else {
-          header.classList.remove('hidden');
-        }
-        lastScroll = current;
-        ticking = false;
-      });
-    },
-    { passive: true }
-  );
+  const handler = () => {
+    if (document.body.classList.contains('menu-open') || ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const current = window.scrollY;
+      if (current > lastScroll && current > 100) {
+        gsap.to(header, { y: -100, duration: 0.3, ease: 'power3.inOut' });
+      } else {
+        gsap.to(header, { y: 0, duration: 0.3, ease: 'power3.out' });
+      }
+      lastScroll = current;
+      ticking = false;
+    });
+  };
+  window.addEventListener('scroll', handler, { passive: true });
+  headerScrollHandler = handler;
 }
 
 function initAmbient() {
@@ -188,38 +188,6 @@ function initWork() {
   const cardST = ScrollTrigger.create({ trigger: '.work-bento', start: 'top 80%' });
   gsap.fromTo('.work-card', { opacity: 0, y: 60, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.12, ease: 'power3.out', scrollTrigger: cardST });
   scrollTriggers.push(cardST);
-
-  initTilt();
-}
-
-function initTilt() {
-  const cards = document.querySelectorAll<HTMLElement>('[data-tilt]:not([data-project])');
-  if (!cards.length) return;
-  const rectCache = new WeakMap<HTMLElement, DOMRect>();
-  cards.forEach((c) => rectCache.set(c, c.getBoundingClientRect()));
-  let resizeTimer: number | null = null;
-  window.addEventListener('resize', () => {
-    if (resizeTimer) clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(() => {
-      cards.forEach((c) => rectCache.set(c, c.getBoundingClientRect()));
-    }, 200);
-  });
-  cards.forEach((card) => {
-    const rxTo = gsap.quickTo(card, 'rotateX', { duration: 0.4, ease: 'power2.out' });
-    const ryTo = gsap.quickTo(card, 'rotateY', { duration: 0.4, ease: 'power2.out' });
-    gsap.set(card, { transformPerspective: 1000 });
-    card.addEventListener('mousemove', (e) => {
-      const rect = rectCache.get(card);
-      if (!rect) return;
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const cx = rect.width / 2;
-      const cy = rect.height / 2;
-      rxTo(((y - cy) / cy) * -8);
-      ryTo(((x - cx) / cx) * 8);
-    });
-    card.addEventListener('mouseleave', () => { rxTo(0); ryTo(0); });
-  });
 }
 
 function initServices() {
@@ -273,28 +241,24 @@ function initCta() {
   const triggers: ScrollTrigger[] = [];
 
   const t1 = ScrollTrigger.create({ trigger: '.cta', start: 'top 80%' });
-  gsap.fromTo('.cta-label', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', scrollTrigger: t1 });
+  gsap.fromTo('.cta-line', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out', scrollTrigger: t1 });
   triggers.push(t1);
 
   const t2 = ScrollTrigger.create({ trigger: '.cta', start: 'top 75%' });
-  gsap.fromTo('.cta-line', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out', scrollTrigger: t2 });
+  gsap.fromTo('.cta-desc', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', scrollTrigger: t2, delay: 0.2 });
   triggers.push(t2);
 
   const t3 = ScrollTrigger.create({ trigger: '.cta', start: 'top 70%' });
-  gsap.fromTo('.cta-desc', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', scrollTrigger: t3, delay: 0.2 });
+  gsap.fromTo('.cta-buttons', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', scrollTrigger: t3 });
   triggers.push(t3);
 
-  const t4 = ScrollTrigger.create({ trigger: '.cta', start: 'top 65%' });
-  gsap.fromTo('.cta-form', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', scrollTrigger: t4 });
+  const t4 = ScrollTrigger.create({ trigger: '.footer', start: 'top 85%' });
+  gsap.fromTo('.footer-card', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: t4 });
   triggers.push(t4);
 
-  const t5 = ScrollTrigger.create({ trigger: '.footer', start: 'top 85%' });
-  gsap.fromTo('.footer-card', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: t5 });
+  const t5 = ScrollTrigger.create({ trigger: '.footer-main', start: 'top 85%' });
+  gsap.fromTo('.footer-links-col', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', scrollTrigger: t5 });
   triggers.push(t5);
-
-  const t6 = ScrollTrigger.create({ trigger: '.footer-main', start: 'top 85%' });
-  gsap.fromTo('.footer-links-col', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', scrollTrigger: t6 });
-  triggers.push(t6);
 
   scrollTriggers.push(...triggers);
 }

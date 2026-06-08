@@ -42,7 +42,6 @@ const { preloadFonts, ...seo } = Astro.props;
     </div>
 
     <script>
-      import { gsap } from 'gsap';
       import { initCursor } from '@scripts/cursor';
       import { initBurger } from '@scripts/burger';
       import { initLoader, initTransitionHandlers } from '@scripts/loader';
@@ -51,6 +50,21 @@ const { preloadFonts, ...seo } = Astro.props;
       const w = window as any;
       if (!w.__iindev) w.__iindev = {};
       const state = w.__iindev;
+
+      if (!state.showToast) {
+        state.showToast = (msg: string) => {
+          const el = document.getElementById('toast');
+          const text = document.getElementById('toast-text');
+          if (!el || !text) return;
+          text.textContent = msg;
+          el.classList.remove('hide');
+          el.classList.add('show');
+          setTimeout(() => {
+            el.classList.remove('show');
+            el.classList.add('hide');
+          }, 3000);
+        };
+      }
 
       function runPageAnimations() {
         initHeroAnimations();

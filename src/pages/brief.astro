@@ -25,7 +25,7 @@ import { SITE } from '@/consts';
       <form class="brief-form" id="brief-form" novalidate>
         <div class="brief-step brief-step-active" data-step="1">
           <span class="brief-step-label">Шаг 1</span>
-          <h1 class="brief-step-title">Кто вы?</h1>
+          <h2 class="brief-step-title">Кто вы?</h2>
           <p class="brief-step-desc">Начнём с основ.</p>
           <div class="brief-fields">
             <div class="brief-field">
@@ -43,7 +43,7 @@ import { SITE } from '@/consts';
 
         <div class="brief-step" data-step="2">
           <span class="brief-step-label">Шаг 2</span>
-          <h1 class="brief-step-title">Какой проект?</h1>
+          <h2 class="brief-step-title">Какой проект?</h2>
           <p class="brief-step-desc">Понимаем задачу - предлагаем решение.</p>
           <div class="brief-fields">
             <div class="brief-field">
@@ -76,7 +76,7 @@ import { SITE } from '@/consts';
 
         <div class="brief-step" data-step="3">
           <span class="brief-step-label">Шаг 3</span>
-          <h1 class="brief-step-title">Детали</h1>
+          <h2 class="brief-step-title">Детали</h2>
           <p class="brief-step-desc">Чем подробнее - тем точнее оценка.</p>
           <div class="brief-fields">
             <div class="brief-field">
@@ -101,7 +101,7 @@ import { SITE } from '@/consts';
       </div>
 
       <div class="brief-success" id="brief-success" style="display:none;">
-        <h1 class="brief-step-title">Отправлено</h1>
+        <h2 class="brief-step-title">Отправлено</h2>
         <p class="brief-step-desc">Свяжемся в течение 24 часов. Если срочно - пишите в <a href={SITE.telegram} target="_blank" rel="noopener">Telegram</a>.</p>
       </div>
     </div>
@@ -209,4 +209,8 @@ import { SITE } from '@/consts';
   }
 
   document.addEventListener('astro:page-load', initBrief);
+  document.addEventListener('astro:before-swap', () => {
+    const form = document.getElementById('brief-form');
+    if (form) form.dataset.briefInit = '';
+  });
 </script>

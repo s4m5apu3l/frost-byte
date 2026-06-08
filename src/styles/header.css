@@ -10,10 +10,6 @@
   transform: translateY(-80px);
 }
 
-.header.hidden {
-  transform: translateY(-100%);
-}
-
 .header-inner {
   display: flex;
   align-items: center;
@@ -73,10 +69,6 @@
   z-index: 90;
   visibility: hidden;
   overflow: hidden;
-}
-
-.menu-overlay.active {
-  visibility: visible;
 }
 
 .menu-panel {
@@ -206,16 +198,6 @@
   opacity: 1;
 }
 
-.menu-footer {
-  margin-top: auto;
-  padding-top: 2rem;
-}
-
-.menu-footer-copy {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
-
 @media (max-width: 768px) {
   .menu-panel {
     width: 100%;
@@ -231,10 +213,6 @@
 
   .menu-panel-inner {
     padding: 5rem 1.5rem 4rem;
-  }
-
-  .menu-footer {
-    padding: 1rem 1.5rem;
   }
 
   .menu-link {

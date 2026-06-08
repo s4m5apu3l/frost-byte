@@ -20,6 +20,8 @@ import { projects } from '@/data/projects';
   function initSlideover() {
     const slideover = document.getElementById('slideover');
     if (!slideover) return;
+    if (slideover.dataset.init) return;
+    slideover.dataset.init = '1';
     const backdrop = document.getElementById('slideoverBackdrop');
     const closeBtn = document.getElementById('slideoverClose');
     const content = document.getElementById('slideoverContent');
