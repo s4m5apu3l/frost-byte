@@ -16,45 +16,36 @@
 
 ## Architecture
 
-Static multi-page site. No framework. GSAP for all animation.
+Astro 5 static site. GSAP for all animation. Deployed to GitHub Pages (gh-pages branch) at iindev.xyz.
 
 ```
-index.html              — main landing
-works/
-  lendos.html           — iindev lendos works page
-styles.css              — shared CSS (all pages)
-app.js                  — shared JS (all pages)
+src/
+  pages/           — Astro pages (index, brief, 404, works/lendos)
+  components/      — Astro components (sections, base, ui)
+  scripts/         — TypeScript (animations, cursor, loader, burger)
+  styles/          — global.css
+  layouts/         — BaseLayout.astro
+  consts.ts        — SITE config, NAV links
+  data/            — projects.ts
+public/            — static assets copied to dist as-is
+  CNAME            — iindev.xyz (MUST exist for gh-pages custom domain)
+  .nojekyll        — MUST exist or GitHub Pages ignores _astro/ dir (MIME error)
+  assets/          — favicon, og-image, etc
 ```
 
-### Page transition system
+## Deployment
 
-Cross-page navigation with black overlay + iindev logo.
+**Branch:** `main` = source code, `gh-pages` = built output
 
-- `sessionStorage.iindev-transition` = flag between pages
-- `data-transition` attr on links = JS intercepts, shows overlay, navigates
-- `data-transition-back` attr = same but for back navigation
-- Target page: inline `<style>` + `<script>` in `<head>` renders overlay before external CSS loads (prevents white flash)
-- On index.html: `app.js` checks sessionStorage on load, skips loader animation if transition flag set
+**Deploy command:** `npx gh-pages -d dist --dotfiles`
 
-### Loader animation (index.html only)
-
-Word morph: `.lc` (i,i,n,d) → `.lw` (i,i,n,d,a) → `.lw` fly out → `.lv` (e,v) rise from below → iindev. `.lv` starts `display:none` so invisible chars don't occupy flex space.
-
-### Custom cursor
-
-`.cursor` (6px dot) + `.cursor-trail` (24px ring). Hover on interactive elements via **event delegation** (`mouseover`/`mouseout` + `e.target.closest()`), not per-element — works with dynamic content (slideover, etc). `cursor: none` on body + all interactive elements in CSS.
-
-### Menu overlay
-
-**Must be outside `<header>`** — `backdrop-filter` on header creates containing block that traps `position:fixed` children. Menu overlay is a sibling of header, direct child of `<body>`.
-
-### Slideover
-
-Project detail panel. Data-driven from `projects` object in app.js. Supports: tag, title, desc, list, philosophy (array of strings, last = accent), worksUrl (link to works page), cta. Rendered dynamically on open.
-
-### Form
-
-Inside `.cta-right` (not full-width card). No card styling — clean fields, stacked vertically. Floating labels. Posts to Google Apps Script.
+**CRITICAL — always verify before deploy:**
+1. `public/CNAME` must contain `iindev.xyz` — without it GitHub Pages resets custom domain
+2. `public/.nojekyll` must exist — without it GitHub Pages ignores `_astro/` (JS returns text/html MIME, site breaks)
+3. `astro.config.mjs` `site` must be `https://iindev.xyz`
+4. After build, verify `dist/CNAME` and `dist/.nojekyll` exist before running `npx gh-pages`
+5. Always use `--dotfiles` flag or `.nojekyll` won't be published (gh-pages npm package skips dotfiles by default)
+6. Never delete CNAME or .nojekyll from public/
 
 ## Sections (index.html)
 
@@ -65,7 +56,7 @@ Inside `.cta-right` (not full-width card). No card styling — clean fields, sta
 | About | 5rem 0 | 6rem 0 | Animated chars, stats grid |
 | Services | 100dvh pinned | auto | Horizontal scroll pinned |
 | Process | 4rem 0 | 3.5rem 0 | 5-step grid |
-| CTA | 5rem 0 3rem | 4rem 0 2.5rem | Title + inline form |
+| CTA | 5rem 0 3rem | 4rem 0 2.5rem | Title + button to /brief |
 | Footer | 0 | 0 | Card with ambient orbs |
 
 ## Design tokens
@@ -117,7 +108,7 @@ Inside `.cta-right` (not full-width card). No card styling — clean fields, sta
 
 ## Scope rules
 
-- Primary output: HTML + CSS + vanilla JS (no framework needed)
+- Primary output: Astro 5 + GSAP + TypeScript
 - Always GSAP-powered animations
 - Mobile-first, responsive
 - Accessible (focus states, reduced motion)
