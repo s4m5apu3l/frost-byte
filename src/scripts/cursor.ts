@@ -1,6 +1,6 @@
 import { gsap } from 'gsap';
 
-const LENGTH = 40;
+const LENGTH = 25;
 const SIZE = 4;
 const LERP = 0.4;
 
@@ -9,9 +9,17 @@ let points: { x: number; y: number }[] = [];
 let mouse = { x: 0, y: 0 };
 let active = false;
 let cleanup: (() => void) | null = null;
+type QuickToFn = ReturnType<typeof gsap.quickTo>;
+let dotXTo: QuickToFn | null = null;
+let dotYTo: QuickToFn | null = null;
 
 const hoverSelector =
   'a, button, [role="button"], input, textarea, select, .work-card, .services-card, .menu-link, .form-submit, .slideover-close, .slideover-cta, .slideover-works';
+
+const alphaCache: string[] = [];
+for (let i = 0; i < LENGTH; i++) {
+  alphaCache[i] = `rgba(94,234,212,${((1 - i / LENGTH) * 0.9).toFixed(3)})`;
+}
 
 function teardown() {
   if (rafId !== null) cancelAnimationFrame(rafId);
@@ -20,6 +28,8 @@ function teardown() {
   cleanup = null;
   active = false;
   points = [];
+  dotXTo = null;
+  dotYTo = null;
 }
 
 function init() {
@@ -37,6 +47,9 @@ function init() {
 
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
+  dotXTo = gsap.quickTo(dot, 'x', { duration: 0.18, ease: 'power3.out' });
+  dotYTo = gsap.quickTo(dot, 'y', { duration: 0.18, ease: 'power3.out' });
+
   function resize() {
     canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;
@@ -51,7 +64,8 @@ function init() {
   const onMove = (e: MouseEvent) => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
-    gsap.to(dot, { x: mouse.x - 3, y: mouse.y - 3, duration: 0.18, ease: 'power3.out', overwrite: 'auto' });
+    dotXTo!(mouse.x - 3);
+    dotYTo!(mouse.y - 3);
   };
   const onOver = (e: Event) => {
     const t = e.target as Element | null;
@@ -87,7 +101,6 @@ function init() {
   };
 
   function render() {
-    ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx!.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
     points[0].x = mouse.x;
@@ -104,10 +117,9 @@ function init() {
     ctx!.lineWidth = SIZE;
 
     for (let i = 1; i < points.length; i++) {
-      const p = points[i];
       const prev = points[i - 1];
-      const alpha = (1 - i / points.length) * 0.9;
-      ctx!.strokeStyle = `rgba(94, 234, 212, ${alpha.toFixed(3)})`;
+      const p = points[i];
+      ctx!.strokeStyle = alphaCache[i];
       ctx!.beginPath();
       ctx!.moveTo(prev.x, prev.y);
       ctx!.lineTo(p.x, p.y);

@@ -7,6 +7,7 @@ const suffixes = ['iinda', 'igidon', 'iiana djons', 'ustria spesodejdy', 'iebit 
 let cycling = false;
 let suffixIndex = 0;
 let cycleTimeout: number | null = null;
+let scrollTriggers: ScrollTrigger[] = [];
 
 function cycleSuffix() {
   if (!cycling) return;
@@ -47,13 +48,11 @@ export function initHeroAnimations() {
     .call(() => { cycling = true; cycleSuffix(); }, [], '+=0.5')
     .call(() => { gsap.set('.hero-line', { willChange: 'auto' }); });
 
-  initHeaderScroll();
+  initHeaderScroll(header);
   initAmbient();
 }
 
-function initHeaderScroll() {
-  const header = document.getElementById('header');
-  if (!header) return;
+function initHeaderScroll(header: HTMLElement) {
   let lastScroll = 0;
   let ticking = false;
   window.addEventListener(
@@ -105,6 +104,10 @@ function initAbout() {
   if (!document.querySelector('.about')) return;
   document.querySelectorAll<HTMLElement>('.about-line').forEach((line) => {
     const textNodes: { node: ChildNode; frag: DocumentFragment }[] = [];
+    const allChars: HTMLElement[] = [];
+    const normalChars: HTMLElement[] = [];
+    const accentChars: HTMLElement[] = [];
+
     line.childNodes.forEach((node) => {
       if (node.nodeType === 3 && node.textContent?.trim()) {
         const chars = node.textContent.split('');
@@ -114,6 +117,8 @@ function initAbout() {
           span.className = 'about-char';
           span.textContent = c === ' ' ? '\u00A0' : c;
           frag.appendChild(span);
+          allChars.push(span);
+          normalChars.push(span);
         });
         textNodes.push({ node, frag });
       } else if (node.nodeType === 1 && (node as HTMLElement).classList.contains('about-accent')) {
@@ -124,6 +129,8 @@ function initAbout() {
           span.className = 'about-char about-char--accent';
           span.textContent = c === ' ' ? '\u00A0' : c;
           frag.appendChild(span);
+          allChars.push(span);
+          accentChars.push(span);
         });
         textNodes.push({ node, frag });
       }
@@ -132,30 +139,32 @@ function initAbout() {
       node.parentNode?.replaceChild(frag, node);
     });
 
-    const all = line.querySelectorAll('.about-char');
-    const normal = line.querySelectorAll('.about-char:not(.about-char--accent)');
-    const accent = line.querySelectorAll('.about-char--accent');
-
-    gsap.fromTo(
-      all,
-      { opacity: 0.3, y: 20 },
-      { opacity: 1, y: 0, duration: 0.4, stagger: 0.03, ease: 'power3.out', scrollTrigger: { trigger: line, start: 'top 80%', end: 'top 40%', scrub: 1 } }
-    );
-    gsap.to(normal, { color: 'var(--text)', scrollTrigger: { trigger: line, start: 'top 80%', end: 'top 40%', scrub: 1 }, stagger: 0.03 });
-    gsap.to(accent, { color: 'var(--accent)', scrollTrigger: { trigger: line, start: 'top 80%', end: 'top 40%', scrub: 1 }, stagger: 0.03 });
+    const stConfig = { trigger: line, start: 'top 80%', end: 'top 40%', scrub: 1 };
+    const tl = gsap.timeline({ scrollTrigger: stConfig });
+    tl.fromTo(allChars, { opacity: 0.3, y: 20 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.03, ease: 'power3.out' })
+      .to(normalChars, { color: 'var(--text)', stagger: 0.03 }, 0)
+      .to(accentChars, { color: 'var(--accent)', stagger: 0.03 }, 0);
+    scrollTriggers.push(tl.scrollTrigger!);
   });
 
-  gsap.fromTo(
-    '.about-stat',
-    { opacity: 0, y: 40 },
-    { opacity: 1, y: 0, duration: 0.7, stagger: 0.15, ease: 'power3.out', scrollTrigger: { trigger: '.about-grid', start: 'top 80%' } }
-  );
+  const statST = ScrollTrigger.create({
+    trigger: '.about-grid',
+    start: 'top 80%',
+  });
+  gsap.fromTo('.about-stat', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.15, ease: 'power3.out', scrollTrigger: statST });
+  scrollTriggers.push(statST);
 }
 
 function initWork() {
   if (!document.querySelector('.work')) return;
-  gsap.fromTo('.work-title', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '.work', start: 'top 80%' } });
-  gsap.fromTo('.work-card', { opacity: 0, y: 60, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.12, ease: 'power3.out', scrollTrigger: { trigger: '.work-bento', start: 'top 80%' } });
+  const titleST = ScrollTrigger.create({ trigger: '.work', start: 'top 80%' });
+  gsap.fromTo('.work-title', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: titleST });
+  scrollTriggers.push(titleST);
+
+  const cardST = ScrollTrigger.create({ trigger: '.work-bento', start: 'top 80%' });
+  gsap.fromTo('.work-card', { opacity: 0, y: 60, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.12, ease: 'power3.out', scrollTrigger: cardST });
+  scrollTriggers.push(cardST);
+
   initTilt();
 }
 
@@ -164,7 +173,13 @@ function initTilt() {
   if (!cards.length) return;
   const rectCache = new WeakMap<HTMLElement, DOMRect>();
   cards.forEach((c) => rectCache.set(c, c.getBoundingClientRect()));
-  window.addEventListener('resize', () => cards.forEach((c) => rectCache.set(c, c.getBoundingClientRect())));
+  let resizeTimer: number | null = null;
+  window.addEventListener('resize', () => {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      cards.forEach((c) => rectCache.set(c, c.getBoundingClientRect()));
+    }, 200);
+  });
   cards.forEach((card) => {
     const rxTo = gsap.quickTo(card, 'rotateX', { duration: 0.4, ease: 'power2.out' });
     const ryTo = gsap.quickTo(card, 'rotateY', { duration: 0.4, ease: 'power2.out' });
@@ -185,45 +200,89 @@ function initTilt() {
 
 function initServices() {
   if (!document.querySelector('.services')) return;
-  gsap.fromTo('.services-label', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', scrollTrigger: { trigger: '.services', start: 'top 80%' } });
-  gsap.fromTo('.services-line', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: '.services', start: 'top 75%' } });
+  const labelST = ScrollTrigger.create({ trigger: '.services', start: 'top 80%' });
+  gsap.fromTo('.services-label', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', scrollTrigger: labelST });
+  scrollTriggers.push(labelST);
+
+  const lineST = ScrollTrigger.create({ trigger: '.services', start: 'top 75%' });
+  gsap.fromTo('.services-line', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out', scrollTrigger: lineST });
+  scrollTriggers.push(lineST);
 
   const mm = gsap.matchMedia();
   mm.add('(min-width: 769px)', () => {
     const inner = document.querySelector<HTMLElement>('.services-inner');
     if (!inner) return;
     const getScrollAmount = () => -(inner.scrollWidth - window.innerWidth);
-    gsap.to(inner, {
-      x: getScrollAmount,
-      ease: 'none',
-      scrollTrigger: { trigger: '.services', start: 'top top', end: () => '+=' + Math.abs(getScrollAmount()), pin: true, scrub: 1, invalidateOnRefresh: true },
+    const pinST = ScrollTrigger.create({
+      trigger: '.services',
+      start: 'top top',
+      end: () => '+=' + Math.abs(getScrollAmount()),
+      pin: true,
+      scrub: 1,
+      invalidateOnRefresh: true,
     });
-    ScrollTrigger.refresh();
+    gsap.to(inner, { x: getScrollAmount, ease: 'none', scrollTrigger: pinST });
+    scrollTriggers.push(pinST);
   });
 }
 
 function initProcess() {
   if (!document.querySelector('.process')) return;
-  gsap.fromTo('.process-label', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', scrollTrigger: { trigger: '.process', start: 'top 80%' } });
-  gsap.fromTo('.process-title', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: '.process', start: 'top 75%' }, delay: 0.1 });
-  gsap.fromTo('.process-step', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: '.process-track', start: 'top 80%' } });
+  const labelST = ScrollTrigger.create({ trigger: '.process', start: 'top 80%' });
+  gsap.fromTo('.process-label', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', scrollTrigger: labelST });
+  scrollTriggers.push(labelST);
+
+  const titleST = ScrollTrigger.create({ trigger: '.process', start: 'top 75%' });
+  gsap.fromTo('.process-title', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', scrollTrigger: titleST, delay: 0.1 });
+  scrollTriggers.push(titleST);
+
+  const stepST = ScrollTrigger.create({ trigger: '.process-track', start: 'top 80%' });
+  gsap.fromTo('.process-step', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', scrollTrigger: stepST });
+  scrollTriggers.push(stepST);
 }
 
 function initCta() {
   if (!document.querySelector('.cta')) return;
-  gsap.fromTo('.cta-label', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', scrollTrigger: { trigger: '.cta', start: 'top 80%' } });
-  gsap.fromTo('.cta-line', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: '.cta', start: 'top 75%' } });
-  gsap.fromTo('.cta-desc', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', scrollTrigger: { trigger: '.cta', start: 'top 70%' }, delay: 0.2 });
-  gsap.fromTo('.cta-form', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: '.cta', start: 'top 65%' } });
-  gsap.fromTo('.footer-card', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '.footer', start: 'top 85%' } });
-  gsap.fromTo('.footer-links-col', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: '.footer-main', start: 'top 85%' } });
+  const triggers: ScrollTrigger[] = [];
+
+  const t1 = ScrollTrigger.create({ trigger: '.cta', start: 'top 80%' });
+  gsap.fromTo('.cta-label', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', scrollTrigger: t1 });
+  triggers.push(t1);
+
+  const t2 = ScrollTrigger.create({ trigger: '.cta', start: 'top 75%' });
+  gsap.fromTo('.cta-line', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out', scrollTrigger: t2 });
+  triggers.push(t2);
+
+  const t3 = ScrollTrigger.create({ trigger: '.cta', start: 'top 70%' });
+  gsap.fromTo('.cta-desc', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', scrollTrigger: t3, delay: 0.2 });
+  triggers.push(t3);
+
+  const t4 = ScrollTrigger.create({ trigger: '.cta', start: 'top 65%' });
+  gsap.fromTo('.cta-form', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', scrollTrigger: t4 });
+  triggers.push(t4);
+
+  const t5 = ScrollTrigger.create({ trigger: '.footer', start: 'top 85%' });
+  gsap.fromTo('.footer-card', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: t5 });
+  triggers.push(t5);
+
+  const t6 = ScrollTrigger.create({ trigger: '.footer-main', start: 'top 85%' });
+  gsap.fromTo('.footer-links-col', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', scrollTrigger: t6 });
+  triggers.push(t6);
+
+  scrollTriggers.push(...triggers);
+}
+
+export function killScrollTriggers() {
+  scrollTriggers.forEach((st) => st.kill());
+  scrollTriggers = [];
 }
 
 export function initScrollAnimations() {
-  ScrollTrigger.getAll().forEach((st) => st.kill());
+  killScrollTriggers();
   initWork();
   initAbout();
   initServices();
   initProcess();
   initCta();
+  ScrollTrigger.refresh();
 }

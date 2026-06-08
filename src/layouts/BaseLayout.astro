@@ -45,8 +45,7 @@ const { preloadFonts, ...seo } = Astro.props;
       import { initCursor } from '@scripts/cursor';
       import { initBurger } from '@scripts/burger';
       import { initLoader, initTransitionHandlers } from '@scripts/loader';
-      import { initHeroAnimations, initScrollAnimations } from '@scripts/animations';
-      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+      import { initHeroAnimations, initScrollAnimations, killScrollTriggers } from '@scripts/animations';
 
       const w = window as any;
       if (!w.__iindev) w.__iindev = {};
@@ -88,7 +87,7 @@ const { preloadFonts, ...seo } = Astro.props;
             runPageAnimations();
           });
         } else {
-          ScrollTrigger.getAll().forEach((st) => st.kill());
+          killScrollTriggers();
           runPageAnimations();
         }
       }
